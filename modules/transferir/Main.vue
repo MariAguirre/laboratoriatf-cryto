@@ -1,13 +1,21 @@
 <template>
-  <Modal />
+    <div>
+        <BaseCard :shadow="inherit" :border="2"> 
+        <BaseText class=" alignment:center">
+        <BodyTransfers />
+        </BaseText>        
+        </BaseCard>
+    </div>
 </template>
 
 <script>
-import Modal from '@/shared/ui/components/Modal/Modal.vue'
+import BaseCard from '@/shared/ui/components/Cards/BaseCard.vue'
+import BodyTransfers from '@/modules/transferir/BodyTransfers.vue'
 
 export default {
     components: {
-    Modal,    
+    BaseCard,
+    BodyTransfers    
     
   },
 }
