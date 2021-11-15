@@ -9,7 +9,8 @@
       :class="[getContentBorderStyle]"
     >
       <LogoV2 v-if="showLogo" />
-      <slot />
+      <slot /> 
+
     </div>
   </header>
 </template>
