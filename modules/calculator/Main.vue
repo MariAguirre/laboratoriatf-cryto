@@ -1,21 +1,15 @@
 <template>
-  <div>
-    <div class="flex">
-      <Button text="Compra" />
-      <Button text="Venta" />
-    </div>
+  <div class="w-500">
     <BuyComponent />
   </div>
 </template>
 
 <script>
 import BuyComponent from "./sections/BuyComponent.vue";
-import Button from "@/shared/ui/components/Button/Button.vue";
 
 export default {
   components: {
-    BuyComponent,
-    Button
+    BuyComponent
   },
   created() {}
 };
