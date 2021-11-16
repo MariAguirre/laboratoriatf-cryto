@@ -76,6 +76,7 @@
               v-model="selectOne"
               class="w-36 h-81 rounded-r-lg text-xl font-black"
               :options="optionsOne"
+              @change="selectValue"
               @send="receiveOne"
             />
           </div>
@@ -110,9 +111,9 @@
 </template>
 <script>
 import Button from "@/shared/ui/components/Button/Button.vue";
-import Select from "../components/Select.vue";
+// import Select from "../components/Select.vue";
 import Magnify from "vue-material-design-icons/Magnify.vue";
-// import Select from "@/shared/ui/components/Select.vue";
+import Select from "@/shared/ui/components/Select.vue";
 import ButtonC from "../components/ButtonC.vue";
 import Modal from "@/shared/ui/components/Modal/Modal.vue";
 import ChevronDown from "vue-material-design-icons/ChevronDown.vue";
@@ -211,6 +212,9 @@ export default {
     },
     handleSearch() {
       console.log(this.searchCrypto);
+    },
+    selectValue(e) {
+      console.log(e);
     }
   }
 };

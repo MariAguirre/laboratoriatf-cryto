@@ -49,7 +49,7 @@
         :ref="customRenderValue(option, key)"
         class="p-3 outline-none hover:bg-gray-100 truncate sm:cursor-pointer select-none"
         :class="isOptionSelectedStyle(key)"
-        @click="onOptionSelected(customRenderValue(option, key))"
+        @click="onOptionSelected(option, key)"
       >
         <template v-if="custom">
           <slot name="option" :index="key" :option="option"></slot>
@@ -323,9 +323,12 @@ export default {
     },
     onOptionSelected(option) {
       if (!this.disabled) {
-        this.searchIndex = this.options.indexOf(option);
-        this.selected = this._searchOptionForIndex(this.searchIndex);
-        this.isOpen = false;
+        const index = this.options.indexOf(option);
+        if (index !== -1) {
+          this.searchIndex = index;
+          this.selected = this._searchOptionForIndex(this.searchIndex);
+          this.isOpen = false;
+        }
       }
     },
     onOpenOptions() {
