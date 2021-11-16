@@ -112,6 +112,7 @@ module.exports = {
     opacity: ["disabled"],
     cursor: ["disabled"]
   },
+  
   plugins: [
     plugin(function({ addVariant, e }) {
       addVariant("dark", ({ modifySelectors, separator }) => {
