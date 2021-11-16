@@ -71,14 +71,19 @@ module.exports = {
       },
       width: {
         404: "404px",
-        500: "500px"
+        500: "500px",
+        719: "719px",
+        306: "306px"
       },
       height: {
         50: "50px",
         52: "52px",
         81: "81px",
         455: "455px",
-        507: "507px"
+        507: "507px",
+        719: "719px",
+        306: "306px",
+        359: "359px"
       }
     }
   },
@@ -122,6 +127,7 @@ module.exports = {
     opacity: ["disabled"],
     cursor: ["disabled"]
   },
+
   plugins: [
     plugin(function({ addVariant, e }) {
       addVariant("dark", ({ modifySelectors, separator }) => {
