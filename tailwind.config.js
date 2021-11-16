@@ -70,7 +70,8 @@ module.exports = {
       animation: {
         wave: "ping 1.75s cubic-bezier(0, 0, 0.2, 1) infinite",
         "wave-shadow": "ping 1.75s cubic-bezier(0, 0, 0.2, 1) 0.75s infinite"
-      }
+      }, 
+     
     }
   },
   variants: {
