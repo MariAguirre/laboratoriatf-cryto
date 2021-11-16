@@ -71,9 +71,19 @@ module.exports = {
         wave: "ping 1.75s cubic-bezier(0, 0, 0.2, 1) infinite",
         "wave-shadow": "ping 1.75s cubic-bezier(0, 0, 0.2, 1) 0.75s infinite"
       }, 
-     
-    }
-  },
+      width: {
+        719: "719px",
+        306: "306px"
+      },
+      height: {
+        719: "719px",
+        306: "306px",
+        359: "359px",
+        }
+      },
+
+    },
+  
   variants: {
     zIndex: ["responsive", "hover"],
     position: ["responsive", "hover"],
@@ -111,8 +121,10 @@ module.exports = {
       "dark-hover"
     ],
     opacity: ["disabled"],
-    cursor: ["disabled"]
+    cursor: ["disabled"],
+    
   },
+  
   plugins: [
     plugin(function({ addVariant, e }) {
       addVariant("dark", ({ modifySelectors, separator }) => {

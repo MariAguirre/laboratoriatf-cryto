@@ -1,42 +1,46 @@
 <template>
-    <div class="m-24 mr-16 grid grid-cols-2 gap-8">
-        <div>
-        <BaseCard > 
-        <BaseText >
-        <BodyTransfersOne />
-        </BaseText>                
-        </BaseCard>
-        </div>
-        <div>
-        <BaseCard > 
-        <BaseText >
-        <BodyTransfersTwo />
-        </BaseText>                
-        </BaseCard>
-        </div>
-        <div class="
-            font-montserrat
-            flex flex-col
-            justify-center
-            items-center">
-            <Button text="CONFIRMO TRANSFERENCIA"> 
-                
-            </Button>
-        </div>
+    <div class="Grid grid-flow-col">        
+            <BaseText  class="flex justify-center mt-20 ml-14 mr-8 md:px-20 ">
+                <p class="flex font-bold mr-4">El tipo de cambio se actualizará en</p>
+                <span class="flex font-bold">00:15:00</span>
+            </BaseText>
+            <div class="m-18 ml-8 mr-8 mt-4 flex justify-center">
+                <div>
+                    <BaseCard class="w-306 md:w-719 p-8 ">  
+                    <BaseText class="">
+                    <BodyTransfers class="flex "/>
+                    </BaseText>                
+                    </BaseCard>
+                </div>
+                <div>
+                    <BaseCard class="hidden sm:block w-306 md:w-306 ml-9 " >                    
+                    <DetalleTransfers class="flex justify-left md:p-4" />                                  
+                    </BaseCard>
+                </div> 
+            </div>      
+            <div class="               
+                    flex flex-col
+                    justify-center
+                    items-center">
+                    <Button class="mt-8" text="CONFIRMO TRANSFERENCIA">                     
+                    </Button>
+            </div>
+         
     </div>
 </template>
 
 <script>
 import BaseCard from '@/shared/ui/components/Cards/BaseCard.vue'
-import BodyTransfersOne from '@/modules/transferir/BodyTransfersOne.vue'
-import BodyTransfersTwo from '@/modules/transferir/BodyTransfersTwo.vue'
+import BodyTransfers from '~/modules/transferir/BodyTransfers.vue'
+import DetalleTransfers from '@/modules/transferir/DetalleTransfers.vue'
 import Button from '@/shared/ui/components/Button/Button.vue'
 
+
 export default {
-    components: {
+    components: {       
     BaseCard,
-    BodyTransfersOne,
-    BodyTransfersTwo,
+    BodyTransfers,
+    DetalleTransfers,
     Button    
     
   },
