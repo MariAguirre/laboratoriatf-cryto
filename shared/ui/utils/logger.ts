@@ -17,7 +17,7 @@ function normalizeValue<T>(value: T){
 
 const logger = {
   info<T>(value: T) {
-    runConsole(`${normalizeValue(value)}`, "color:aqua");
+    runConsole(`${normalizeValue(value)}`, "color:green");
   },
   success<T>(value: T) {
     runConsole(`${normalizeValue(value)}`, "color:lime;");

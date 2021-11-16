@@ -3,12 +3,12 @@ const kambistaColors = {
   kambista: {
     blue: "#060F26",
     green: "#00E3C2",
-    sky : '#2DB4FF',
-    'secondary-1' : '#DC182D',
-    'secondary-2' : '#FFAA06',
-    'secondary-3' : '#A7A7A7',
-    'secondary-4' : '#686868',
-    'secondary-5' : '#F6F6F9',
+    sky: "#2DB4FF",
+    "secondary-1": "#DC182D",
+    "secondary-2": "#FFAA06",
+    "secondary-3": "#A7A7A7",
+    "secondary-4": "#686868",
+    "secondary-5": "#F6F6F9",
     2: "#F1F5F8",
     3: "#2DB4FF",
     4: "#FF3D4A",
@@ -18,8 +18,9 @@ const kambistaColors = {
     8: "#E0E0E0",
     9: "#9B9999",
     10: "#E0E4EB",
-    11 : '#E8F3FE',
-    12 : '#F1E1E4'
+    11: "#E8F3FE",
+    12: "#F1E1E4",
+    13: "#E5E5E5"
   },
   dark: {
     1: "#293145",
@@ -37,10 +38,7 @@ const kambistaColors = {
 module.exports = {
   purge: {
     enabled: process.env.NODE_ENV === "production",
-    content: [
-      "shared/**/*.vue",
-      "modules/**/*.vue",
-    ]
+    content: ["shared/**/*.vue", "modules/**/*.vue"]
   },
   theme: {
     extend: {
@@ -70,20 +68,25 @@ module.exports = {
       animation: {
         wave: "ping 1.75s cubic-bezier(0, 0, 0.2, 1) infinite",
         "wave-shadow": "ping 1.75s cubic-bezier(0, 0, 0.2, 1) 0.75s infinite"
-      }, 
+      },
       width: {
+        404: "404px",
+        500: "500px",
         719: "719px",
         306: "306px"
       },
       height: {
+        50: "50px",
+        52: "52px",
+        81: "81px",
+        455: "455px",
+        507: "507px",
         719: "719px",
         306: "306px",
-        359: "359px",
-        }
-      },
-
-    },
-  
+        359: "359px"
+      }
+    }
+  },
   variants: {
     zIndex: ["responsive", "hover"],
     position: ["responsive", "hover"],
@@ -96,6 +99,7 @@ module.exports = {
       "odd",
       "responsive",
       "hover",
+      "focus",
       "dark",
       "dark-hover",
       "checked"
@@ -121,10 +125,9 @@ module.exports = {
       "dark-hover"
     ],
     opacity: ["disabled"],
-    cursor: ["disabled"],
-    
+    cursor: ["disabled"]
   },
-  
+
   plugins: [
     plugin(function({ addVariant, e }) {
       addVariant("dark", ({ modifySelectors, separator }) => {

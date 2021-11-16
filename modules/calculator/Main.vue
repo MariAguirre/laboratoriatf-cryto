@@ -1,13 +1,16 @@
 <template>
-  <div>
-      hola
+  <div class="w-500">
+    <BuyComponent />
   </div>
 </template>
 
 <script>
+import BuyComponent from "./sections/BuyComponent.vue";
 
 export default {
-    created(){
-    }
-}
+  components: {
+    BuyComponent
+  },
+  created() {}
+};
 </script>

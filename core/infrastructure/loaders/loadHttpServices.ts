@@ -9,6 +9,8 @@ import ComplianceService from "../http/ComplianceService";
 import CustomerService from "../http/CustomerService";
 import KuzzleService from "../http/KuzzleService";
 import UtilService from "../http/UtilService";
+import MarketsService from '../http/MarketsService';
+import MarketsRepository from "~/core/domain/repositories/markets/MarketsRepository";
 
 export function loadHTTPServices(api: HTTPClientRepository) {
     const services = {
@@ -16,7 +18,8 @@ export function loadHTTPServices(api: HTTPClientRepository) {
         compliance: new ComplianceService(api),
         kuzzle: new KuzzleService(api),
         analytic: new AnalyticService(api),
-        utils: new UtilService(api)
+        utils: new UtilService(api),
+        markets: new MarketsService(api),
       };
     return services;
 }
@@ -26,5 +29,6 @@ export type LoadHTTPServicesType = {
   compliance: ComplianceRepository,
   kuzzle: SharedValuesRepository,
   analytic: AnalyticRepository,
-  utils: UtilsRepository
+  utils: UtilsRepository,
+  markets: MarketsRepository
 }
