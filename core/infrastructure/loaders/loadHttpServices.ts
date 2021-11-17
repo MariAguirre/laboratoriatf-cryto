@@ -11,6 +11,8 @@ import KuzzleService from "../http/KuzzleService";
 import UtilService from "../http/UtilService";
 import MarketsService from '../http/MarketsService';
 import MarketsRepository from "~/core/domain/repositories/markets/MarketsRepository";
+import LoginService from "../http/LoginService"
+import LoginRepository from "~/core/domain/repositories/login/LoginRepository" 
 
 export function loadHTTPServices(api: HTTPClientRepository) {
     const services = {
@@ -20,6 +22,7 @@ export function loadHTTPServices(api: HTTPClientRepository) {
         analytic: new AnalyticService(api),
         utils: new UtilService(api),
         markets: new MarketsService(api),
+        login: new LoginService(api),
       };
     return services;
 }
@@ -30,5 +33,6 @@ export type LoadHTTPServicesType = {
   kuzzle: SharedValuesRepository,
   analytic: AnalyticRepository,
   utils: UtilsRepository,
-  markets: MarketsRepository
+  markets: MarketsRepository,
+  login: LoginRepository
 }

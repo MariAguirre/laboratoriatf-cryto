@@ -38,6 +38,8 @@ import KInput from "@/shared/ui/components/Input.vue";
 import KButton from "@/shared/ui/components/Button/Button.vue";
 import { is } from "@/shared/ui/utils/validators";
 import RecoveryPasswordTitle from '../components/RecoveryPasswordTitle.vue';
+
+
 export default {
   components: {
     KInput,
@@ -76,7 +78,18 @@ export default {
       this[id].isValid = validInput;
     },
     async handleSubmit() {
-     alert();
+      let formData = {
+        email: this.email.value,
+        password: this.password.value
+      };
+      const data = await this.$services.login.login(formData);
+      console.log(data);
+      if(data.status == 200){
+        localStorage.setItem('dataLogin', JSON.stringify(data.data.data));
+        localStorage.setItem('token', data.data.data.token);
+        //aca agregar dirigir a home
+      }
+
     },
   }
 };
