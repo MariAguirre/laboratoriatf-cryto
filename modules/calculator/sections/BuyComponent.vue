@@ -104,6 +104,7 @@
         <Button
           class="w-full mt-10 sm:mt-0 mb-4 sm:mb-8 text-sm"
           text="INICIAR OPERACIÓN"
+          :loading="loading"
           @click.native="setQuote"
         />
       </div>
@@ -148,7 +149,8 @@ export default {
       optionsTwo: [],
       open: false,
       searchCrypto: "",
-      openLoader: true
+      openLoader: true,
+      loading: null
     };
   },
   mounted() {
@@ -216,7 +218,7 @@ export default {
       this.open = true;
     },
     setQuote() {
-      window.location.href = "/completedata";
+      this.loading = true;
       const data = {
         mountOrigin: this.exchangeOne,
         mountDestiny: this.exchangeTwo,
@@ -227,6 +229,7 @@ export default {
         delay: this.filterCurrency(this.currencyTwo)[0].delay
       };
       localStorage.setItem("quote", JSON.stringify(data));
+      window.location.href = "/completedata";
     }
   }
 };

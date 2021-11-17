@@ -93,8 +93,9 @@ export default {
   methods: {
     getdata() {
       this.dataQuote = JSON.parse(localStorage.getItem("quote"));
-      this.dataJUtils = JSON.parse(localStorage.getItem("utils"));
+      this.dataUtils = JSON.parse(localStorage.getItem("utils"));
       this.delay = this.dataQuote.delay;
+      this.banks = this.dataUtils;
       logger.info(this.dataUtils);
       this.openLoader = false;
     }

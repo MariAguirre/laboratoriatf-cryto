@@ -7,8 +7,8 @@ export default class Utils2Service implements Utils2Repository {
   constructor(axios: HTTPClientRepository) {
     this.axios = axios;
   }
-  async findUtils(): Promise<JSONObject[]> {
+  async findUtils(): Promise<JSONObject> {
     const res = await this.axios.get("/utils");
-    return res.data.data.banks;
+    return res.data.data;
   }
 }
