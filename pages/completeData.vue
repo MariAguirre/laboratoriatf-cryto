@@ -34,7 +34,7 @@
       <Highlight 
       class="mt-6 w-96" 
       title= 'Tiempo estimado de espera'
-      :baseDataH='baseDataH'
+      :delay='delay'
       />
 
       <BaseText
@@ -43,15 +43,15 @@
       />
       <Select
       class="mt-1 w-96 bg-white "
-      :baseDataS='baseDataS' />
+      />
       <BaseText text="¿A qué dirección enviamos tus criptomonedas?" />
       <Select  
       :options = 'dataBank'
       class="mt-1 w-96 bg-white" 
-      :baseDataS='baseDataS'/>
+      />
       <BaseText text="Origen de fondos" />
       <Select class="mt-1 w-96 bg-white" 
-      :baseDataS='baseDataS'/>
+      />
 
       <Button disabled class="w-96 mt-3" text="Continuar" />
     </div>
@@ -90,14 +90,12 @@ export default {
       keySegurity:'',
       origin:'',
       baseData:'',
-      baseDataH:'',
+      delay:'',
       // dataBank:
       // [
       //   {value:'bcp', name:'BCP'. imagen:''},
       //   {value:'Interbank', name:'Interbank'. imagen:''}
       // ]
-
-      
     }
     
 

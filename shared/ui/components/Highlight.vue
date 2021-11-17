@@ -7,7 +7,7 @@
       <component :is="getIconComponent" :class="getVariantStyles" :size="26"/>
     </div>
     <div>
-      <div v-if="title" class="font-semibold mb-1">{{title}}:  {{baseDataH.delay}}</div>
+      <div v-if="title" class="font-semibold mb-1">{{title}}:  {{delay}}</div>
       <slot></slot>
     </div>
     <div v-if="closeable" class="ml-2 flex-shrink">
@@ -54,9 +54,6 @@ export default {
       type: String,
       default : ""
     },
-    baseDataH:{
-    type: Object,
-    }
   },
   computed: {
     getVariantStyles() {
