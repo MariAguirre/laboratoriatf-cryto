@@ -40,7 +40,10 @@ export default {
     },
     props: {
         data2: {
-            type: Object
+            type: Object,
+            default(){
+                
+            }
         }
     }
     

@@ -8,7 +8,7 @@
                 <div>
                     <BaseCard class="w-306 md:w-719 p-8 ">  
                     <BaseText class="">
-                    <BodyTransfers class="flex " :montoOrigin="mountOrigin"/>
+                    <BodyTransfers class="flex " :monto-origin="mountOrigin"/>
                     </BaseText>                
                     </BaseCard>
                 </div>
