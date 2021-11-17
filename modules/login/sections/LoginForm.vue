@@ -37,6 +37,8 @@ import KInput from "@/shared/ui/components/Input.vue";
 import KButton from "@/shared/ui/components/Button/Button.vue";
 import { is } from "@/shared/ui/utils/validators";
 import RecoveryPasswordTitle from '../components/RecoveryPasswordTitle.vue';
+
+
 export default {
   components: {
     KInput,
@@ -74,7 +76,22 @@ export default {
       const { validInput, id } = e;
       this[id].isValid = validInput;
     },
+    goToHome() {
+      window.location.href = "/";
+    },
     async handleSubmit() {
+      let formData = {
+        email: this.email.value,
+        password: this.password.value
+      };
+      const data = await this.$services.login.login(formData);
+      console.log(data);
+      if(data.status == 200){
+        localStorage.setItem('dataLogin', JSON.stringify(data.data.data));
+        localStorage.setItem('token', data.data.data.token);
+        this.goToHome();
+      }
+
      //alert();
       const utils = await this.$services.utils2.findUtils();
       localStorage.setItem("utils", JSON.stringify(utils)); //guardando data al localStorage

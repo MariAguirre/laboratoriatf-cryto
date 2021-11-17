@@ -1,10 +1,24 @@
 <template>
-    <UserDropdownItem text="Carlos Tejada" icon="company" />
+    <UserDropdownItem :text="nameUser" icon="company" />
 </template>
 
 <script>
 import UserDropdownItem from '../UserDropdownItem/UserDropdownItem.vue'
 export default {
   components: { UserDropdownItem },
+  data(){
+    return{
+      nameUser:""
+    }
+  },
+  mounted(){
+    this.getdata()
+  },
+  methods:{
+    getdata(){
+       this.nameUser = JSON.parse(localStorage.getItem("dataLogin")).name;
+    }
+   
+  }
 }
 </script>
