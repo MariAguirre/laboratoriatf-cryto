@@ -216,6 +216,7 @@ export default {
       this.open = true;
     },
     setQuote() {
+      window.location.href = "/completedata";
       const data = {
         mountOrigin: this.exchangeOne,
         mountDestiny: this.exchangeTwo,

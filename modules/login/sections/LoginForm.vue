@@ -22,12 +22,13 @@
       :helper="password.helper"
       @is-valid="isValidInput"
     />
-    <RecoveryPasswordTitle/>
+    <RecoveryPasswordTitle />
     <KButton
       text="Iniciar Sesión"
       size="lg"
-      class="w-full mt-8"   
-            
+      class="w-full mt-8"
+      :disabled="disabled"
+      :loading="loading"
     />
   </form>
 </template>
@@ -36,8 +37,7 @@
 import KInput from "@/shared/ui/components/Input.vue";
 import KButton from "@/shared/ui/components/Button/Button.vue";
 import { is } from "@/shared/ui/utils/validators";
-import RecoveryPasswordTitle from '../components/RecoveryPasswordTitle.vue';
-
+import RecoveryPasswordTitle from "../components/RecoveryPasswordTitle.vue";
 
 export default {
   components: {
@@ -69,8 +69,7 @@ export default {
       return !(this.email.isValid && this.password.isValid);
     }
   },
-  mounted() {
-  },
+  mounted() {},
   methods: {
     isValidInput(e) {
       const { validInput, id } = e;
@@ -80,24 +79,20 @@ export default {
       window.location.href = "/";
     },
     async handleSubmit() {
+      this.loading = true;
       let formData = {
         email: this.email.value,
         password: this.password.value
       };
       const data = await this.$services.login.login(formData);
-      console.log(data);
-      if(data.status == 200){
-        localStorage.setItem('dataLogin', JSON.stringify(data.data.data));
-        localStorage.setItem('token', data.data.data.token);
+      if (data.status == 200) {
+        const utils = await this.$services.utils2.findUtils();
+        localStorage.setItem("utils", JSON.stringify(utils));
+        localStorage.setItem("dataLogin", JSON.stringify(data.data.data));
+        localStorage.setItem("token", data.data.data.token);
         this.goToHome();
       }
-
-     //alert();
-      const utils = await this.$services.utils2.findUtils();
-      localStorage.setItem("utils", JSON.stringify(utils)); //guardando data al localStorage
-      console.log(utils);
-    },
-    
+    }
   }
 };
 </script>

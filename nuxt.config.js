@@ -30,7 +30,7 @@ export default {
     { src: "~/plugins/vuex-persist", mode: "client" },
     { src: "~plugins/kambista" }
   ],
-  components: true,
+  components: false,
   buildModules: [
     "@nuxt/typescript-build",
     "@nuxtjs/eslint-module",

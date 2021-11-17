@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <section>
+    <Loader v-if="openLoader" class="h-full w-full bg-white" />
     <div>
       <Topbarflow class="hidden sm:block" variant="light" show-logo show-nav />
     </div>
@@ -27,7 +28,7 @@
           text="Completa los datos de tu operación"
         />
       </div>
-      <BaseCardData :base-data="baseData" class="w-96  h-40 mt-4" />
+      <BaseCardData :base-data="dataQuote" class="w-96  h-40 mt-4" />
       <Highlight
         class="mt-6 w-96"
         title="Tiempo estimado de espera"
@@ -38,15 +39,15 @@
         class=" mt-4 text-left"
         text="¿Desde qué banco nos envías tu dinero?"
       />
-      <Select class="mt-1 w-96 bg-white " />
+      <Select :options="banks" class="mt-1 w-96 bg-white " />
       <BaseText text="¿A qué dirección enviamos tus criptomonedas?" />
-      <Select :options="dataBank" class="mt-1 w-96 bg-white" />
+      <Select :options="keySeguritys" class="mt-1 w-96 bg-white" />
       <BaseText text="Origen de fondos" />
       <Select class="mt-1 w-96 bg-white" />
 
       <Button disabled class="w-96 mt-3" text="Continuar" />
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -58,6 +59,9 @@ import BaseCardData from "../modules/data/BaseCardData.vue";
 import Select from "~/shared/ui/components/Select.vue";
 import Button from "~/shared/ui/components/Button/Button.vue";
 import Highlight from "~/shared/ui/components/Highlight.vue";
+import Loader from "@/shared/ui/components/Loading/LoadingScreen.vue";
+import logger from "@/shared/ui/utils/logger.ts";
+
 export default {
   components: {
     Topbarflow,
@@ -67,48 +71,32 @@ export default {
     BaseCardData,
     Button,
     Highlight,
-    BaseText
+    BaseText,
+    Loader
   },
   data() {
     return {
-      send: "",
-      received: "",
-      coinSend: "",
-      coinReceived: "",
-      currentChangeBTC: "",
-      currentChangeDolars: "",
-      banks: "",
-      keySegurity: "",
-      origin: "",
-      baseData: {},
+      keySeguritys: [],
+      dataQuote: {},
+      dataUtils: {},
       delay: 0,
-      dataBank: [
+      banks: [
         { value: "bcp", name: "BCP", imagen: "" },
         { value: "Interbank", name: "Interbank", imagen: "" }
-      ]
+      ],
+      openLoader: true
     };
   },
   mounted() {
     this.getdata();
-    this.getdataUtil();
   },
   methods: {
     getdata() {
-      const dataJ = JSON.parse(localStorage.getItem("quote"));
-      console.log(dataJ);
-      this.baseData = dataJ;
-      this.delay = dataJ.delay;
-      // (this.currencyOrigin = dataJ.mountOrigin),
-      //   (this.currencyReceived = dataJ.mountDestiny),
-      //   (this.coinOrigin = dataJ.currencyOrigin),
-      //   (this.coinReceived = dataJ.currencyDestiny),
-      //   (this.valueCurrentDolars = dataJ.exchangeTwo),
-      //   (this.valueCurrentBTC = dataJ.exchangeOne),
-      //   (this.delayCurrent = dataJ.delay);
-    },
-    getdataUtil() {
-      const dataJUtils = JSON.parse(localStorage.getItem("utils"));
-      console.log(dataJUtils);
+      this.dataQuote = JSON.parse(localStorage.getItem("quote"));
+      this.dataJUtils = JSON.parse(localStorage.getItem("utils"));
+      this.delay = this.dataQuote.delay;
+      logger.info(this.dataUtils);
+      this.openLoader = false;
     }
   }
 };
