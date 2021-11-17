@@ -81,7 +81,12 @@
           <i>{{ e.option }}</i>
         </template>
       </Select>
-      <Button :disabled="disabled" class="w-96 mt-3" text="Continuar" />
+      <Button
+        :disabled="disabled"
+        class="w-96 mt-3"
+        text="Continuar"
+        @click.native="createTransaccion"
+      />
     </div>
   </section>
 </template>
@@ -128,15 +133,11 @@ export default {
   },
   computed: {
     disabled() {
-      if (
+      return !(
         this.values.valueBank !== "" &&
         this.values.valueWallet !== "" &&
         this.values.fundsValue !== ""
-      ) {
-        localStorage.setItem("quote", JSON.stringify(this.values));
-        return true;
-      }
-      return false;
+      );
     }
   },
   mounted() {
@@ -153,6 +154,10 @@ export default {
       this.funds = this.dataUtils.sourceOfFunds;
       logger.info(this.dataUtils);
       this.openLoader = false;
+    },
+    createTransaccion() {
+      console.log(this.values);
+      localStorage.setItem("transaccionValues", JSON.stringify(this.values));
     }
   }
 };
