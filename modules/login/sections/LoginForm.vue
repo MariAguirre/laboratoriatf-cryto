@@ -26,9 +26,9 @@
     <KButton
       text="Iniciar Sesión"
       size="lg"
-      class="w-full mt-8"
-      :disabled="disabled"
+      class="w-full mt-8"   
       :loading="loading"
+      :disabled="disabled"      
     />
   </form>
 </template>
@@ -76,8 +76,12 @@ export default {
       this[id].isValid = validInput;
     },
     async handleSubmit() {
-     alert();
+     //alert();
+      const utils = await this.$services.utils2.findUtils();
+      localStorage.setItem("utils", JSON.stringify(utils)); //guardando data al localStorage
+      console.log(utils);
     },
+    
   }
 };
 </script>
