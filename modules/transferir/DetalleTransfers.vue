@@ -19,12 +19,12 @@
         </div>
         <div class="mt-4">
             <h2 class="font-bold mt-2">Monto</h2>
-            <p class="mt-2">Enviado: <span>100.00 Dólares</span></p>
-            <p class="mt-2">Recibido: <span>0.000033334 BTC</span></p>
+            <p class="mt-2">Enviado: <span>{{data2.mountOrigin}} Dólares</span></p>
+            <p class="mt-2">Recibido: <span>{{data2.mountDestiny}} BTC</span></p>
         </div>
         <div class="mt-6">
-            <p class="font-bold">1BTC = 60.140.39 USD</p>
-            <p class="mt-2 font-bold">1USD = 0.000017 BTC</p>
+            <p class="font-bold">1BTC = {{data2.exchangeOne}} USD</p>
+            <p class="mt-2 font-bold">1USD = {{data2.exchangeTwo}} BTC</p>
         </div>
         
     </div>        
@@ -38,5 +38,11 @@ export default {
     components: {
         
     },
+    props: {
+        data2: {
+            type: Object
+        }
+    }
+    
 }
 </script>

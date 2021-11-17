@@ -22,7 +22,7 @@
           <p class="font-bold">Monto a tranferir</p>
         </div>
         <div class="mr-8 flex justify-between">
-          <p class="font-bold">100 dólares</p>
+          <p class="font-bold"><span>{{montoOrigin}} Dólares</span></p>
           <img class="ml-5" src="@/assets/images/common/clipboard.svg" alt="" />
         </div>
       </div>
@@ -65,5 +65,11 @@ export default {
   components: {
     TextTitle,
   },
+  props: {
+    montoOrigin: {
+      type: String,
+    }
+  }
+  
 };
 </script>
