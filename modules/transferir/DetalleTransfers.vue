@@ -11,11 +11,11 @@
         </h1>
         <div class="mt-4">
             <p>Origen</p>
-            <p class="mt-2">Interbank</p>
+            <p class="mt-2">{{data3.bankId}}</p>
         </div>
         <div class="mt-4">
-            <p>Direccion de destino</p>
-            <p class="mt-2 truncate md:overflow-ellipsis">https://www.figma.com/file/RNHgfOUm2zbN5EZvrIwuxJ/Reto-Criptomonedas?node-id=29%3A764</p>
+            <p>Direccion de destino {{data3.account.currency}}</p>
+            <p class="mt-2 truncate md:overflow-ellipsis">{{data3.account.number}}</p>
         </div>
         <div class="mt-4">
             <h2 class="font-bold mt-2">Monto</h2>
@@ -42,7 +42,13 @@ export default {
         data2: {
             type: Object,
             default(){
-                
+
+            }
+        },
+        data3: {
+            type: Object,
+            default(){
+
             }
         }
     }
