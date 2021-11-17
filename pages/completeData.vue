@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="w-375 sm:w-641 sm:flex sm:justify-center sm:flex-col">
     <Loader v-if="openLoader" class="h-full w-full bg-white" />
     <div>
       <Topbarflow class="hidden sm:block" variant="light" show-logo show-nav />
@@ -24,20 +24,17 @@
     >
       <div>
         <TextTitle
-          class="flex mt-6 md:text-2xl text-center sm:text-center"
+          class="flex mt-8 sm:mt-12 text-center w-full sm:w-full"
           text="Completa los datos de tu operación"
         />
       </div>
-      <BaseCardData :base-data="dataQuote" class="w-96  h-40 mt-4" />
+      <BaseCardData :base-data="dataQuote" class="w-96 mt-4" />
       <Highlight
         class="mt-6 w-96"
         title="Tiempo estimado de espera"
         :delay="delay"
       />
-      <BaseText
-        class=" mt-4 text-left"
-        text="¿Desde qué banco nos envías tu dinero?"
-      />
+      <BaseText class=" mt-4" text="¿Desde qué banco nos envías tu dinero?" />
       <Select
         v-model="values.valueBank"
         :options="banks"
@@ -48,7 +45,7 @@
           <img :src="e.option.image" />
           <i>{{ e.option.name }}</i>
         </template>
-        <template #option="e" class="flex flex-row">
+        <template #option="e" class="">
           <img :src="e.option.image" />
           <i>{{ e.option.name }}</i>
         </template>
@@ -63,7 +60,7 @@
         <template #currentOption="e">
           <i>{{ e.option }}</i>
         </template>
-        <template #option="e" class="flex flex-row">
+        <template #option="e" class="">
           <i>{{ e.option }}</i>
         </template>
       </Select>
@@ -151,8 +148,6 @@ export default {
       this.banks = this.dataUtils.banks;
       this.wallets = this.dataUtils.originWallets;
       this.funds = this.dataUtils.sourceOfFunds;
-      logger.info(this.dataUtils);
-      logger.info(this.dataQuote);
       this.openLoader = false;
     },
     async createTransaccion() {
