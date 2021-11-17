@@ -5,14 +5,14 @@
     style="z-index: 10"
   >
     <div
-      class="flex items-center box-border h-14 "
+      class="flex items-center  "
       :class="[getContentBorderStyle]"
     >
       <div>
         <LogoV2 v-if="showLogo" class="" />
-        <BaseCard text="">
-          <nav v-show="true" class="ml-14 flex justify-center items-center">
-            <ul class="flex  pl-0 rounded list-none ">
+        <div >
+          <nav  class="ml-14 w-full flex justify-center items-center">
+            <ul class="flex w-full pl-0 list-none ">
               <li>
                 <a
                   href=""
@@ -30,7 +30,6 @@
                   items-center
                   justify-center
                   leading-tight
-                  absolute
                   border border-solid border-gray-900
                   bg-gray-900
                 "
@@ -38,7 +37,7 @@
                 </a>
               </li>
               <hr
-                class="bg-gray-900 w-28 ml-5 border-solid-3 z-40 object-center mt-2"
+                class="bg-gray-900 w-28  border-solid-3 z-40 object-center mt-2"
               />
               <li>
                 <a
@@ -55,7 +54,7 @@
                   items-center
                   justify-center
                   leading-tight
-                  relative
+                  
                   border border-solid border-gray-200
                   bg-gray-200
                 "
@@ -78,7 +77,7 @@
                   items-center
                   justify-center
                   leading-tight
-                  relative
+                 
                   border border-solid border-gray-200
                   bg-gray-200
                 "
@@ -87,7 +86,7 @@
               </li>
             </ul>
           </nav>
-        </BaseCard>
+        </div>
       </div>
       <slot />
     </div>
@@ -96,9 +95,9 @@
 
 <script>
 import LogoV2 from "../../Logo/LogoV2.vue";
-import BaseCard from "@/shared/ui/components/Cards/BaseCard.vue";
+
 export default {
-  components: { LogoV2, BaseCard },
+  components: { LogoV2},
   props: {
     variant: {
       type: String,
@@ -125,10 +124,10 @@ export default {
       }[this.variant || "default"];
     },
     getAutoHideStyle() {
-      return this.autoHide ? "hidden" : "";
+      return this.autoHide ;
     },
     getContentBorderStyle() {
-      return this.variant === "default" ? "border-b" : "";
+      return this.variant === "default" ;
     },
     getAutoContentStyle() {
       return this.autoContent ? "px-4 lg:px-7" : "";

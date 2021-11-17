@@ -141,6 +141,9 @@ export default {
     },
    baseData:{
     type: Object,
+    default(){
+      
+    }
     }
     
   },

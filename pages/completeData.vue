@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="w-375 sm:w-641 sm:flex sm:justify-center sm:flex-col">
     <div>
       <Topbarflow class="hidden sm:block" variant="light" show-logo show-nav />
     </div>
@@ -13,38 +13,35 @@
     </div>
 
     <div
-      class="
-      flex flex-col
-      justify-center
-      items-center
-      backdrop-blur-sm
-      m-2 sm:m-4
-    "
+      class="m-2 sm:m-4"
     >
       <div>
         <TextTitle
-          class="flex mt-6 md:text-2xl text-center sm:text-center"
+          class="flex mt-8 sm:mt-12  text-center w-full sm:w-full"
           text="Completa los datos de tu operación"
+          alignment="center"
+          
         />
       </div>
-      <BaseCardData :base-data="baseData" class="w-96  h-40 mt-4" />
+      <BaseCardData :base-data="baseData" class="w-full sm:w-410 mt-4" />
       <Highlight
-        class="mt-6 w-96"
+        class="mt-6 w-full"
         title="Tiempo estimado de espera"
         :delay="delay"
       />
 
       <BaseText
-        class=" mt-4 text-left"
+        class=" mt-4"
         text="¿Desde qué banco nos envías tu dinero?"
+        
       />
-      <Select class="mt-1 w-96 bg-white " />
+      <Select class="mt-1 w-full bg-white " />
       <BaseText text="¿A qué dirección enviamos tus criptomonedas?" />
-      <Select :options="dataBank" class="mt-1 w-96 bg-white" />
+      <Select :options="dataBank" class="mt-1 w-full bg-white" />
       <BaseText text="Origen de fondos" />
-      <Select class="mt-1 w-96 bg-white" />
+      <Select class="mt-1 w-full bg-white" />
 
-      <Button disabled class="w-96 mt-3" text="Continuar" />
+      <Button disabled class="w-full mt-3" text="Continuar" />
     </div>
   </div>
 </template>
