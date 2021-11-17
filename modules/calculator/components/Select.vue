@@ -1,6 +1,6 @@
 <template>
   <select
-    class="p-6 form-select outline-none hover:bg-gray-100 hover:text-kambista-blue truncate sm:cursor-pointer bg-kambista-blue text-white"
+    class="p-4 sm:p-6 form-select outline-none hover:bg-gray-100 hover:text-kambista-blue truncate sm:cursor-pointer bg-kambista-blue text-white"
     @change="onChange($event)"
   >
     <option v-for="(option, key) in options" :key="key" class="border-none">{{

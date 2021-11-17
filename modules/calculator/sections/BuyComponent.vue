@@ -1,5 +1,6 @@
 <template>
   <section>
+    <Loader v-if="openLoader" class="h-full w-full bg-white" />
     <Modal v-model="open" closeable-by-backdrop>
       <div class="flex flex-col items-center bg-white rounded-xl w-full">
         <div class="flex flex-col w-11/12 sm:w-96">
@@ -46,12 +47,10 @@
         class="bg-white hover:border hover:border-black hover:bg-kambista-blue hover:text-white"
       />
     </div>
-    <div
-      class="flex flex-col w-full justify-center items-center h-455 bg-white"
-    >
-      <div class="w-404">
+    <div class="flex flex-col w-full justify-center items-center bg-white">
+      <div class="w-312 sm:w-404">
         <div
-          class=" font-medium flex w-full justify-between pb-2 text-base leading-7"
+          class="font-semibold sm:font-medium flex w-full justify-between pt-5 pb-3.5 px-1.5 text-xs sm:text-base leading-7"
         >
           <span
             >1 {{ currencyTwo }} {{ valueOneRound }} {{ currencyOne }}
@@ -60,41 +59,41 @@
             >1 {{ currencyOne }} {{ valueTwoRound }} {{ currencyTwo }}
           </span>
         </div>
-        <div class="pb-6 pt-4 w-404">
-          <div class="flex h-81 w-full my-6">
+        <div class="pb-2 sm:pb-6 pt-1 sm:pt-6 w-312 sm:w-404 bg-white">
+          <div class="flex h-70 sm:h-81 w-full my-2 sm:my-6">
             <label
-              class="flex flex-col bg-kambista-8 w-3/4 h-81 rounded-l-lg pl-7 pt-3.5 text-sm font-medium leading-4"
+              class="flex flex-col bg-kambista-8 w-3/4 h-70 sm:h-81 rounded-l-lg pl-7 pt-3.5 text-sm font-medium leading-4"
               >¿Cuánto tienes?
               <input
                 v-model="exchangeOne"
-                class="bg-kambista-8 text-lg font-medium leading-5 outline-none mt-2.5"
+                class="bg-kambista-8 text-sm sm:text-lg font-medium leading-5 outline-none mt-1 sm:mt-2.5"
                 @keyup="onKeyup"
               />
             </label>
             <Select
               v-model="selectOne"
-              class="w-36 h-81 rounded-r-lg text-xl font-black"
+              class="w-36 h-70 sm:h-81 rounded-r-lg text-base sm:text-xl font-black"
               :options="optionsOne"
               @send="receiveOne"
             />
           </div>
-          <div class="flex h-81 w-full my-6 rounded-sm">
+          <div class="flex h-81 w-full my-2 sm:my-6 rounded-sm">
             <label
-              class="flex flex-col bg-kambista-8 w-3/4 h-81 rounded-l-lg pl-7 pt-3.5 text-sm font-medium leading-4"
+              class="flex flex-col bg-kambista-8 w-3/4 h-70 sm:h-81 rounded-l-lg pl-7 pt-3.5 text-sm font-medium leading-4"
               >Entonces recibes
               <input
                 v-model="exchangeTwo"
-                class="bg-kambista-8 text-lg font-medium leading-5 outline-none mt-2.5"
+                class="bg-kambista-8 text-sm sm:text-lg font-medium leading-5 outline-none mt-2.5"
                 @keyup="onKeyup2"
               />
             </label>
             <div
-              class="flex items-center justify-end bg-kambista-blue text-white w-36 h-81 rounded-r-lg text-xl font-black"
+              class="flex items-center justify-end bg-kambista-blue text-white w-36 h-70 sm:h-81 rounded-r-lg text-base sm:text-xl font-black"
               @click="handleClick"
             >
               {{ selectTwo }}
               <ChevronDown
-                class="pl-6"
+                class="pl-3 sm:pl-6"
                 :size="19"
                 aria-hidden="true"
                 aria-label="select options"
@@ -103,9 +102,9 @@
           </div>
         </div>
         <Button
-          class="sm:w-full mb-8"
-          text="INICIAR OPERACION"
-          @click.native="sendQuote"
+          class="w-full mt-10 sm:mt-0 mb-4 sm:mb-8 text-sm"
+          text="INICIAR OPERACIÓN"
+          @click.native="setQuote"
         />
       </div>
     </div>
@@ -118,6 +117,7 @@ import Magnify from "vue-material-design-icons/Magnify.vue";
 import ButtonC from "../components/ButtonC.vue";
 import Modal from "@/shared/ui/components/Modal/Modal.vue";
 import ChevronDown from "vue-material-design-icons/ChevronDown.vue";
+import Loader from "@/shared/ui/components/Loading/LoadingScreen.vue";
 
 export default {
   components: {
@@ -126,7 +126,8 @@ export default {
     Button,
     Modal,
     ChevronDown,
-    Magnify
+    Magnify,
+    Loader
   },
   data() {
     return {
@@ -146,7 +147,8 @@ export default {
       ],
       optionsTwo: [],
       open: false,
-      searchCrypto: ""
+      searchCrypto: "",
+      openLoader: true
     };
   },
   mounted() {
@@ -160,6 +162,7 @@ export default {
       localStorage.setItem("markets", JSON.stringify(data));
       this.markets = JSON.parse(localStorage.getItem("markets"));
       this.filterPrice(this.currencyOne, this.currencyTwo);
+      this.openLoader = false;
       data.forEach(e => {
         this.optionsTwo.push({
           name: e.id,
@@ -185,7 +188,7 @@ export default {
     receiveOne(childData) {
       this.currencyOne = childData;
       this.filterPrice(this.currencyOne, this.currencyTwo);
-      this.exchangeOne = (Number(this.exchangeTwo) * this.valueOne).toFixed(3);
+      this.exchangeTwo = (Number(this.exchangeOne) * this.valueTwo).toFixed(5);
     },
     selectCrypto(value) {
       this.open = false;
@@ -212,7 +215,7 @@ export default {
     handleClick() {
       this.open = true;
     },
-    sendQuote() {
+    setQuote() {
       const data = {
         mountOrigin: this.exchangeOne,
         mountDestiny: this.exchangeTwo,

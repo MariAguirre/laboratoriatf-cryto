@@ -1,5 +1,5 @@
 <template>
-  <div class="w-500">
+  <div class="w-340 sm:w-500">
     <BuyComponent />
   </div>
 </template>
