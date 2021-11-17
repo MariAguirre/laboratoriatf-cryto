@@ -13,6 +13,7 @@
     v-if="showLogo" 
     class="" 
     />
+    <BaseCard>
        <nav 
         v-show=true
         class="ml-14 flex justify-center items-center">
@@ -89,7 +90,7 @@
             </li>
           </ul>
         </nav>
-      
+      </BaseCard>
     </div>
       <slot />
     </div>
@@ -98,8 +99,9 @@
 
 <script>
 import LogoV2 from "../../Logo/LogoV2.vue";
+import BaseCard from "@/shared/ui/components/Cards/BaseCard.vue"
 export default {
-  components: { LogoV2 },
+  components: { LogoV2, BaseCard },
   props: {
     variant: {
       type: String,
