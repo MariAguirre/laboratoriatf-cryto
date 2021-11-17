@@ -145,16 +145,36 @@ export default {
     getdata() {
       this.dataQuote = JSON.parse(localStorage.getItem("quote"));
       this.dataUtils = JSON.parse(localStorage.getItem("utils"));
-      console.log(this.dataQuote, this.dataUtils);
       this.delay = this.dataQuote.delay;
       this.banks = this.dataUtils.banks;
       this.wallets = this.dataUtils.originWallets;
       this.funds = this.dataUtils.sourceOfFunds;
       logger.info(this.dataUtils);
+      logger.info(this.dataQuote);
       this.openLoader = false;
     },
-    createTransaccion() {
-      console.log(this.values);
+    async createTransaccion() {
+      const transaction = {
+        originCurrency: this.dataQuote.currencyOrigin,
+        destinationCurrency: this.dataQuote.currencyDestiny,
+        amountSent: this.dataQuote.mountOrigin,
+        bankId: this.values.valueBank.id,
+        account: {
+          id: "6de6f675-bb1f-41eb-8147-4702849210b5",
+          customerId: "129be299-22ed-4407-b7b8-91daf26d867a",
+          type: "crypto",
+          number: "3AEcLU8NkukFRP5kGVikbmHVLXhL5KWuGv",
+          currency: "BTC",
+          alias: "U1 Mi cuenta BTC"
+        },
+        sourceOfFunds: this.values.fundsValue
+      };
+      const response = await this.$services.transaction.createTransaction(
+        transaction,
+        localStorage.getItem("token")
+      );
+      logger.info(response);
+      localStorage.setItem("transaction", JSON.stringify(response));
       localStorage.setItem("transaccionValues", JSON.stringify(this.values));
     }
   }

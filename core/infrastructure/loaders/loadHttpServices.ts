@@ -15,6 +15,8 @@ import LoginService from "../http/LoginService"
 import LoginRepository from "~/core/domain/repositories/login/LoginRepository" 
 import Utils2Service from "../http/Utils2Service";
 import Utils2Repository from "~/core/domain/repositories/utils2/Utils2Repository";
+import TransaccionRepository from '../../domain/repositories/transaction/TransactionRepository';
+import TransactionService from '../http/TransactionService';
 
 
 export function loadHTTPServices(api: HTTPClientRepository) {
@@ -27,6 +29,7 @@ export function loadHTTPServices(api: HTTPClientRepository) {
         markets: new MarketsService(api),
         login: new LoginService(api),
         utils2: new Utils2Service(api),
+        transaction: new TransactionService(api)
       };
     return services;
 }
@@ -39,5 +42,6 @@ export type LoadHTTPServicesType = {
   utils: UtilsRepository,
   markets: MarketsRepository,
   login: LoginRepository,
-  utils2: Utils2Repository
+  utils2: Utils2Repository,
+  transaction: TransaccionRepository
 }
