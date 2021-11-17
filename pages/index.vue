@@ -1,6 +1,8 @@
 <template>
   <DashboardLayout title="Cambios">
-    <section class="relative flex justify-around items-center h-full">
+    <section
+      class="relative flex justify-center items-center h-screen sm:h-full "
+    >
       <Main />
     </section>
   </DashboardLayout>
