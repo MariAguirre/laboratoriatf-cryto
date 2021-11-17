@@ -42,7 +42,9 @@ export default {
         data2: {
             type: Object,
             default(){
-         }}
+                
+            }
+        }
     }
     
 }

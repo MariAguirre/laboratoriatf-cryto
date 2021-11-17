@@ -1,13 +1,12 @@
 <template>
   <div class="intro-x mt-5 sm:mt-6">
-    <LoginForm/>
+    <LoginForm />
   </div>
 </template>
 
 <script>
-import LoginForm from './sections/LoginForm.vue'
+import LoginForm from "./sections/LoginForm.vue";
 export default {
-  components: { LoginForm },
-
-}
+  components: { LoginForm }
+};
 </script>

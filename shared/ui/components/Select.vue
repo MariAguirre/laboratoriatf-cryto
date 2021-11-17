@@ -141,9 +141,9 @@ export default {
     },
    baseData:{
     type: Object,
-    default(){
-      
-    }
+      default(){
+        
+      }
     }
     
   },

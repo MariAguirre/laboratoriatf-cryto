@@ -1,5 +1,7 @@
 <template>
   <div class="w-375 sm:w-641 sm:flex sm:justify-center sm:flex-col">
+  <section>
+    <Loader v-if="openLoader" class="h-full w-full bg-white" />
     <div>
       <Topbarflow class="hidden sm:block" variant="light" show-logo show-nav />
     </div>
@@ -23,27 +25,68 @@
           
         />
       </div>
-      <BaseCardData :base-data="baseData" class="w-full sm:w-410 mt-4" />
+      <BaseCardData :base-data="dataQuote" class="w-96  h-40 mt-4" />
       <Highlight
         class="mt-6 w-full"
         title="Tiempo estimado de espera"
         :delay="delay"
       />
-
       <BaseText
         class=" mt-4"
         text="¿Desde qué banco nos envías tu dinero?"
         
       />
-      <Select class="mt-1 w-full bg-white " />
+      <Select
+        v-model="values.valueBank"
+        :options="banks"
+        class="mt-1 w-96 bg-white"
+        :custom="true"
+      >
+        <template #currentOption="e">
+          <img :src="e.option.image" />
+          <i>{{ e.option.name }}</i>
+        </template>
+        <template #option="e" class="flex flex-row">
+          <img :src="e.option.image" />
+          <i>{{ e.option.name }}</i>
+        </template>
+      </Select>
       <BaseText text="¿A qué dirección enviamos tus criptomonedas?" />
-      <Select :options="dataBank" class="mt-1 w-full bg-white" />
+      <Select
+        v-model="values.valueWallet"
+        :options="wallets"
+        class="mt-1 w-96 bg-white"
+        :custom="true"
+      >
+        <template #currentOption="e">
+          <i>{{ e.option }}</i>
+        </template>
+        <template #option="e" class="flex flex-row">
+          <i>{{ e.option }}</i>
+        </template>
+      </Select>
       <BaseText text="Origen de fondos" />
-      <Select class="mt-1 w-full bg-white" />
-
-      <Button disabled class="w-full mt-3" text="Continuar" />
+      <Select
+        v-model="values.fundsValue"
+        class="mt-1 w-96 bg-white"
+        :options="funds"
+        :custom="true"
+      >
+        <template #currentOption="e">
+          <i>{{ e.option }}</i>
+        </template>
+        <template #option="e" class="flex flex-row">
+          <i>{{ e.option }}</i>
+        </template>
+      </Select>
+      <Button
+        :disabled="disabled"
+        class="w-96 mt-3"
+        text="Continuar"
+        @click.native="createTransaccion"
+      />
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -55,6 +98,9 @@ import BaseCardData from "../modules/data/BaseCardData.vue";
 import Select from "~/shared/ui/components/Select.vue";
 import Button from "~/shared/ui/components/Button/Button.vue";
 import Highlight from "~/shared/ui/components/Highlight.vue";
+import Loader from "@/shared/ui/components/Loading/LoadingScreen.vue";
+import logger from "@/shared/ui/utils/logger.ts";
+
 export default {
   components: {
     Topbarflow,
@@ -64,48 +110,52 @@ export default {
     BaseCardData,
     Button,
     Highlight,
-    BaseText
+    BaseText,
+    Loader
   },
   data() {
     return {
-      send: "",
-      received: "",
-      coinSend: "",
-      coinReceived: "",
-      currentChangeBTC: "",
-      currentChangeDolars: "",
-      banks: "",
-      keySegurity: "",
-      origin: "",
-      baseData: {},
+      wallets: [],
+      funds: [],
+      dataQuote: {},
+      dataUtils: {},
       delay: 0,
-      dataBank: [
-        { value: "bcp", name: "BCP", imagen: "" },
-        { value: "Interbank", name: "Interbank", imagen: "" }
-      ]
+      banks: [],
+      openLoader: true,
+      values: {
+        valueBank: "",
+        valueWallet: "",
+        fundsValue: ""
+      }
     };
+  },
+  computed: {
+    disabled() {
+      return !(
+        this.values.valueBank !== "" &&
+        this.values.valueWallet !== "" &&
+        this.values.fundsValue !== ""
+      );
+    }
   },
   mounted() {
     this.getdata();
-    this.getdataUtil();
   },
   methods: {
     getdata() {
-      const dataJ = JSON.parse(localStorage.getItem("quote"));
-      console.log(dataJ);
-      this.baseData = dataJ;
-      this.delay = dataJ.delay;
-      // (this.currencyOrigin = dataJ.mountOrigin),
-      //   (this.currencyReceived = dataJ.mountDestiny),
-      //   (this.coinOrigin = dataJ.currencyOrigin),
-      //   (this.coinReceived = dataJ.currencyDestiny),
-      //   (this.valueCurrentDolars = dataJ.exchangeTwo),
-      //   (this.valueCurrentBTC = dataJ.exchangeOne),
-      //   (this.delayCurrent = dataJ.delay);
+      this.dataQuote = JSON.parse(localStorage.getItem("quote"));
+      this.dataUtils = JSON.parse(localStorage.getItem("utils"));
+      console.log(this.dataQuote, this.dataUtils);
+      this.delay = this.dataQuote.delay;
+      this.banks = this.dataUtils.banks;
+      this.wallets = this.dataUtils.originWallets;
+      this.funds = this.dataUtils.sourceOfFunds;
+      logger.info(this.dataUtils);
+      this.openLoader = false;
     },
-    getdataUtil() {
-      const dataJUtils = JSON.parse(localStorage.getItem("utils"));
-      console.log(dataJUtils);
+    createTransaccion() {
+      console.log(this.values);
+      localStorage.setItem("transaccionValues", JSON.stringify(this.values));
     }
   }
 };

@@ -68,9 +68,7 @@ export default {
   props: {
     montoOrigin: {
       type: String,
-      default(){
-      
-    }
+      default: ''
     }
   }
   
