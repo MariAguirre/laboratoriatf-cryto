@@ -1,5 +1,6 @@
 <template>
   <section>
+    <Loader v-if="openLoader" class="h-full w-full bg-white" />
     <Modal v-model="open" closeable-by-backdrop>
       <div class="flex flex-col items-center bg-white rounded-xl w-full">
         <div class="flex flex-col w-11/12 sm:w-96">
@@ -105,7 +106,7 @@
         <Button
           class="sm:w-full mb-8"
           text="INICIAR OPERACION"
-          @click.native="sendQuote"
+          @click.native="setQuote"
         />
       </div>
     </div>
@@ -118,6 +119,7 @@ import Magnify from "vue-material-design-icons/Magnify.vue";
 import ButtonC from "../components/ButtonC.vue";
 import Modal from "@/shared/ui/components/Modal/Modal.vue";
 import ChevronDown from "vue-material-design-icons/ChevronDown.vue";
+import Loader from "@/shared/ui/components/Loading/LoadingScreen.vue";
 
 export default {
   components: {
@@ -126,7 +128,8 @@ export default {
     Button,
     Modal,
     ChevronDown,
-    Magnify
+    Magnify,
+    Loader
   },
   data() {
     return {
@@ -146,7 +149,8 @@ export default {
       ],
       optionsTwo: [],
       open: false,
-      searchCrypto: ""
+      searchCrypto: "",
+      openLoader: true
     };
   },
   mounted() {
@@ -160,6 +164,7 @@ export default {
       localStorage.setItem("markets", JSON.stringify(data));
       this.markets = JSON.parse(localStorage.getItem("markets"));
       this.filterPrice(this.currencyOne, this.currencyTwo);
+      this.openLoader = false;
       data.forEach(e => {
         this.optionsTwo.push({
           name: e.id,
@@ -185,7 +190,7 @@ export default {
     receiveOne(childData) {
       this.currencyOne = childData;
       this.filterPrice(this.currencyOne, this.currencyTwo);
-      this.exchangeOne = (Number(this.exchangeTwo) * this.valueOne).toFixed(3);
+      this.exchangeTwo = (Number(this.exchangeOne) * this.valueTwo).toFixed(5);
     },
     selectCrypto(value) {
       this.open = false;
@@ -212,7 +217,7 @@ export default {
     handleClick() {
       this.open = true;
     },
-    sendQuote() {
+    setQuote() {
       const data = {
         mountOrigin: this.exchangeOne,
         mountDestiny: this.exchangeTwo,
