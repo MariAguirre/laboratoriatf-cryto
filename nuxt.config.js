@@ -30,7 +30,7 @@ export default {
     { src: "~/plugins/vuex-persist", mode: "client" },
     { src: "~plugins/kambista" }
   ],
-  components: true,
+  components: false,
   buildModules: [
     "@nuxt/typescript-build",
     "@nuxtjs/eslint-module",
@@ -63,7 +63,7 @@ export default {
     extractors: [
       {
         extractor: content => content.match(/[A-z0-9-:\\/]+/g) || [],
-        extensions: ['html', 'vue', 'js']
+        extensions: ["html", "vue", "js"]
       }
     ]
   },

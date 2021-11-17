@@ -8,20 +8,15 @@
       class="flex items-center box-border h-14 "
       :class="[getContentBorderStyle]"
     >
-    <div >
-    <LogoV2
-    v-if="showLogo" 
-    class="" 
-    />
-    <BaseCard>
-       <nav 
-        v-show=true
-        class="ml-14 flex justify-center items-center">
-          <ul class="flex  pl-0 rounded list-none ">
-            <li>
-              <a
-                href=""
-                class="
+      <div>
+        <LogoV2 v-if="showLogo" class="" />
+        <BaseCard text="">
+          <nav v-show="true" class="ml-14 flex justify-center items-center">
+            <ul class="flex  pl-0 rounded list-none ">
+              <li>
+                <a
+                  href=""
+                  class="
                   linea
                   z-10
                   inline-block
@@ -39,14 +34,16 @@
                   border border-solid border-gray-900
                   bg-gray-900
                 "
-              ><p class="mt-4 -ml-5 text-xs ">Completa</p>
-              </a>
-            </li>
-            <hr class="bg-gray-900 w-28 ml-5 border-solid-3 z-40 object-center mt-2" />
-            <li>
-              <a
-                href=""
-                class="
+                  ><p class="mt-4 -ml-5 text-xs ">Completa</p>
+                </a>
+              </li>
+              <hr
+                class="bg-gray-900 w-28 ml-5 border-solid-3 z-40 object-center mt-2"
+              />
+              <li>
+                <a
+                  href=""
+                  class="
                   first:ml-0
                   text-xs
                   font-semibold
@@ -62,14 +59,14 @@
                   border border-solid border-gray-200
                   bg-gray-200
                 "
-              ><p class="mt-10 text-xs">Transfiere</p>
-              </a>
-            </li>
-            <hr class="bg-gray-900 w-28 border-solid-3 object-center mt-2" />
-            <li>
-              <a
-                href=""
-                class="
+                  ><p class="mt-10 text-xs">Transfiere</p>
+                </a>
+              </li>
+              <hr class="bg-gray-900 w-28 border-solid-3 object-center mt-2" />
+              <li>
+                <a
+                  href=""
+                  class="
                   first:ml-0
                   text-xs
                   font-semibold
@@ -85,13 +82,13 @@
                   border border-solid border-gray-200
                   bg-gray-200
                 "
-              ><p class="mt-10 text-xs ">Envia</p>
-              </a>
-            </li>
-          </ul>
-        </nav>
-      </BaseCard>
-    </div>
+                  ><p class="mt-10 text-xs ">Envia</p>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </BaseCard>
+      </div>
       <slot />
     </div>
   </header>
@@ -99,32 +96,32 @@
 
 <script>
 import LogoV2 from "../../Logo/LogoV2.vue";
-import BaseCard from "@/shared/ui/components/Cards/BaseCard.vue"
+import BaseCard from "@/shared/ui/components/Cards/BaseCard.vue";
 export default {
   components: { LogoV2, BaseCard },
   props: {
     variant: {
       type: String,
-      default: "default",
+      default: "default"
     },
     showLogo: {
       type: Boolean,
-      default: false,
+      default: false
     },
-     showNav: {
+    showNav: {
       type: Boolean,
-      default: false,
+      default: false
     },
     autoContent: {
       type: Boolean,
-      default: false,
-    },
+      default: false
+    }
   },
   computed: {
     getWrapperStyle() {
       return {
         default: "border-gray-400 bg-kambista-6",
-        light: "bg-white border-b",
+        light: "bg-white border-b"
       }[this.variant || "default"];
     },
     getAutoHideStyle() {
@@ -135,7 +132,7 @@ export default {
     },
     getAutoContentStyle() {
       return this.autoContent ? "px-4 lg:px-7" : "";
-    },
-  },
+    }
+  }
 };
 </script>

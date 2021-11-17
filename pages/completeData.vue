@@ -27,7 +27,7 @@
           text="Completa los datos de tu operación"
         />
       </div>
-      <BaseCardData class=" w-96  h-40 mt-4" :baseData="baseData" />
+      <BaseCardData :base-data="baseData" class="w-96  h-40 mt-4" />
       <Highlight
         class="mt-6 w-96"
         title="Tiempo estimado de espera"
@@ -80,8 +80,8 @@ export default {
       banks: "",
       keySegurity: "",
       origin: "",
-      baseData: "",
-      delay: "",
+      baseData: {},
+      delay: 0,
       dataBank: [
         { value: "bcp", name: "BCP", imagen: "" },
         { value: "Interbank", name: "Interbank", imagen: "" }
