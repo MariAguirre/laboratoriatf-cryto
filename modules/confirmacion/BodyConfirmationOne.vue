@@ -1,6 +1,6 @@
 <template>
     <div
-    clas="" > <BaseCard class="w-1/2 h-96" :shadow="inherit" :border="2">
+    clas="p-2 sm:p-4" > <BaseCard class="w-1/2 h-96" :shadow="inherit" :border="2">
     <div
 class="
 bg-white
@@ -11,9 +11,9 @@ items-center"
 <div class="flex justify-center flex flex-col items-center">
 <img class="w-60 pt-16 " src ="~/assets/images/banners/monedameta.png" alt="" />
  
-<h1 class=" mt-8 hidden md:block mb-3 font montserrat text-2xl">¡Constancia Enviada!</h1>
+<h1 class=" mt-8  mb-3 font montserrat text-2xl">¡Constancia Enviada!</h1>
 </div>
-<div class="py-8 px-28">
+<div class="py-8 px-28 ">
 <div class="flex justify-between md:justify-between">
   <p class="text-kambista-7 font-bold">Código Kambista</p>
   <p class="font-bold">KM20TTFFF</p>
