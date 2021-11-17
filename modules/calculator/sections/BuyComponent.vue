@@ -166,7 +166,8 @@ export default {
           value: e.name,
           currency: e.bid.filter(i => i.currency === this.currencyOne)[0]
             .currency,
-          price: e.bid.filter(i => i.currency === this.currencyOne)[0].price
+          price: e.bid.filter(i => i.currency === this.currencyOne)[0].price,
+          delay: e.bid.filter(i => i.currency === this.currencyOne)[0].delay
         });
       });
     },
@@ -213,15 +214,15 @@ export default {
     },
     sendQuote() {
       const data = {
-        markets: this.markets,
         mountOrigin: this.exchangeOne,
         mountDestiny: this.exchangeTwo,
         currencyOrigin: this.currencyOne,
         currencyDestiny: this.currencyTwo,
         exchangeOne: this.valueOneRound,
-        exchangeTwo: this.valueTwoRound
+        exchangeTwo: this.valueTwoRound,
+        delay: this.filterCurrency(this.currencyTwo)[0].delay
       };
-      localStorage.setItem("exchange", JSON.stringify(data));
+      localStorage.setItem("quote", JSON.stringify(data));
     }
   }
 };
