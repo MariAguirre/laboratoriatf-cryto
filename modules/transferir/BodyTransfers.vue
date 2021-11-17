@@ -31,7 +31,7 @@
           <p class="mt-4 font-bold">Nuemero de cuenta <span>¿.....?</span> </p>
         </div>
         <div class="mr-8 flex justify-between">
-          <p class="mt-4 font-bold">0,000034 BTC</p>
+          <p class="mt-4 font-bold"><span>{{data3.customerId}}</span></p>
           <img
             class="ml-5 mt-4"
             src="@/assets/images/common/clipboard.svg"
@@ -69,7 +69,13 @@ export default {
     montoOrigin: {
       type: String,
       default: ''
-    }
+    },
+    data3: {
+            type: Object,
+            default(){
+
+            }
+        }
   }
   
 };
