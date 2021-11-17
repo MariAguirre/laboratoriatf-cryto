@@ -38,6 +38,6 @@ export type LoadHTTPServicesType = {
   analytic: AnalyticRepository,
   utils: UtilsRepository,
   markets: MarketsRepository,
-  login: LoginRepository
+  login: LoginRepository,
   utils2: Utils2Repository
 }

@@ -77,6 +77,9 @@ export default {
       const { validInput, id } = e;
       this[id].isValid = validInput;
     },
+    goToHome() {
+      window.location.href = "/";
+    },
     async handleSubmit() {
       let formData = {
         email: this.email.value,
@@ -87,7 +90,7 @@ export default {
       if(data.status == 200){
         localStorage.setItem('dataLogin', JSON.stringify(data.data.data));
         localStorage.setItem('token', data.data.data.token);
-        //aca agregar dirigir a home
+        this.goToHome();
       }
 
      //alert();
