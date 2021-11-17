@@ -34,18 +34,54 @@
         title="Tiempo estimado de espera"
         :delay="delay"
       />
-
       <BaseText
         class=" mt-4 text-left"
         text="¿Desde qué banco nos envías tu dinero?"
       />
-      <Select :options="banks" class="mt-1 w-96 bg-white " />
+      <Select
+        v-model="values.valueBank"
+        :options="banks"
+        class="mt-1 w-96 bg-white"
+        :custom="true"
+      >
+        <template #currentOption="e">
+          <img :src="e.option.image" />
+          <i>{{ e.option.name }}</i>
+        </template>
+        <template #option="e" class="flex flex-row">
+          <img :src="e.option.image" />
+          <i>{{ e.option.name }}</i>
+        </template>
+      </Select>
       <BaseText text="¿A qué dirección enviamos tus criptomonedas?" />
-      <Select :options="keySeguritys" class="mt-1 w-96 bg-white" />
+      <Select
+        v-model="values.valueWallet"
+        :options="wallets"
+        class="mt-1 w-96 bg-white"
+        :custom="true"
+      >
+        <template #currentOption="e">
+          <i>{{ e.option }}</i>
+        </template>
+        <template #option="e" class="flex flex-row">
+          <i>{{ e.option }}</i>
+        </template>
+      </Select>
       <BaseText text="Origen de fondos" />
-      <Select class="mt-1 w-96 bg-white" />
-
-      <Button disabled class="w-96 mt-3" text="Continuar" />
+      <Select
+        v-model="values.fundsValue"
+        class="mt-1 w-96 bg-white"
+        :options="funds"
+        :custom="true"
+      >
+        <template #currentOption="e">
+          <i>{{ e.option }}</i>
+        </template>
+        <template #option="e" class="flex flex-row">
+          <i>{{ e.option }}</i>
+        </template>
+      </Select>
+      <Button :disabled="disabled" class="w-96 mt-3" text="Continuar" />
     </div>
   </section>
 </template>
@@ -76,16 +112,32 @@ export default {
   },
   data() {
     return {
-      keySeguritys: [],
+      wallets: [],
+      funds: [],
       dataQuote: {},
       dataUtils: {},
       delay: 0,
-      banks: [
-        { value: "bcp", name: "BCP", imagen: "" },
-        { value: "Interbank", name: "Interbank", imagen: "" }
-      ],
-      openLoader: true
+      banks: [],
+      openLoader: true,
+      values: {
+        valueBank: "",
+        valueWallet: "",
+        fundsValue: ""
+      }
     };
+  },
+  computed: {
+    disabled() {
+      if (
+        this.values.valueBank !== "" &&
+        this.values.valueWallet !== "" &&
+        this.values.fundsValue !== ""
+      ) {
+        localStorage.setItem("quote", JSON.stringify(this.values));
+        return true;
+      }
+      return false;
+    }
   },
   mounted() {
     this.getdata();
@@ -94,8 +146,11 @@ export default {
     getdata() {
       this.dataQuote = JSON.parse(localStorage.getItem("quote"));
       this.dataUtils = JSON.parse(localStorage.getItem("utils"));
+      console.log(this.dataQuote, this.dataUtils);
       this.delay = this.dataQuote.delay;
-      this.banks = this.dataUtils;
+      this.banks = this.dataUtils.banks;
+      this.wallets = this.dataUtils.originWallets;
+      this.funds = this.dataUtils.sourceOfFunds;
       logger.info(this.dataUtils);
       this.openLoader = false;
     }
