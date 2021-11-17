@@ -14,7 +14,6 @@
               v-model="searchCrypto"
               class="outline-none text-7 text-base leading-6 font-normal w-full"
               placeholder="Buscar"
-              @keyup="handleSearch"
             />
           </label>
         </div>
@@ -103,7 +102,11 @@
             </div>
           </div>
         </div>
-        <Button class="sm:w-full mb-8" text="INICIAR OPERACION" />
+        <Button
+          class="sm:w-full mb-8"
+          text="INICIAR OPERACION"
+          @click.native="sendQuote"
+        />
       </div>
     </div>
   </section>
@@ -119,8 +122,8 @@ import ChevronDown from "vue-material-design-icons/ChevronDown.vue";
 export default {
   components: {
     Select,
-    Button,
     ButtonC,
+    Button,
     Modal,
     ChevronDown,
     Magnify
@@ -163,7 +166,8 @@ export default {
           value: e.name,
           currency: e.bid.filter(i => i.currency === this.currencyOne)[0]
             .currency,
-          price: e.bid.filter(i => i.currency === this.currencyOne)[0].price
+          price: e.bid.filter(i => i.currency === this.currencyOne)[0].price,
+          delay: e.bid.filter(i => i.currency === this.currencyOne)[0].delay
         });
       });
     },
@@ -208,8 +212,17 @@ export default {
     handleClick() {
       this.open = true;
     },
-    handleSearch() {
-      console.log(this.searchCrypto);
+    sendQuote() {
+      const data = {
+        mountOrigin: this.exchangeOne,
+        mountDestiny: this.exchangeTwo,
+        currencyOrigin: this.currencyOne,
+        currencyDestiny: this.currencyTwo,
+        exchangeOne: this.valueOneRound,
+        exchangeTwo: this.valueTwoRound,
+        delay: this.filterCurrency(this.currencyTwo)[0].delay
+      };
+      localStorage.setItem("quote", JSON.stringify(data));
     }
   }
 };
