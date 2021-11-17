@@ -27,8 +27,7 @@
       text="Iniciar Sesión"
       size="lg"
       class="w-full mt-8"   
-      :loading="loading"
-      :disabled="disabled"      
+            
     />
   </form>
 </template>

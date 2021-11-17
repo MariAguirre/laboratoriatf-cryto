@@ -27,18 +27,31 @@
           text="Completa los datos de tu operación"
         />
       </div>
-      <BaseCardData class=" w-96  h-40 mt-4" />
-      <Highlight class="mt-6 w-96" title="Tiempo estimado de espera" />
+      <BaseCardData 
+      class=" w-96  h-40 mt-4" 
+      :baseData='baseData'
+      />
+      <Highlight 
+      class="mt-6 w-96" 
+      title= 'Tiempo estimado de espera'
+      :baseDataH='baseDataH'
+      />
 
       <BaseText
         class=" mt-4 text-left"
         text="¿Desde qué banco nos envías tu dinero?"
       />
-      <Select class="mt-1 w-96 bg-white " />
+      <Select
+      class="mt-1 w-96 bg-white "
+      :baseDataS='baseDataS' />
       <BaseText text="¿A qué dirección enviamos tus criptomonedas?" />
-      <Select class="mt-1 w-96 bg-white" />
+      <Select  
+      :options = 'dataBank'
+      class="mt-1 w-96 bg-white" 
+      :baseDataS='baseDataS'/>
       <BaseText text="Origen de fondos" />
-      <Select class="mt-1 w-96 bg-white" />
+      <Select class="mt-1 w-96 bg-white" 
+      :baseDataS='baseDataS'/>
 
       <Button disabled class="w-96 mt-3" text="Continuar" />
     </div>
@@ -64,7 +77,58 @@ export default {
     Button,
     Highlight,
     BaseText
+  },
+  data(){
+    return {
+      send:'',
+      received:'',
+      coinSend:'',
+      coinReceived:'',
+      currentChangeBTC:'',
+      currentChangeDolars:'',
+      banks:'',
+      keySegurity:'',
+      origin:'',
+      baseData:'',
+      baseDataH:'',
+      // dataBank:
+      // [
+      //   {value:'bcp', name:'BCP'. imagen:''},
+      //   {value:'Interbank', name:'Interbank'. imagen:''}
+      // ]
+
+      
+    }
+    
+
+  },
+  mounted(){
+    this.getdata()
+    this.getdataUtil()
+
+  },
+   methods:{
+       getdata() {
+      const dataJ=  JSON.parse(localStorage.getItem("quote"));
+       console.log(dataJ)
+       this.baseData=dataJ
+      this.currencyOrigin= dataJ.mountOrigin,
+      this.currencyReceived=dataJ.mountDestiny,
+      this.coinOrigin=dataJ.currencyOrigin,
+      this.coinReceived=dataJ.currencyDestiny,
+      this.valueCurrentDolars=dataJ.exchangeTwo,
+      this.valueCurrentBTC=dataJ.exchangeOne,
+      this.delayCurrent=dataJ.delay
+    },
+     getdataUtil() {
+      const dataJUtils=  JSON.parse(localStorage.getItem("utils"));
+       console.log(dataJUtils)
+      
+      
+    }
+
   }
 };
 </script>
-<style scoped></style>
+
+

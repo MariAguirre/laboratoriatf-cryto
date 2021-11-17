@@ -110,7 +110,9 @@ export default {
     options: {
       type: Array,
       default: function() {
-        return [];
+        return [
+          
+         ];
       }
     },
     value: {
@@ -136,7 +138,11 @@ export default {
     renderValue: {
       type: Function,
       default: null
+    },
+   baseData:{
+    type: Object,
     }
+    
   },
   data() {
     return {
@@ -146,7 +152,8 @@ export default {
       currentKeyboards: [],
       documentPosition: {
         y: 0
-      }
+      },
+      
     };
   },
   computed: {
