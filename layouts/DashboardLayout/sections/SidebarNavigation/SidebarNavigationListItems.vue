@@ -35,10 +35,10 @@
       @onPressed="$emit('onPressed')"
     />
     <SidebarItem
-      class="flex md:hidden"
+      class="flex"
       text="Cerrar sesión"
       icon="logout"
-      @onPressed="$emit('onPressed')"
+      @onPressed="logout"
     />
   </div>
 </template>
@@ -48,5 +48,11 @@ import SidebarItem from "../../components/SidebarItem/SidebarItem.vue";
 
 export default {
   components: { SidebarItem },
+  methods: {
+    logout() {
+      localStorage.clear();
+      window.location.href = "/login";
+    }
+  }
 }
 </script>
