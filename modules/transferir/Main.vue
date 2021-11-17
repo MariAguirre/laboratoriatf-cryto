@@ -8,13 +8,13 @@
                 <div>
                     <BaseCard class="w-306 md:w-719 p-8 ">  
                     <BaseText class="">
-                    <BodyTransfers class="flex "/>
+                    <BodyTransfers class="flex " :montoOrigin="mountOrigin"/>
                     </BaseText>                
                     </BaseCard>
                 </div>
                 <div>
                     <BaseCard class="hidden sm:block w-306 md:w-306 ml-9 " >                    
-                    <DetalleTransfers class="flex justify-left md:p-4" />                                  
+                    <DetalleTransfers class="flex justify-left md:p-4" :data="data" />                                  
                     </BaseCard>
                 </div> 
             </div>      
@@ -43,6 +43,33 @@ export default {
     DetalleTransfers,
     Button    
     
+  },
+  data(){
+    return {
+      mountOrigin: '',
+      currencyOrigin: '',
+      mountDestiny: '',
+      currencyDestiny: '',
+      exchangeOne: '',
+      exchangeTwo: '',
+      data2: '',
+    }
+  },
+  mounted() {
+    this.getdata()
+  },
+  methods: {
+    getdata () {
+      const data = JSON.parse(localStorage.getItem("quote"));
+      console.log(data);
+      this.data2 = data;
+      this.mountOrigin = this.data.mountOrigin;
+      /*this.currencyOrigin = data.mountOrigin;
+      this.mountDestiny = data.mountDestiny;
+      this.currencyDestiny = data.currencyDestiny;
+      this.exchangeOne = data.exchangeOne;
+      this.exchangeTwo = data.exchangeTwo; */
+    }
   },
 }
 </script>
