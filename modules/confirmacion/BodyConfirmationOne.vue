@@ -1,6 +1,6 @@
 <template>
     <div
-    clas="p-2 sm:p-4" > <BaseCard class="w-1/2 h-96" :shadow="inherit" :border="2">
+    clas="p-2 sm:p-4 ml-9" > <BaseCard class="w-1/2 h-96" :shadow="inherit" :border="2">
     <div
 class="
 bg-white
@@ -13,7 +13,7 @@ items-center"
  
 <h1 class=" mt-8  mb-3 font montserrat text-2xl">¡Constancia Enviada!</h1>
 </div>
-<div class="py-8 px-28 ">
+<div class="py-8 px-2 sm:flex-grow-0 hidden sm:block ">
 <div class="flex justify-between md:justify-between">
   <p class="text-kambista-7 font-bold">Código Kambista</p>
   <p class="font-bold">KM20TTFFF</p>
@@ -29,6 +29,26 @@ items-center"
 <div class="py-2 flex justify-between md:justify-between">
   <p class="text-kambista-7 font-bold">Tiempo de espera</p>
   <p class="font-bold"> 15 min aprox</p>
+</div>
+</div>
+<div class="py-2 px-2 block sm:hidden">
+  
+<div class="sm:flex-grow-0">
+  <p class="text-kambista-7 font-bold">Código Kambista</p>
+  <p class="font-bold">KM20TTFFF</p>
+</div>
+
+
+  <p class="py-4">*Usa tu código para dar seguimiento a tu operación o si tuvieras una consulta.</p>
+  <div class= "sm:flex  ">
+  <div class="py-2  sm:flex-grow">
+  <p class="text-kambista-7 font-bold">Monto a recibir</p>
+  <p class="font-bold ">0.000033344 BTC</p>
+</div>
+<div class="py-2 sm:flex-grow text-right">
+  <p class="text-kambista-7 font-bold">Tiempo de espera</p>
+  <p class="font-bold"> 15 min aprox</p>
+  </div>
 </div>
 </div>
 </div>

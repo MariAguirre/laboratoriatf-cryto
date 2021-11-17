@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-9 ml-90 flex justify-center items-center flex-col" >
+  <div class=" flex justify-center items-center flex-col mt-9 ml-90" >
     <BodyConfirmationOne class="w-306 md:w-719"/>
     <BodyConfirmationBtn class="w-306 md:w-719"/>
   </div>
