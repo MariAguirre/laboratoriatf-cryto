@@ -18,8 +18,14 @@
       </div>
       <hr class="bg-gray-900 w-72 border-solid-2 z-40 mt-2.5" />
       <div class="font-bold flex justify-between">
-        <p class="py-4">1BTC = {{ baseData.exchangeOne }} USD</p>
-        <p class="py-4">1USD = {{ baseData.exchangeTwo }} BTC</p>
+        <p class="py-4">
+          1 {{ baseData.currencyDestiny }} = {{ baseData.exchangeOne }}
+          {{ baseData.currencyOrigin }}
+        </p>
+        <p class="py-4">
+          1 {{ baseData.currencyOrigin }} = {{ baseData.exchangeTwo }}
+          {{ baseData.currencyDestiny }}
+        </p>
       </div>
     </div>
 
@@ -29,11 +35,6 @@
 <script>
 export default {
   props: {
-    // text: {
-    //   type: String,
-    //   default: "",
-    //   required: true
-    // },
     shadow: {
       type: String,
       default: "base"

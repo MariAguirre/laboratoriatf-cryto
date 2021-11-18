@@ -1,6 +1,5 @@
 <template>
-  <div class="w-375 sm:w-641 sm:flex sm:justify-center sm:flex-col">
-  <section>
+  <section class="w-375 sm:w-641 sm:flex sm:justify-center sm:flex-col">
     <Loader v-if="openLoader" class="h-full w-full bg-white" />
     <div>
       <Topbarflow class="hidden sm:block" variant="light" show-logo show-nav />
@@ -19,23 +18,19 @@
     >
       <div>
         <TextTitle
-          class="flex mt-8 sm:mt-12  text-center w-full sm:w-full"
+          class="flex mt-8 sm:mt-12 text-center w-full sm:w-full"
           text="Completa los datos de tu operación"
           alignment="center"
           
         />
       </div>
-      <BaseCardData :base-data="dataQuote" class="w-96  h-40 mt-4" />
+      <BaseCardData :base-data="dataQuote" class="w-96 mt-4" />
       <Highlight
         class="mt-6 w-full"
         title="Tiempo estimado de espera"
         :delay="delay"
       />
-      <BaseText
-        class=" mt-4"
-        text="¿Desde qué banco nos envías tu dinero?"
-        
-      />
+      <BaseText class=" mt-4" text="¿Desde qué banco nos envías tu dinero?" />
       <Select
         v-model="values.valueBank"
         :options="banks"
@@ -46,7 +41,7 @@
           <img :src="e.option.image" />
           <i>{{ e.option.name }}</i>
         </template>
-        <template #option="e" class="flex flex-row">
+        <template #option="e" class="">
           <img :src="e.option.image" />
           <i>{{ e.option.name }}</i>
         </template>
@@ -54,15 +49,15 @@
       <BaseText text="¿A qué dirección enviamos tus criptomonedas?" />
       <Select
         v-model="values.valueWallet"
-        :options="wallets"
+        :options="accounts"
         class="mt-1 w-96 bg-white"
         :custom="true"
       >
         <template #currentOption="e">
-          <i>{{ e.option }}</i>
+          <i>{{ e.number }}</i>
         </template>
-        <template #option="e" class="flex flex-row">
-          <i>{{ e.option }}</i>
+        <template #option="e" class="">
+          <i>{{ e.number }}</i>
         </template>
       </Select>
       <BaseText text="Origen de fondos" />
@@ -115,7 +110,7 @@ export default {
   },
   data() {
     return {
-      wallets: [],
+      accounts: [],
       funds: [],
       dataQuote: {},
       dataUtils: {},
@@ -142,15 +137,22 @@ export default {
     this.getdata();
   },
   methods: {
-    getdata() {
+    async getdata() {
       this.dataQuote = JSON.parse(localStorage.getItem("quote"));
       this.dataUtils = JSON.parse(localStorage.getItem("utils"));
       this.delay = this.dataQuote.delay;
       this.banks = this.dataUtils.banks;
-      this.wallets = this.dataUtils.originWallets;
       this.funds = this.dataUtils.sourceOfFunds;
-      logger.info(this.dataUtils);
-      logger.info(this.dataQuote);
+      this.accounts = (
+        await this.$services.accounts.getAccount(
+          localStorage.getItem("token"),
+          {
+            currency: this.dataQuote.currencyDestiny,
+            type: "crypto"
+          }
+        )
+      ).data.data;
+      logger.info(this.accounts);
       this.openLoader = false;
     },
     async createTransaccion() {
@@ -159,14 +161,7 @@ export default {
         destinationCurrency: this.dataQuote.currencyDestiny,
         amountSent: this.dataQuote.mountOrigin,
         bankId: this.values.valueBank.id,
-        account: {
-          id: "6de6f675-bb1f-41eb-8147-4702849210b5",
-          customerId: "129be299-22ed-4407-b7b8-91daf26d867a",
-          type: "crypto",
-          number: "3AEcLU8NkukFRP5kGVikbmHVLXhL5KWuGv",
-          currency: "BTC",
-          alias: "U1 Mi cuenta BTC"
-        },
+        account: this.accounts,
         sourceOfFunds: this.values.fundsValue
       };
       const response = await this.$services.transaction.createTransaction(
@@ -176,6 +171,7 @@ export default {
       logger.info(response);
       localStorage.setItem("transaction", JSON.stringify(response));
       localStorage.setItem("transaccionValues", JSON.stringify(this.values));
+      // window.location.href = "/transfers";
     }
   }
 };
