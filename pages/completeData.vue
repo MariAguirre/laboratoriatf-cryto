@@ -126,6 +126,7 @@ import Highlight from "~/shared/ui/components/Highlight.vue";
 import Loader from "@/shared/ui/components/Loading/LoadingScreen.vue";
 import logger from "@/shared/ui/utils/logger.ts";
 import Modal from "@/shared/ui/components/Modal/Modal.vue";
+import { mapState } from "vuex";
 
 export default {
   components: {
@@ -146,7 +147,7 @@ export default {
       funds: [],
       dataQuote: {},
       dataUtils: {},
-      delay: 0,
+      delay: "",
       banks: [],
       openLoader: true,
       values: {
@@ -158,6 +159,7 @@ export default {
     };
   },
   computed: {
+    ...mapState(["transaction", "quote"]),
     disabled() {
       return !(
         this.values.valueBank !== "" &&
@@ -177,7 +179,7 @@ export default {
 
   methods: {
     async getdata() {
-      this.dataQuote = JSON.parse(localStorage.getItem("quote"));
+      this.dataQuote = this.quote;
       this.dataUtils = JSON.parse(localStorage.getItem("utils"));
       this.delay = this.convertTime(this.dataQuote.delay);
       this.banks = this.dataUtils.banks;
@@ -210,9 +212,9 @@ export default {
           transaction,
           localStorage.getItem("token")
         );
-        localStorage.setItem("transaction", JSON.stringify(response.data.data));
+        this.$store.dispatch("setTransaction", response.data.data);
         localStorage.setItem("transactionValues", JSON.stringify(this.values));
-        window.location.href = "/transfers";
+        this.$router.push({ path: "transfers" }, console.log, console.log);
       } catch (err) {
         this.open = true;
       }

@@ -15,8 +15,10 @@
     <Modal v-model="open" closeable-by-backdrop>
       <div class="flex flex-col items-center bg-white rounded-xl w-full">
         <div class="flex flex-col w-11/12 sm:w-96">
-          <p class="pb-1 text-center text-2xl leading-6 font-normal">Ocurrió un error inténtelo nuevamente.</p>
-            <img src="@/assets/images/error/errorLogin.jpg"  alt="question" />
+          <p class="pb-1 text-center text-2xl leading-6 font-normal">
+            Ocurrió un error inténtelo nuevamente.
+          </p>
+          <img src="@/assets/images/error/errorLogin.jpg" alt="question" />
         </div>
       </div>
     </Modal>
@@ -149,8 +151,7 @@
 <script>
 import Button from "@/shared/ui/components/Button/Button.vue";
 import Modal from "@/shared/ui/components/Modal/Modal.vue";
-// import * as FormData from "form-data";
-// import { fs } from "fs";
+import { mapState } from "vuex";
 
 export default {
   components: {
@@ -172,6 +173,7 @@ export default {
     };
   },
   computed: {
+    ...mapState(["transaction", "quote", "check"]),
     disabled() {
       return !(this.checked !== "");
     }
@@ -201,25 +203,27 @@ export default {
       this.loading = true;
       try {
         if (this.checked === "uploadFile") {
-          // const data = new FormData();
-          // data.append("image", fs.createReadStream(this.file));
-          // const response = await this.$services.file.uploadFile(
-          //   data,
-          //   localStorage.getItem("token")
-          // );
-          // console.log(response);
-          console.log(this.checked);
+          const data = new FormData();
+          data.append("image", this.file);
+          const id = this.transaction.id;
+          const img = await this.$services.file.uploadFile(
+            data,
+            localStorage.getItem("token")
+          );
+          await this.$services.transaction.checkTransaction(
+            { voucherImage: img.data.data.url, inmediate: this.inmediate },
+            localStorage.getItem("token"),
+            id
+          );
+          this.$router.push({ path: "confirmacion" }, console.log, console.log);
         } else {
-          console.log(this.checked);
-          const id = JSON.parse(localStorage.getItem("transaction")).id;
-          console.log(id);
-          const response = await this.$services.transaction.checkTransaction(
+          const id = this.transaction.id;
+          await this.$services.transaction.checkTransaction(
             { voucherEmail: true, inmediate: this.inmediate },
             localStorage.getItem("token"),
             id
           );
-          console.log(response);
-          window.location.href = "/confirmacion";
+          this.$router.push({ path: "confirmacion" }, console.log, console.log);
         }
       } catch (err) {
         this.open = true;
