@@ -77,8 +77,5 @@
     },
     "rules": {}
   },
-  "keywords": [],
-  "engines": {
-    "node": "14.17.0"
-    }
+  "keywords": []
 }
