@@ -231,15 +231,9 @@ export default {
     convertTime(time) {
       const minutes = Math.floor(time / 60);
       const seconds = time - minutes * 60;
-<<<<<<< HEAD
-      return `${minutes}:${seconds > 10 ? seconds : `0${seconds}`}`;
-    },
-   
-=======
       console.log(seconds);
       return `${minutes} min`;
     }
->>>>>>> 0a86f6d147d164a45ffa608e2bd424ac88691926
   }
 };
 </script>
