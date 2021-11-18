@@ -122,6 +122,7 @@ import Button from "~/shared/ui/components/Button/Button.vue";
 import Highlight from "~/shared/ui/components/Highlight.vue";
 import Loader from "@/shared/ui/components/Loading/LoadingScreen.vue";
 import logger from "@/shared/ui/utils/logger.ts";
+import Modal from "@/shared/ui/components/Modal/Modal.vue";
 
 export default {
   components: {
@@ -133,7 +134,8 @@ export default {
     Button,
     Highlight,
     BaseText,
-    Loader
+    Loader,
+    Modal
   },
   data() {
     return {
@@ -148,7 +150,8 @@ export default {
         valueBank: "",
         valueWallet: "",
         fundsValue: ""
-      }
+      },
+      open: false
     };
   },
   computed: {
