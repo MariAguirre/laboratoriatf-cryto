@@ -12,16 +12,34 @@
       sm:w-719 sm:h-434
     "
   >
-    <img class="mb-0.5" src="@/assets/images/document/document-icon.svg" alt="" />
-    <h1 class="mb-4 font-bold text-24 text-blue leading-29">Envía constancia</h1>
+    <Modal v-model="open" closeable-by-backdrop>
+      <div class="flex flex-col items-center bg-white rounded-xl w-full">
+        <div class="flex flex-col w-11/12 sm:w-96">
+          <p class="pb-1 text-center text-2xl leading-6 font-normal">Ocurrió un error inténtelo nuevamente.</p>
+            <img src="@/assets/images/error/errorLogin.jpg"  alt="question" />
+        </div>
+      </div>
+    </Modal>
+    <img
+      class="mb-0.5"
+      src="@/assets/images/document/document-icon.svg"
+      alt=""
+    />
+    <h1 class="mb-4 font-bold text-24 text-blue leading-29">
+      Envía constancia
+    </h1>
     <fieldset class="w-277 sm:w-auto">
       <div>
-        <p class="pl-3 mb-5 font-normal text-16 leading-20 text-left sm:text-center">
+        <p
+          class="pl-3 mb-5 font-normal text-16 leading-20 text-left sm:text-center"
+        >
           Selecciona una forma de envío de la constancia de tu transferencia
         </p>
       </div>
       <div class="flex flex-col mt-4 space-y-2 items-center">
-        <div class="flex flex-col inputContainer justify-center items-center w-306 sm:w-396">
+        <div
+          class="flex flex-col inputContainer justify-center items-center w-306 sm:w-396"
+        >
           <div class="flex w-full py-5">
             <input
               id="push-upload"
@@ -61,9 +79,18 @@
                 "
               >
                 <span v-if="image">Adjunta una imagen</span>
-                <input id="file-upload" name="file-upload" type="file" class="sr-only" @change="captureFile" />
+                <input
+                  id="file-upload"
+                  name="file-upload"
+                  type="file"
+                  class="sr-only"
+                  @change="captureFile"
+                />
                 <span v-if="imageUpload">{{ fileName }}</span>
-                <img src="@/assets/images/common/upload-icon.svg" alt="upload" />
+                <img
+                  src="@/assets/images/common/upload-icon.svg"
+                  alt="upload"
+                />
               </label>
             </div>
           </div>
@@ -78,9 +105,13 @@
             class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
             @change="handlingChecked"
           />
-          <label for="push-email" class="ml-3 w-5/6 text-14 sm:text-16 font-normal text-blue leading-24 tracking-wider">
+          <label
+            for="push-email"
+            class="ml-3 w-5/6 text-14 sm:text-16 font-normal text-blue leading-24 tracking-wider"
+          >
             Enviar comprobante por correo
-            <a class="underline font-bold w-5/6 tracking-wider text-blue leading-24 text-14 sm:text-16"
+            <a
+              class="underline font-bold w-5/6 tracking-wider text-blue leading-24 text-14 sm:text-16"
               >operaciones@kambista.com</a
             >
           </label>
@@ -92,46 +123,109 @@
         id="check"
         name="remember-me"
         type="checkbox"
+        :value="true"
         class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+        @change="handlingInmediate"
       />
-      <label for="check" class="ml-2 font-normal text-12 sm:text-14 text-gray-2 leading-15 w-277 sm:w-auto">
-        Realicé una <b class="text-12 sm:text-14 text-gray-2 leading-15">transferencia interbancaria</b> inmediata a la
-        cuenta de Kambista</label
+      <label
+        for="check"
+        class="ml-2 font-normal text-12 sm:text-14 text-gray-2 leading-15 w-277 sm:w-auto"
+      >
+        Realicé una
+        <b class="text-12 sm:text-14 text-gray-2 leading-15"
+          >transferencia interbancaria</b
+        >
+        inmediata a la cuenta de Kambista</label
       >
     </div>
+    <Button
+      :disabled="disabled"
+      :loading="loading"
+      text="ENVIAR CONSTANCIA"
+      @click.native="sendconstancia"
+    />
   </div>
 </template>
 <script>
+import Button from "@/shared/ui/components/Button/Button.vue";
+import Modal from "@/shared/ui/components/Modal/Modal.vue";
+// import * as FormData from "form-data";
+// import { fs } from "fs";
+
 export default {
+  components: {
+    Button,
+    Modal
+  },
   props: {},
   data() {
     return {
-      checked: '',
+      checked: "",
       check: false,
       image: true,
       imageUpload: true,
-      fileName: '',
+      fileName: "",
+      open: false,
+      inmediate: false,
+      file: "",
+      loading: null
     };
+  },
+  computed: {
+    disabled() {
+      return !(this.checked !== "");
+    }
   },
   methods: {
     handlingChecked(e) {
-      if (e.target.value === 'uploadFile') {
+      if (e.target.value === "uploadFile") {
         this.checked = e.target.value;
         this.check = true;
-        this.$emit('send', this.checked);
+        this.$emit("send", this.checked);
       } else {
         this.check = false;
         this.image = true;
         this.imageUpload = false;
       }
     },
+    handlingInmediate(e) {
+      this.inmediate = e.target.value;
+    },
     captureFile(e) {
-      // aquí se captura la imagen
       this.image = false;
       this.imageUpload = true;
+      this.file = e.target.files[0];
       this.fileName = e.target.files[0].name;
     },
-  },
+    async sendconstancia() {
+      this.loading = true;
+      try {
+        if (this.checked === "uploadFile") {
+          // const data = new FormData();
+          // data.append("image", fs.createReadStream(this.file));
+          // const response = await this.$services.file.uploadFile(
+          //   data,
+          //   localStorage.getItem("token")
+          // );
+          // console.log(response);
+          console.log(this.checked);
+        } else {
+          console.log(this.checked);
+          const id = JSON.parse(localStorage.getItem("transaction")).id;
+          console.log(id);
+          const response = await this.$services.transaction.checkTransaction(
+            { voucherEmail: true, inmediate: this.inmediate },
+            localStorage.getItem("token"),
+            id
+          );
+          console.log(response);
+          window.location.href = "/confirmacion";
+        }
+      } catch (err) {
+        this.open = true;
+      }
+    }
+  }
 };
 </script>
 <style scoped>

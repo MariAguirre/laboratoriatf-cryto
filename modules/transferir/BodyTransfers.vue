@@ -9,11 +9,9 @@
       <h1 class="mb-6 font-bold text-2xl">Transfiere a Kambista</h1>
     </TextTitle>
 
-    <p
-      for="first-name"
-      class="text-justify text-base"
-    >
-      Transfiere desde tu banco y guarda el <span class="underline">número de operación</span> para el siguiente paso.
+    <p for="first-name" class="text-justify text-base">
+      Transfiere desde tu banco y guarda el
+      <span class="underline">número de operación</span> para el siguiente paso.
     </p>
 
     <div class=" w-306 md:w-719 mt-4">
@@ -22,16 +20,23 @@
           <p class="font-bold">Monto a tranferir</p>
         </div>
         <div class="mr-8 flex justify-between">
-          <p class="font-bold"><span>{{montoOrigin}} Dólares</span></p>
-          <img class="ml-5" src="@/assets/images/common/clipboard.svg" alt="" />
+          <p class="font-bold flex justify-between">
+            <span>{{ montoOrigin }}</span>
+            <span class="ml-1">{{ currencyOrigin }}</span>
+          </p>
+          <button @click.native="capture"><img class="ml-5" src="@/assets/images/common/clipboard.svg" alt="" /></button>
         </div>
       </div>
       <div class="flex justify-between">
         <div class="ml-8">
-          <p class="mt-4 font-bold">Nuemero de cuenta <span>¿.....?</span> </p>
+          <p class="mt-4 font-bold">
+            Nuemero de cuenta <span>{{ name }}</span>
+          </p>
         </div>
         <div class="mr-8 flex justify-between">
-          <p class="mt-4 font-bold"><span>{{data3.customerId}}</span></p>
+          <p class="mt-4 font-bold">
+            <span>{{ number }}</span>
+          </p>
           <img
             class="ml-5 mt-4"
             src="@/assets/images/common/clipboard.svg"
@@ -39,7 +44,7 @@
           />
         </div>
       </div>
-      <div class="hidden sm:block">
+      <div class="block sm:hidden">
         <div class="flex justify-between">
           <div class="ml-8">
             <p class="mt-4 font-bold">RUC Kambista</p>
@@ -54,6 +59,9 @@
           </div>
         </div>
       </div>
+      <div class="Block sm:hidden">
+        <p>Detalle de la operación</p>
+      </div>
     </div>
   </div>
 </template>
@@ -61,22 +69,49 @@
 <script>
 import TextTitle from "@/shared/ui/components/Typography/TextTitle.vue";
 
+
 export default {
   components: {
     TextTitle,
-  },
+    
+  }, 
+  
   props: {
     montoOrigin: {
       type: String,
-      default: ''
+      default: ""
     },
     data3: {
-            type: Object,
-            default(){
-
-            }
-        }
+      type: Object,
+      default() {}
+    },
+    currencyOrigin: {
+      type: String,
+      default: ""
+    },
+    number: {
+      type: String,
+      default: ""
+    },
+    name: {
+      type: String,
+      default: ""
+    }
+  },
+  methods: {
+   capture(){
+     if(this.montoOrigin === '' && this.currencyOrigin === ''){
+       alert('No se encontraron los datos');
+       console.log('no hay datos');       
+    }else{
+      const copy1 = JSON.parse(localStorage.setItem("transaction"));
+      console.log(copy1);
+      const copy2 = JSON.parse(localStorage.setItem("transaction"));
+      console.log(copy2);
+      alert('mensaje copiado')
+    }
+   }
+    
   }
-  
 };
 </script>
