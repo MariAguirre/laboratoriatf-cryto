@@ -15,5 +15,11 @@ import Main from "@/modules/confirmacion/Main.vue"
 
 export default {
   components: { Topbar, TextParagraph, Main},
+  mounted() {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      this.$router.push({path: 'login'});
+    }
+  },
 }
 </script>

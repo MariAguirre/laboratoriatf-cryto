@@ -19,5 +19,15 @@ export default {
     LoginTitle,
     CreateAccountTitle,
   },
+  mounted() {
+    const token = localStorage.getItem('token');
+    if (token) {
+      console.log('SI TOKEN');
+      this.$router.push({path: '/'});
+    } else {
+      console.log('NO TOKEN');
+      this.$router.push({path: 'login'});
+    }
+  }
 };
 </script>

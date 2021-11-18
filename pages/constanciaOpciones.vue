@@ -20,6 +20,13 @@ import BaseText from "@/shared/ui/components/Typography/BaseText.vue";
 import ConstancySend from "@/modules/constans/components/ConstancySend.vue";
 
 export default {
-  components: { Topbar, BaseCard, BaseText, ConstancySend }
-};
+  components: { Topbar,BaseCard,BaseText,ConstancySend},
+  mounted() {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      this.$router.push({path: 'login'});
+    }
+  },
+}
+
 </script>

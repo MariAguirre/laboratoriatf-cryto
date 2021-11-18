@@ -146,8 +146,14 @@ export default {
     }
   },
   mounted() {
-    this.getdata();
+    const token = localStorage.getItem('token');
+    if (!token) {
+      this.$router.push({path: 'login'});
+    } else {
+      this.getdata();
+    }
   },
+
   methods: {
     async getdata() {
       this.dataQuote = JSON.parse(localStorage.getItem("quote"));
