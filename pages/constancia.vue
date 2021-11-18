@@ -18,7 +18,7 @@
     <div class="font-montserrat flex flex-col justify-center items-center pt-8">
     <Button text="ENVIAR CONSTANCIA" >
     </Button>
-    
+   
     </div>
   </div>
 </template>
@@ -34,6 +34,21 @@ import DetalleTransfer from '@/modules/transferir/DetalleTransfers.vue'
 import ConstancyOpera from '@/modules/constans/components/ConstancyTransfer.vue' */
 
 export default {
-  components: { Topbarflow3,BaseCard,BaseText,ConstancyOpera,Button,DetalleTransfer},
+  components: { Topbar,BaseCard,BaseText,ConstancyOpera},
+  data() {
+    return {
+      showView: false
+    }
+  },
+  mounted() {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      console.log('NO TOKEN');
+      this.$router.push({path: 'login'});
+    } else {
+      console.log('SI TOKEN');
+      this.showView = true;
+    }
+  },
 }
 </script>

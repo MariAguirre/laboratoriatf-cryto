@@ -15,5 +15,11 @@ export default {
     Main,
     
   },
+  mounted() {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      this.$router.push({path: 'login'});
+    }
+  },
 };
 </script>
