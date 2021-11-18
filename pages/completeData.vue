@@ -169,23 +169,23 @@ export default {
       this.openLoader = false;
     },
     async createTransaccion() {
-      const transaction = {
-        originCurrency: this.dataQuote.currencyOrigin,
-        destinationCurrency: this.dataQuote.currencyDestiny,
-        amountSent: this.dataQuote.mountOrigin,
-        bankId: this.values.valueBank.id,
-        account: this.accounts,
-        sourceOfFunds: this.values.fundsValue
-      };
-      const response = await this.$services.transaction.createTransaction(
-        transaction,
-        localStorage.getItem("token")
-      );
-      if (response.status === 200) {
+      try {
+        const transaction = {
+          originCurrency: this.dataQuote.currencyOrigin,
+          destinationCurrency: this.dataQuote.currencyDestiny,
+          amountSent: this.dataQuote.mountOrigin,
+          bankId: this.values.valueBank.id,
+          account: this.accounts,
+          sourceOfFunds: this.values.fundsValue
+        };
+        const response = await this.$services.transaction.createTransaction(
+          transaction,
+          localStorage.getItem("token")
+        );
         localStorage.setItem("transaction", JSON.stringify(response.data.data));
-        localStorage.setItem("transaccionValues", JSON.stringify(this.values));
+        localStorage.setItem("transactionValues", JSON.stringify(this.values));
         window.location.href = "/transfers";
-      } else {
+      } catch (err) {
         this.open = true;
       }
     }
