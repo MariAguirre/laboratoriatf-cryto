@@ -34,7 +34,7 @@ import DetalleTransfer from '@/modules/transferir/DetalleTransfers.vue'
 import ConstancyOpera from '@/modules/constans/components/ConstancyTransfer.vue' */
 
 export default {
-  components: { Topbar,BaseCard,BaseText,ConstancyOpera},
+  components: { BaseCard,BaseText,ConstancyOpera, Topbarflow3, Button, DetalleTransfer},
   data() {
     return {
       showView: false
