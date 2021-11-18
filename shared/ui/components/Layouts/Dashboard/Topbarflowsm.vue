@@ -5,14 +5,15 @@
     style="z-index: 10"
   >
     <div
-      class="flex items-center box-border h-14 "
+      class="flex items-center"
       :class="[getContentBorderStyle]"
     >
       <div>
         <LogoV2 v-if="showLogo" class="" />
-        <BaseCard text="">
-          <nav v-show="true" class="ml-14 flex justify-center items-center">
-            <ul class="flex  pl-0 rounded list-none ">
+        <div >
+         
+           <nav  class="ml-14 w-full -mt-2 flex justify-center items-center">
+            <ul class="flex w-full pl-0 list-none ">
               <li>
                 <a
                   href=""
@@ -23,22 +24,21 @@
                   first:ml-0
                   text-xs
                   font-semibold
-                  w-4
-                  h-4
+                  w-3
+                  h-3
                   p-0
                   rounded-full
                   items-center
                   justify-center
                   leading-tight
-                  absolute
-                  border border-solid border-gray-900
-                  bg-gray-900
+                  border border-solid border-kambista-blue
+                  bg-kambista-blue
                 "
-                  ><p class="mt-4 -ml-5 text-xs ">Completa</p>
+                  ><p class="mt-5 -ml-5 text-xxxs">Completa</p>
                 </a>
               </li>
               <hr
-                class="bg-gray-900 w-28 ml-5 border-solid-3 z-40 object-center mt-2"
+                class="bg-gray-200 w-28 h-1 border-solid-3 z-40 object-center mt-1"
               />
               <li>
                 <a
@@ -48,21 +48,21 @@
                   text-xs
                   font-semibold
                   flex
-                  w-4
-                  h-4
+                  w-3
+                  h-3
                   p-0
                   rounded-full
                   items-center
                   justify-center
                   leading-tight
-                  relative
+                  
                   border border-solid border-gray-200
                   bg-gray-200
                 "
-                  ><p class="mt-10 text-xs">Transfiere</p>
+                  ><p class="mt-10 text-xxxs">Transfiere</p>
                 </a>
               </li>
-              <hr class="bg-gray-900 w-28 border-solid-3 object-center mt-2" />
+              <hr class="bg-gray-200 w-28 h-1 border-solid-3 object-center mt-1" />
               <li>
                 <a
                   href=""
@@ -71,23 +71,23 @@
                   text-xs
                   font-semibold
                   flex
-                  w-4
-                  h-4
+                  w-3
+                  h-3
                   p-0
                   rounded-full
                   items-center
                   justify-center
                   leading-tight
-                  relative
+                 
                   border border-solid border-gray-200
                   bg-gray-200
                 "
-                  ><p class="mt-10 text-xs ">Envia</p>
+                  ><p class="mt-10 text-xxxs">Envia</p>
                 </a>
               </li>
             </ul>
           </nav>
-        </BaseCard>
+        </div>
       </div>
       <slot />
     </div>
@@ -96,9 +96,9 @@
 
 <script>
 import LogoV2 from "../../Logo/LogoV2.vue";
-import BaseCard from "@/shared/ui/components/Cards/BaseCard.vue";
+
 export default {
-  components: { LogoV2, BaseCard },
+  components: { LogoV2},
   props: {
     variant: {
       type: String,
@@ -125,10 +125,10 @@ export default {
       }[this.variant || "default"];
     },
     getAutoHideStyle() {
-      return this.autoHide ? "hidden" : "";
+      return this.autoHide ;
     },
     getContentBorderStyle() {
-      return this.variant === "default" ? "border-b" : "";
+      return this.variant === "default" ;
     },
     getAutoContentStyle() {
       return this.autoContent ? "px-4 lg:px-7" : "";

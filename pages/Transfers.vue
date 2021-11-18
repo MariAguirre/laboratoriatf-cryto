@@ -1,19 +1,41 @@
 <template>
+  <div>
     <div>
-        <Topbar variant="light" show-logo></Topbar> 
-        <Main />
+      <Topbarflow2 class="hidden sm:block" variant="light" show-logo show-nav />
     </div>
+    <div>
+      <Topbarflowsm2
+        class="block sm:hidden"
+        variant="light"
+        show-logo
+        show-nav
+      />
+      <Main />
+    </div>
+  </div>
 </template>
 
 <script>
-import Topbar from '@/shared/ui/components/Layouts/Dashboard/Topbar.vue'
-import Main from "@/modules/transferir/Main.vue"
+import Topbarflow2 from "@/shared/ui/components/Layouts/Dashboard/Topbarflow2.vue";
+import Topbarflowsm2 from "@/shared/ui/components/Layouts/Dashboard/Topbarflowsm2.vue";
+import Main from "@/modules/transferir/Main.vue";
 
 export default {
   components: {
-    Topbar,
-    Main,
-    
+    Topbarflow2,
+    Topbarflowsm2,
+    Main
   },
+  data() {
+    return {
+      open: true
+    };
+  },
+  mounted() {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      this.$router.push({ path: "login" });
+    }
+  }
 };
 </script>

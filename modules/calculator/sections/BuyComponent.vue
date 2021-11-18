@@ -93,7 +93,7 @@
             >
               {{ selectTwo }}
               <ChevronDown
-                class="pl-3 sm:pl-6"
+                class="pl-3 sm:pl-8"
                 :size="19"
                 aria-hidden="true"
                 aria-label="select options"
@@ -228,8 +228,8 @@ export default {
         exchangeTwo: this.valueTwoRound,
         delay: this.filterCurrency(this.currencyTwo)[0].delay
       };
-      localStorage.setItem("quote", JSON.stringify(data));
-      window.location.href = "/completedata";
+      this.$store.dispatch("setQuote", data);
+      this.$router.push({ path: "completedata" }, console.log, console.log);
     }
   }
 };

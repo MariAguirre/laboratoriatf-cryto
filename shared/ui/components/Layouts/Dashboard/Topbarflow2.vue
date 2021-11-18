@@ -11,9 +11,9 @@
         <div>
           <LogoV3 v-if="showLogo" class="" />
         </div>
-        <div class="flex items-center justify-center w-full">
-          <nav class="flex items-center -mt-14 w-full">
-            <ul class="flex pl-0 ml-97 justify-center rounded list-none ">
+        <div class="flex items-center justify-center ">
+          <nav class="flex items-center -mt-14 justify-center w-full">
+            <ul class="flex pl-0 ml-97 rounded list-none ">
               <li>
                 <a
                   href=""
@@ -40,7 +40,7 @@
                 </a>
               </li>
               <hr
-                class="bg-gray-200 md:w-72 sm:w-20 h-1  border-solid-2 z-40 object-center mt-2.5"
+                class="bg-kambista-blue md:w-72 sm:w-20 h-1 border-solid-2 z-40 object-center mt-2.5"
               />
               <li>
                 <a
@@ -58,8 +58,8 @@
                   justify-center
                   leading-tight
                   
-                  border border-solid border-gray-200
-                  bg-gray-200
+                  border border-solid border-kambista-blue
+                  bg-kambista-blue
                 "
                   ><p class="mt-10">Transfiere</p>
                 </a>
