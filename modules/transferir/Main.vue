@@ -4,9 +4,9 @@
       <div
         class="flex flex-col items-center bg-white rounded-xl w-full justify-center"
       >
-        <BaseCard class="w-306 md:w-306" text="">
+        <BaseCard class="w-306 md:w-306 my-2" text="">
           <DetalleTransfers
-            class="flex justify-left md:p-4 h-330"
+            class="flex justify-left p-4 px-6 md:p-4 h-330"
             :data2="data2"
             :data3="data3"
             :number-destiny="numberDestiny"
