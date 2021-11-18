@@ -29,7 +29,7 @@
       <div class="flex justify-between">
         <div class="ml-8">
           <p class="mt-4 font-bold">
-            Nuemero de cuenta <span>{{ data3.cashIn.name }}</span>
+            Nuemero de cuenta <span>{{ name }}</span>
           </p>
         </div>
         <div class="mr-8 flex justify-between">
@@ -85,16 +85,15 @@ export default {
     number: {
       type: String,
       default: ""
+    },
+    name: {
+      type: String,
+      default: ""
     }
+    
   },
   methods: {
-    redirect(property) {
-      if (property === "OWN") {
-        window.location.href = "/constancia";
-      } else {
-        window.location.href = "/constanciaopciones";
-      }
-    }
+   
   }
 };
 </script>
