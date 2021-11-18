@@ -32,73 +32,81 @@
     "
     >
       <div>
-        <TextTitle
+        <TextSubTitle
           class="flex mt-8 text-2xl sm:mt-12 text-center w-full sm:w-full"
           text="Completa los datos de tu operación"
+          alignment="center"
         />
       </div>
-      <BaseCardData :base-data="dataQuote" class="w-96 mt-4" />
-      <Highlight
-        class="mt-6 w-96"
-        title="Tiempo estimado de espera"
-        :delay="delay"
-      />
-      <BaseText
-        class="w-96 mt-8 pl-1 text-7"
-        text="¿Desde qué banco nos envías tu dinero?"
-      />
-      <Select
-        v-model="values.valueBank"
-        :options="banks"
-        class="mt-1 w-96 bg-white"
-        :custom="true"
-      >
-        <template #currentOption="e">
-          <img class="w-5" :src="e.option.image" />
-          <i>{{ e.option.name }}</i>
-        </template>
-        <template #option="e">
-          <img class="w-5" :src="e.option.image" />
-          <i>{{ e.option.name }}</i>
-        </template>
-      </Select>
-      <BaseText
-        class="w-96 pl-1 text-7  mt-4 "
-        text="¿A qué dirección enviamos tus criptomonedas?"
-      />
-      <Select
-        v-model="values.valueWallet"
-        :options="accounts"
-        class="mt-1 w-96 bg-white"
-        :custom="true"
-      >
-        <template #currentOption="e">
-          <i>{{ e.option.id }}</i>
-        </template>
-        <template #option="e" class="">
-          <i>{{ e.option.id }}</i>
-        </template>
-      </Select>
-      <BaseText class="w-96 pl-1 text-7  mt-4 " text="Origen de fondos" />
-      <Select
-        v-model="values.fundsValue"
-        class="mt-1 w-96 bg-white"
-        :options="funds"
-        :custom="true"
-      >
-        <template #currentOption="e">
-          <i>{{ e.option.name }}</i>
-        </template>
-        <template #option="e" class="flex flex-row">
-          <i>{{ e.option.name }}</i>
-        </template>
-      </Select>
-      <Button
-        :disabled="disabled"
-        class="w-96 mt-8 mb-28"
-        text="Continuar"
-        @click.native="createTransaccion"
-      />
+      <div class="flex flex-col items-center w-full h-full justify-center">
+        c
+        <BaseCardData :base-data="dataQuote" class="w-96 sm:mt-4" />
+        <Highlight
+          class="mt-6 w-96 "
+          title="Tiempo estimado de espera"
+          :delay="delay"
+        />
+        <BaseText
+          class="w-96 mt-8 pl-1 text-7"
+          text="¿Desde qué banco nos envías tu dinero?"
+        />
+        <Select
+          v-model="values.valueBank"
+          :options="banks"
+          class="mt-1 w-96 bg-white"
+          :custom="true"
+        >
+          <template #currentOption="e">
+            <div class="flex flex-row justify-center">
+              <img :src="e.option.image" />
+              <i class=" ml-2 mt-2 not-italic">{{ e.option.name }}</i>
+            </div>
+          </template>
+          <template #option="e" class="">
+            <div class="flex flex-row justify-center">
+              <img :src="e.option.image" />
+              <i class=" ml-2 mt-2 not-italic">{{ e.option.name }}</i>
+            </div>
+          </template>
+        </Select>
+        <BaseText
+          class="w-96 pl-1 text-7  mt-4 "
+          text="¿A qué dirección enviamos tus criptomonedas?"
+        />
+        <Select
+          v-model="values.valueWallet"
+          :options="accounts"
+          class="mt-1 w-96 bg-white"
+          :custom="true"
+        >
+          <template #currentOption="e">
+            <i class=" not-italic">{{ e.option.id }}</i>
+          </template>
+          <template #option="e" class="">
+            <i class=" not-italic">{{ e.option.id }}</i>
+          </template>
+        </Select>
+        <BaseText class="w-96 pl-1 text-7  mt-4 " text="Origen de fondos" />
+        <Select
+          v-model="values.fundsValue"
+          class="mt-1 w-96 bg-white"
+          :options="funds"
+          :custom="true"
+        >
+          <template #currentOption="e">
+            <i>{{ e.option }}</i>
+          </template>
+          <template #option="e" class="flex flex-row">
+            <i>{{ e.option }}</i>
+          </template>
+        </Select>
+        <Button
+          :disabled="disabled"
+          class="w-96 mt-8 mb-28"
+          text="Continuar"
+          @click.native="createTransaccion"
+        />
+      </div>
     </div>
   </section>
 </template>
@@ -106,27 +114,26 @@
 <script>
 import Topbarflow from "~/shared/ui/components/Layouts/Dashboard/Topbarflow.vue";
 import Topbarflowsm from "~/shared/ui/components/Layouts/Dashboard/Topbarflowsm.vue";
-import TextTitle from "~/shared/ui/components/Typography/TextTitle.vue";
+import TextSubTitle from "~/shared/ui/components/Typography/TextSubtitle.vue";
 import BaseText from "~/shared/ui/components/Typography/BaseText.vue";
 import BaseCardData from "../modules/data/BaseCardData.vue";
 import Select from "~/shared/ui/components/Select.vue";
 import Button from "~/shared/ui/components/Button/Button.vue";
 import Highlight from "~/shared/ui/components/Highlight.vue";
 import Loader from "@/shared/ui/components/Loading/LoadingScreen.vue";
-import Modal from "@/shared/ui/components/Modal/Modal.vue";
+import logger from "@/shared/ui/utils/logger.ts";
 
 export default {
   components: {
     Topbarflow,
     Topbarflowsm,
     Select,
-    TextTitle,
+    TextSubTitle,
     BaseCardData,
     Button,
     Highlight,
     BaseText,
-    Loader,
-    Modal
+    Loader
   },
   data() {
     return {
@@ -141,8 +148,7 @@ export default {
         valueBank: "",
         valueWallet: "",
         fundsValue: ""
-      },
-      open: false
+      }
     };
   },
   computed: {
@@ -155,9 +161,9 @@ export default {
     }
   },
   mounted() {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     if (!token) {
-      this.$router.push({path: 'login'});
+      this.$router.push({ path: "login" });
     } else {
       this.getdata();
     }
@@ -169,9 +175,7 @@ export default {
       this.dataUtils = JSON.parse(localStorage.getItem("utils"));
       this.delay = this.convertTime(this.dataQuote.delay);
       this.banks = this.dataUtils.banks;
-      this.dataUtils.sourceOfFunds.forEach(e => {
-        this.funds.push({ name: e });
-      });
+      this.funds = this.dataUtils.sourceOfFunds;
       this.accounts = (
         await this.$services.accounts.getAccount(
           localStorage.getItem("token"),
@@ -181,6 +185,7 @@ export default {
           }
         )
       ).data.data;
+      logger.info(this.accounts);
       this.openLoader = false;
     },
     async createTransaccion() {
