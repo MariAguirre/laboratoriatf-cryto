@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="showView">
     <Topbar variant="light" show-logo></Topbar> 
     <div class="m-24 mr-16 grid grid-cols-2 grap-4">
     <BaseCard>
@@ -11,9 +11,6 @@
     </Button>
     </div>
     </div>
-   
-
-
   </div>
 
 </template>
@@ -32,5 +29,20 @@ import ConstancyOpera from '@/modules/constans/components/ConstancyTransfer.vue'
 
 export default {
   components: { Topbar,BaseCard,BaseText,ConstancyOpera,Button},
+  data() {
+    return {
+      showView: false
+    }
+  },
+  mounted() {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      console.log('NO TOKEN');
+      this.$router.push({path: 'login'});
+    } else {
+      console.log('SI TOKEN');
+      this.showView = true;
+    }
+  },
 }
 </script>

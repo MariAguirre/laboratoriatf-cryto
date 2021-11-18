@@ -31,6 +31,12 @@ import ConstancySend from '@/modules/constans/components/ConstancySend.vue'
 
 export default {
   components: { Topbar,BaseCard,BaseText,ConstancySend,Button},
+  mounted() {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      this.$router.push({path: 'login'});
+    }
+  },
 }
 
 </script>
