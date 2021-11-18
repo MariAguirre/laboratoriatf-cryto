@@ -20,7 +20,7 @@
       >Escribe el código de operación del banco aquí</label
     >
     <div>
-    <Input/>
+    <Input v-model="codigo" />
     </div>
     <div class="flex mb-4">
       <img src="@/assets/images/common/question-icon.svg" alt="question" />
@@ -31,14 +31,28 @@
     <p class="mb-2 font-light md:font-normal text-14 md:text-16 md:leading-20 leading-17 p-1 px-8 md:p-0">
       Verificaremos tu operación para enviarte<span> BTC </span>a tu dirección.
     </p>
+    <Button text="ENVIAR CONSTANCIA" @click.native = "sendconstancia">
+    </Button>
   </div>
 </template>
 
 <script>
 import Input from '@/shared/ui/components/Input.vue'
+import Button from '@/shared/ui/components/Button/Button.vue'
 
 export default {
-  components: { Input},
+  components: { Input, Button},
+  data(){
+    return{
+      codigo: '',
+    }
+  },
+  methods: {
+    sendconstancia(){
+      console.log(this.codigo);
+    }
+  }
+
 }
 </script>
 
