@@ -56,32 +56,14 @@ export default {
     
     DetalleTransfer
   },
-  props: {
-    data2: {
-      type: Object,
-      default() {}
-    },
-    data3: {
-      type: Object,
-      default() {}
-    },
-    numberDestiny: {
-      type: String,
-      default: ""
-    },
-    currency: {
-      type: String,
-      default: ""
-    },
-    banco: {
-      type: String,
-      default: ""
-    }
-  },
   data() {
     return {
       showView: false,
-      name: ""
+      data2: {},
+      data3: {},
+      numberDestiny: "",
+      currency: "",
+      banco: ""
     };
   },
   computed: {
@@ -98,7 +80,7 @@ export default {
     this.data3 = this.transaction;
     this.numberDestiny = this.data3.account[0].number;
     this.currency = this.data3.account[0].currency;
-    this.name = this.data3.cashIn.name;
+    this.banco = this.data3.bankId;
   }
 };
 </script>

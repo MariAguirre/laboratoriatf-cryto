@@ -1,7 +1,7 @@
 <template>
-<div>
+  <div>
     <div>
-         <Topbarflow2 class="hidden sm:block" variant="light" show-logo show-nav />
+      <Topbarflow2 class="hidden sm:block" variant="light" show-logo show-nav />
     </div>
     <div>
       <Topbarflowsm2
@@ -10,28 +10,32 @@
         show-logo
         show-nav
       />
-        <Main />
+      <Main />
     </div>
-    </div>
+  </div>
 </template>
 
 <script>
-import Topbarflow2 from '@/shared/ui/components/Layouts/Dashboard/Topbarflow2.vue'
-import Topbarflowsm2 from '@/shared/ui/components/Layouts/Dashboard/Topbarflowsm2.vue'
-import Main from "@/modules/transferir/Main.vue"
+import Topbarflow2 from "@/shared/ui/components/Layouts/Dashboard/Topbarflow2.vue";
+import Topbarflowsm2 from "@/shared/ui/components/Layouts/Dashboard/Topbarflowsm2.vue";
+import Main from "@/modules/transferir/Main.vue";
 
 export default {
   components: {
     Topbarflow2,
     Topbarflowsm2,
-    Main,
-    
+    Main
+  },
+  data() {
+    return {
+      open: true
+    };
   },
   mounted() {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     if (!token) {
-      this.$router.push({path: 'login'});
+      this.$router.push({ path: "login" });
     }
-  },
+  }
 };
 </script>
