@@ -35,8 +35,6 @@ import BaseText from "@/shared/ui/components/Typography/BaseText.vue";
 import ConstancyOpera from "@/modules/constans/components/ConstancyOpera.vue";
 import Button from "@/shared/ui/components/Button/Button.vue";
 import DetalleTransfer from "@/modules/transferir/DetalleTransfers.vue";
-/* import ConstancyOpera from '@/modules/constans/components/ConstancySend.vue'
-import ConstancyOpera from '@/modules/constans/components/ConstancyTransfer.vue' */
 
 export default {
   components: {
@@ -78,10 +76,8 @@ export default {
   mounted() {
     const token = localStorage.getItem("token");
     if (!token) {
-      console.log("NO TOKEN");
       this.$router.push({ path: "login" });
     } else {
-      console.log("SI TOKEN");
       this.showView = true;
     }
   },

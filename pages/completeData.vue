@@ -1,5 +1,5 @@
 <template>
-  <section class="w-375 sm:w-641 sm:flex sm:justify-center sm:flex-col">
+  <section class="w-full">
     <Modal v-model="open" closeable-by-backdrop>
       <div class="flex flex-col items-center bg-white rounded-xl w-full">
         <div class="flex flex-col w-11/12 sm:w-96">
@@ -22,90 +22,93 @@
         show-nav
       />
     </div>
-    <div
-      class="
+    <div class="w-full flex justify-center">
+      <div class="w-375 sm:w-641 sm:flex sm:justify-center sm:flex-col">
+        <div
+          class="
       flex flex-col
       justify-center
       items-center
       backdrop-blur-sm
       m-2 sm:m-4
     "
-    >
-      <div>
-        <TextSubTitle
-          class="flex mt-8 text-2xl sm:mt-12 text-center w-full sm:w-full"
-          text="Completa los datos de tu operación"
-          alignment="center"
-        />
-      </div>
-      <div class="flex flex-col items-center w-full h-full justify-center">
-        c
-        <BaseCardData :base-data="dataQuote" class="w-96 sm:mt-4" />
-        <Highlight
-          class="mt-6 w-96 "
-          title="Tiempo estimado de espera"
-          :delay="delay"
-        />
-        <BaseText
-          class="w-96 mt-8 pl-1 text-7"
-          text="¿Desde qué banco nos envías tu dinero?"
-        />
-        <Select
-          v-model="values.valueBank"
-          :options="banks"
-          class="mt-1 w-96 bg-white"
-          :custom="true"
         >
-          <template #currentOption="e">
-            <div class="flex flex-row justify-center">
-              <img :src="e.option.image" />
-              <i class=" ml-2 mt-2 not-italic">{{ e.option.name }}</i>
-            </div>
-          </template>
-          <template #option="e" class="">
-            <div class="flex flex-row justify-center">
-              <img :src="e.option.image" />
-              <i class=" ml-2 mt-2 not-italic">{{ e.option.name }}</i>
-            </div>
-          </template>
-        </Select>
-        <BaseText
-          class="w-96 pl-1 text-7  mt-4 "
-          text="¿A qué dirección enviamos tus criptomonedas?"
-        />
-        <Select
-          v-model="values.valueWallet"
-          :options="accounts"
-          class="mt-1 w-96 bg-white"
-          :custom="true"
-        >
-          <template #currentOption="e">
-            <i class=" not-italic">{{ e.option.id }}</i>
-          </template>
-          <template #option="e" class="">
-            <i class=" not-italic">{{ e.option.id }}</i>
-          </template>
-        </Select>
-        <BaseText class="w-96 pl-1 text-7  mt-4 " text="Origen de fondos" />
-        <Select
-          v-model="values.fundsValue"
-          class="mt-1 w-96 bg-white"
-          :options="funds"
-          :custom="true"
-        >
-          <template #currentOption="e">
-            <i>{{ e.option }}</i>
-          </template>
-          <template #option="e" class="flex flex-row">
-            <i>{{ e.option }}</i>
-          </template>
-        </Select>
-        <Button
-          :disabled="disabled"
-          class="w-96 mt-8 mb-28"
-          text="Continuar"
-          @click.native="createTransaccion"
-        />
+          <div>
+            <TextSubTitle
+              class="flex mt-8 text-2xl sm:mt-12 text-center w-full sm:w-full"
+              text="Completa los datos de tu operación"
+              alignment="center"
+            />
+          </div>
+          <div class="flex flex-col items-center w-full h-full justify-center">
+            <BaseCardData :base-data="dataQuote" class="w-96 sm:mt-4" />
+            <Highlight
+              class="mt-6 w-96 "
+              title="Tiempo estimado de espera"
+              :delay="delay"
+            />
+            <BaseText
+              class="w-96 mt-8 pl-1 text-7"
+              text="¿Desde qué banco nos envías tu dinero?"
+            />
+            <Select
+              v-model="values.valueBank"
+              :options="banks"
+              class="mt-1 w-96 bg-white"
+              :custom="true"
+            >
+              <template #currentOption="e">
+                <div class="flex flex-row items-start w-full">
+                  <img :src="e.option.image" />
+                  <i class=" ml-2 mt-2 not-italic">{{ e.option.name }}</i>
+                </div>
+              </template>
+              <template #option="e" class="">
+                <div class="flex flex-row items-start w-full">
+                  <img :src="e.option.image" />
+                  <i class=" ml-2 mt-2 not-italic">{{ e.option.name }}</i>
+                </div>
+              </template>
+            </Select>
+            <BaseText
+              class="w-96 pl-1 text-7  mt-4 "
+              text="¿A qué dirección enviamos tus criptomonedas?"
+            />
+            <Select
+              v-model="values.valueWallet"
+              :options="accounts"
+              class="mt-1 w-96 bg-white"
+              :custom="true"
+            >
+              <template #currentOption="e">
+                <i class=" not-italic">{{ e.option.id }}</i>
+              </template>
+              <template #option="e" class="">
+                <i class=" not-italic">{{ e.option.id }}</i>
+              </template>
+            </Select>
+            <BaseText class="w-96 pl-1 text-7  mt-4 " text="Origen de fondos" />
+            <Select
+              v-model="values.fundsValue"
+              class="mt-1 w-96 bg-white"
+              :options="funds"
+              :custom="true"
+            >
+              <template #currentOption="e">
+                <i>{{ e.option.name }}</i>
+              </template>
+              <template #option="e" class="flex flex-row">
+                <i>{{ e.option.name }}</i>
+              </template>
+            </Select>
+            <Button
+              :disabled="disabled"
+              class="w-96 mt-8 mb-28"
+              text="Continuar"
+              @click.native="createTransaccion"
+            />
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -122,6 +125,8 @@ import Button from "~/shared/ui/components/Button/Button.vue";
 import Highlight from "~/shared/ui/components/Highlight.vue";
 import Loader from "@/shared/ui/components/Loading/LoadingScreen.vue";
 import logger from "@/shared/ui/utils/logger.ts";
+import Modal from "@/shared/ui/components/Modal/Modal.vue";
+import { mapState } from "vuex";
 
 export default {
   components: {
@@ -133,7 +138,8 @@ export default {
     Button,
     Highlight,
     BaseText,
-    Loader
+    Loader,
+    Modal
   },
   data() {
     return {
@@ -141,17 +147,19 @@ export default {
       funds: [],
       dataQuote: {},
       dataUtils: {},
-      delay: 0,
+      delay: "",
       banks: [],
       openLoader: true,
       values: {
         valueBank: "",
         valueWallet: "",
         fundsValue: ""
-      }
+      },
+      open: false
     };
   },
   computed: {
+    ...mapState(["transaction", "quote"]),
     disabled() {
       return !(
         this.values.valueBank !== "" &&
@@ -171,11 +179,13 @@ export default {
 
   methods: {
     async getdata() {
-      this.dataQuote = JSON.parse(localStorage.getItem("quote"));
+      this.dataQuote = this.quote;
       this.dataUtils = JSON.parse(localStorage.getItem("utils"));
       this.delay = this.convertTime(this.dataQuote.delay);
       this.banks = this.dataUtils.banks;
-      this.funds = this.dataUtils.sourceOfFunds;
+      this.dataUtils.sourceOfFunds.forEach(e => {
+        this.funds.push({ name: e });
+      });
       this.accounts = (
         await this.$services.accounts.getAccount(
           localStorage.getItem("token"),
@@ -202,9 +212,9 @@ export default {
           transaction,
           localStorage.getItem("token")
         );
-        localStorage.setItem("transaction", JSON.stringify(response.data.data));
+        this.$store.dispatch("setTransaction", response.data.data);
         localStorage.setItem("transactionValues", JSON.stringify(this.values));
-        window.location.href = "/transfers";
+        this.$router.push({ path: "transfers" }, console.log, console.log);
       } catch (err) {
         this.open = true;
       }
