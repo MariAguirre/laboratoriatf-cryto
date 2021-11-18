@@ -40,7 +40,7 @@
                     items-center"
     >
       <Button
-        class="mt-8"
+        class="mt-8 mb-10"
         text="CONFIRMO TRANSFERENCIA"
         @click.native="sendtransfer"
       >
@@ -54,7 +54,6 @@ import BaseCard from "@/shared/ui/components/Cards/BaseCard.vue";
 import BodyTransfers from "~/modules/transferir/BodyTransfers.vue";
 import DetalleTransfers from "@/modules/transferir/DetalleTransfers.vue";
 import Button from "@/shared/ui/components/Button/Button.vue";
-// import logger from "@/shared/ui/utils/logger.ts";
 import Loader from "@/shared/ui/components/Loading/LoadingScreen.vue";
 import { mapState } from "vuex";
 

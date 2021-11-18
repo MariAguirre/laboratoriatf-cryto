@@ -6,7 +6,14 @@
         <ConstancyOpera />
       </BaseCard>
       <BaseText />
-      <DetalleTransfer class="flex justify-left md:p-4" />
+      <DetalleTransfer
+        class="flex justify-left md:p-4"
+        :data2="quote"
+        :data3="transaction"
+        :number-destiny="numberDestiny"
+        :currency="currency"
+        :banco="banco"
+      />
       <div
         class="font-montserrat flex flex-col justify-center items-center pt-8"
       >
@@ -23,6 +30,7 @@ import BaseText from "@/shared/ui/components/Typography/BaseText.vue";
 import ConstancyOpera from "@/modules/constans/components/ConstancyOpera.vue";
 import Button from "@/shared/ui/components/Button/Button.vue";
 import DetalleTransfer from "@/modules/transferir/DetalleTransfers.vue";
+import { mapState } from "vuex";
 
 export default {
   components: {
@@ -35,8 +43,14 @@ export default {
   },
   data() {
     return {
-      showView: false
+      showView: false,
+      numberDestiny: "",
+      currency: "",
+      name: ""
     };
+  },
+  computed: {
+    ...mapState(["transaction", "quote", "check"])
   },
   mounted() {
     const token = localStorage.getItem("token");
@@ -45,6 +59,11 @@ export default {
     } else {
       this.showView = true;
     }
+    this.data2 = this.quote;
+    this.data3 = this.transaction;
+    this.numberDestiny = this.data3.account[0].number;
+    this.currency = this.data3.account[0].currency;
+    this.name = this.data3.cashIn.name;
   }
 };
 </script>
