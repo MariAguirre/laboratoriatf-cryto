@@ -210,9 +210,9 @@ export default {
           transaction,
           localStorage.getItem("token")
         );
-        localStorage.setItem("transaction", JSON.stringify(response.data.data));
+        this.$store.dispatch("setTransaction", response.data.data);
         localStorage.setItem("transactionValues", JSON.stringify(this.values));
-        window.location.href = "/transfers";
+        this.$router.push({ path: "transfers" }, console.log, console.log);
       } catch (err) {
         this.open = true;
       }
