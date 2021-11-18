@@ -50,14 +50,18 @@
     >
       Verificaremos tu operación para enviarte<span> BTC </span>a tu dirección.
     </p>
-    <Button text="ENVIAR CONSTANCIA" @click.native="sendconstancia"> </Button>
+    <Button
+      :disabled="disabled"
+      :loading="loading"
+      text="ENVIAR CONSTANCIA"
+      @click.native="sendconstancia"
+    />
   </div>
 </template>
 
 <script>
 import Input from "@/shared/ui/components/Input.vue";
 import Button from "@/shared/ui/components/Button/Button.vue";
-import logger from "@/shared/ui/utils/logger.ts";
 import Modal from "@/shared/ui/components/Modal/Modal.vue";
 
 export default {
@@ -65,14 +69,20 @@ export default {
   data() {
     return {
       codigo: "",
-      open: false
+      open: false,
+      loading: null
     };
+  },
+  computed: {
+    disabled() {
+      return !(this.codigo !== "");
+    }
   },
   methods: {
     async sendconstancia() {
+      this.loading = true;
       try {
         const id = JSON.parse(localStorage.getItem("transaction")).id;
-        logger.info(id);
         await this.$services.transaction.checkTransaction(
           { voucher: this.codigo },
           localStorage.getItem("token"),
@@ -81,6 +91,7 @@ export default {
         window.location.href = "/confirmacion";
       } catch (err) {
         this.open = true;
+        this.loading = null;
       }
     }
   }

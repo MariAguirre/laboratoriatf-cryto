@@ -183,7 +183,7 @@ export default {
           localStorage.getItem("token")
         );
         localStorage.setItem("transaction", JSON.stringify(response.data.data));
-        localStorage.setItem("transaccionValues", JSON.stringify(this.values));
+        localStorage.setItem("transactionValues", JSON.stringify(this.values));
         window.location.href = "/transfers";
       } catch (err) {
         this.open = true;
