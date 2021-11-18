@@ -24,7 +24,7 @@
             <span>{{ montoOrigin }}</span>
             <span class="ml-1">{{ currencyOrigin }}</span>
           </p>
-          <img class="ml-5" src="@/assets/images/common/clipboard.svg" alt="" />
+          <button @click.native="capture"><img class="ml-5" src="@/assets/images/common/clipboard.svg" alt="" /></button>
         </div>
       </div>
       <div class="flex justify-between">
@@ -44,7 +44,7 @@
           />
         </div>
       </div>
-      <div class="hidden sm:block">
+      <div class="block sm:hidden">
         <div class="flex justify-between">
           <div class="ml-8">
             <p class="mt-4 font-bold">RUC Kambista</p>
@@ -59,6 +59,9 @@
           </div>
         </div>
       </div>
+      <div class="Block sm:hidden">
+        <p>Detalle de la operación</p>
+      </div>
     </div>
   </div>
 </template>
@@ -66,10 +69,13 @@
 <script>
 import TextTitle from "@/shared/ui/components/Typography/TextTitle.vue";
 
+
 export default {
   components: {
-    TextTitle
-  },
+    TextTitle,
+    
+  }, 
+  
   props: {
     montoOrigin: {
       type: String,
@@ -92,6 +98,20 @@ export default {
       default: ""
     }
   },
-  methods: {}
+  methods: {
+   capture(){
+     if(this.montoOrigin === '' && this.currencyOrigin === ''){
+       alert('No se encontraron los datos');
+       console.log('no hay datos');       
+    }else{
+      const copy1 = JSON.parse(localStorage.setItem("transaction"));
+      console.log(copy1);
+      const copy2 = JSON.parse(localStorage.setItem("transaction"));
+      console.log(copy2);
+      alert('mensaje copiado')
+    }
+   }
+    
+  }
 };
 </script>
