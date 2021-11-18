@@ -1,5 +1,6 @@
 <template>
   <div class="Grid grid-flow-col">
+    <Loader v-if="openLoader" class="h-full w-full bg-white" />
     <BaseText class="flex justify-center mt-20 ml-14 mr-8 md:px-20 ">
       <p class="flex font-bold mr-4">El tipo de cambio se actualizará en</p>
       <span class="flex font-bold">00:15:00</span>
@@ -38,7 +39,12 @@
                     justify-center
                     items-center"
     >
-      <Button class="mt-8" text="CONFIRMO TRANSFERENCIA" @click.native="sendtransfer"> </Button>
+      <Button
+        class="mt-8"
+        text="CONFIRMO TRANSFERENCIA"
+        @click.native="sendtransfer"
+      >
+      </Button>
     </div>
   </div>
 </template>
@@ -49,13 +55,15 @@ import BodyTransfers from "~/modules/transferir/BodyTransfers.vue";
 import DetalleTransfers from "@/modules/transferir/DetalleTransfers.vue";
 import Button from "@/shared/ui/components/Button/Button.vue";
 import logger from "@/shared/ui/utils/logger.ts";
+import Loader from "@/shared/ui/components/Loading/LoadingScreen.vue";
 
 export default {
   components: {
     BaseCard,
     BodyTransfers,
     DetalleTransfers,
-    Button
+    Button,
+    Loader
   },
   data() {
     return {
@@ -72,7 +80,8 @@ export default {
       data3: {},
       currency: "",
       numberDestiny: "",
-      name:"",
+      name: "",
+      openLoader: true
     };
   },
   mounted() {
@@ -120,17 +129,15 @@ export default {
       this.name = this.data3.cashIn.name;
       this.banco = this.data3.bankId
       console.log(this.currency, this.numberDestiny, this.number);
+      this.openLoader = false;
     },
-    sendtransfer(){       
-      if (this.data3.cashIn.type === "OWN") {        
+    sendtransfer() {
+      if (this.data3.cashIn.type === "OWN") {
         window.location.href = "/constancia";
-
       } else {
         window.location.href = "/constanciaopciones";
-      }    
+      }
     }
-
-  },
-
+  }
 };
 </script>

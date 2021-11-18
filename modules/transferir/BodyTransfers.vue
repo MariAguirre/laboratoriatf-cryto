@@ -20,8 +20,9 @@
           <p class="font-bold">Monto a tranferir</p>
         </div>
         <div class="mr-8 flex justify-between">
-          <p class="font-bold">
-            <span>{{ montoOrigin }} {{ currencyOrigin }}</span>
+          <p class="font-bold flex justify-between">
+            <span>{{ montoOrigin }}</span>
+            <span class="ml-1">{{ currencyOrigin }}</span>
           </p>
           <button @click.native="capture"><img class="ml-5" src="@/assets/images/common/clipboard.svg" alt="" /></button>
         </div>
@@ -96,7 +97,6 @@ export default {
       type: String,
       default: ""
     }
-    
   },
   methods: {
    capture(){

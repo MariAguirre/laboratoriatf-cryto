@@ -58,8 +58,8 @@
                   justify-center
                   leading-tight
                   
-                  border border-solid border-gray-200
-                  bg-gray-200
+                  border border-solid border-gray-900
+                  bg-gray-900
                 "
               ><p class="mt-10">Transfiere</p>
               </a>
