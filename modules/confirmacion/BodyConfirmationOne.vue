@@ -1,13 +1,10 @@
 <template>
     <div
-    clas="p-2 sm:p-4 ml-9" > <BaseCard class="w-719 h-96" text="">
-    <div
-class="
-bg-white
+    clas="p-2 sm:p-4 ml-9 w-719 h-96 bg-white
 flex flex-col
 justify-center
-items-center"
->
+items-center"><BaseCard class="" text="">
+    
 <div class="flex justify-center flex flex-col items-center">
 <img class="w-60 pt-16 " src ="~/assets/images/banners/monedameta.png" alt="" />
  
@@ -51,7 +48,6 @@ items-center"
   </div>
 </div>
 </div>
-</div>
     </BaseCard></div>
 </template>
 <script>
@@ -85,7 +81,7 @@ export default {
         "destinationCurrency": "BTC",
         "amountSent": 100,
         "bankId": "BCP",
-        "waitTime": 15,
+        "waitTime": 31,
 
         "account": {
             "id": "6de6f675-bb1f-41eb-8147-4702849210b5",
