@@ -1,26 +1,29 @@
 <template>
   <div class=" Grid grid-flow-col">
     <Topbarflow3 variant="light" show-logo></Topbarflow3>
-    <div class=" flex flex-col ">
-      <BaseCard text="">
-        <ConstancyOpera />
-      </BaseCard>
-      <BaseText />
-      <DetalleTransfer
-        class="flex justify-left md:p-4"
+    <div class="m-18 ml-8 mr-8 mt-20 flex justify-center">
+      <div>
+        <BaseCard class="w-306 md:w-719 p-1 " text="">
+           <ConstancyOpera class="flex h-359" />
+       </BaseCard>
+       <BaseText />
+       </div>
+       <div>
+        <BaseCard class="hidden sm:block w-306 md:w-306 ml-9" text="">
+       <DetalleTransfer
+        class="flex justify-left md:p-4 h-330"
         :data2="quote"
         :data3="transaction"
         :number-destiny="numberDestiny"
         :currency="currency"
         :banco="banco"
-      />
-      <div
-        class="font-montserrat flex flex-col justify-center items-center pt-8"
-      >
-        <Button text="ENVIAR CONSTANCIA"> </Button>
-      </div>
-      <div>
-        <BaseCard class="hidden sm:block w-306 md:w-306 ml-9" text="">
+       />
+       </BaseCard>
+      </div>     
+    </div>
+      
+      
+        <!-- <BaseCard class="hidden sm:block w-306 md:w-306 ml-9" text="">
           <DetalleTransfer
             class="flex justify-left md:p-4 h-330"
             :data2="data2"
@@ -29,13 +32,10 @@
             :currency="currency"
             :banco="banco"
           />
-        </BaseCard>
+        </BaseCard> -->
       </div>
-    </div>
-    <div class="flex flex-col justify-center items-center">
-      <Button class="mt-8" text="ENVIAR CONSTANCIA"> </Button>
-    </div>
-  </div>
+    
+  
 </template>
 
 <script>
@@ -43,7 +43,7 @@ import Topbarflow3 from "~/shared/ui/components/Layouts/Dashboard/Topbarflow3.vu
 import BaseCard from "@/shared/ui/components/Cards/BaseCard.vue";
 import BaseText from "@/shared/ui/components/Typography/BaseText.vue";
 import ConstancyOpera from "@/modules/constans/components/ConstancyOpera.vue";
-import Button from "@/shared/ui/components/Button/Button.vue";
+
 import DetalleTransfer from "@/modules/transferir/DetalleTransfers.vue";
 import { mapState } from "vuex";
 
@@ -53,7 +53,7 @@ export default {
     BaseText,
     ConstancyOpera,
     Topbarflow3,
-    Button,
+    
     DetalleTransfer
   },
   props: {
