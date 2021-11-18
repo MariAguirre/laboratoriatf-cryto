@@ -1,5 +1,11 @@
 <template>
   <section class="w-375 sm:w-641 sm:flex sm:justify-center sm:flex-col">
+    <Modal v-model="open" closeable-by-backdrop>
+      <div class="flex flex-col items-center bg-white rounded-xl w-full">
+        <h1 class="pb-8">¡UPS!</h1>
+        <h2>Ocurrió un error inténtelo nuevamente.</h2>
+      </div>
+    </Modal>
     <Loader v-if="openLoader" class="h-full w-full bg-white" />
     <div>
       <Topbarflow class="hidden sm:block" variant="light" show-logo show-nav />
@@ -72,10 +78,10 @@
         :custom="true"
       >
         <template #currentOption="e">
-          <i>{{ e.option }}</i>
+          <i>{{ e.option.name }}</i>
         </template>
         <template #option="e" class="flex flex-row">
-          <i>{{ e.option }}</i>
+          <i>{{ e.option.name }}</i>
         </template>
       </Select>
       <Button
@@ -98,7 +104,7 @@ import Select from "~/shared/ui/components/Select.vue";
 import Button from "~/shared/ui/components/Button/Button.vue";
 import Highlight from "~/shared/ui/components/Highlight.vue";
 import Loader from "@/shared/ui/components/Loading/LoadingScreen.vue";
-import logger from "@/shared/ui/utils/logger.ts";
+import Modal from "@/shared/ui/components/Modal/Modal.vue";
 
 export default {
   components: {
@@ -110,7 +116,8 @@ export default {
     Button,
     Highlight,
     BaseText,
-    Loader
+    Loader,
+    Modal
   },
   data() {
     return {
@@ -125,7 +132,8 @@ export default {
         valueBank: "",
         valueWallet: "",
         fundsValue: ""
-      }
+      },
+      open: false
     };
   },
   computed: {
@@ -152,7 +160,9 @@ export default {
       this.dataUtils = JSON.parse(localStorage.getItem("utils"));
       this.delay = this.dataQuote.delay;
       this.banks = this.dataUtils.banks;
-      this.funds = this.dataUtils.sourceOfFunds;
+      this.dataUtils.sourceOfFunds.forEach(e => {
+        this.funds.push({ name: e });
+      });
       this.accounts = (
         await this.$services.accounts.getAccount(
           localStorage.getItem("token"),
@@ -162,26 +172,28 @@ export default {
           }
         )
       ).data.data;
-      logger.info(this.accounts);
       this.openLoader = false;
     },
     async createTransaccion() {
-      const transaction = {
-        originCurrency: this.dataQuote.currencyOrigin,
-        destinationCurrency: this.dataQuote.currencyDestiny,
-        amountSent: this.dataQuote.mountOrigin,
-        bankId: this.values.valueBank.id,
-        account: this.accounts,
-        sourceOfFunds: this.values.fundsValue
-      };
-      const response = await this.$services.transaction.createTransaction(
-        transaction,
-        localStorage.getItem("token")
-      );
-      logger.info(response);
-      localStorage.setItem("transaction", JSON.stringify(response));
-      localStorage.setItem("transaccionValues", JSON.stringify(this.values));
-      // window.location.href = "/transfers";
+      try {
+        const transaction = {
+          originCurrency: this.dataQuote.currencyOrigin,
+          destinationCurrency: this.dataQuote.currencyDestiny,
+          amountSent: this.dataQuote.mountOrigin,
+          bankId: this.values.valueBank.id,
+          account: this.accounts,
+          sourceOfFunds: this.values.fundsValue
+        };
+        const response = await this.$services.transaction.createTransaction(
+          transaction,
+          localStorage.getItem("token")
+        );
+        localStorage.setItem("transaction", JSON.stringify(response.data.data));
+        localStorage.setItem("transactionValues", JSON.stringify(this.values));
+        window.location.href = "/transfers";
+      } catch (err) {
+        this.open = true;
+      }
     }
   }
 };

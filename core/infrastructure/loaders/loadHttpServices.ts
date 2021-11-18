@@ -19,6 +19,8 @@ import TransaccionRepository from '../../domain/repositories/transaction/Transac
 import TransactionService from '../http/TransactionService';
 import AccountsRepository from '~/core/domain/repositories/accounts/AccountsRepository';
 import AccountsService from '../http/AccountsService';
+import FileRepository from '~/core/domain/repositories/file/FileRepository';
+import FileService from '../http/FileServices';
 
 export function loadHTTPServices(api: HTTPClientRepository) {
     const services = {
@@ -31,7 +33,8 @@ export function loadHTTPServices(api: HTTPClientRepository) {
         login: new LoginService(api),
         utils2: new Utils2Service(api),
         transaction: new TransactionService(api),
-        accounts: new AccountsService(api)
+        accounts: new AccountsService(api),
+        file: new FileService(api)
       };
     return services;
 }
@@ -46,5 +49,6 @@ export type LoadHTTPServicesType = {
   login: LoginRepository,
   utils2: Utils2Repository,
   transaction: TransaccionRepository,
-  accounts: AccountsRepository
+  accounts: AccountsRepository,
+  file: FileRepository
 }

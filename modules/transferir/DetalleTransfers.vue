@@ -14,23 +14,31 @@
         <p class="mt-2">{{ data3.bankId }}</p>
       </div>
       <div class="mt-4">
-        <p>Direccion de destino {{ data3.account.currency }}</p>
+        <p>Direccion de destino {{ currency }}</p>
         <p class="mt-2 truncate md:overflow-ellipsis">
-          {{ data3.account.number }}
+          {{ numberDestiny }}
         </p>
       </div>
       <div class="mt-4">
         <h2 class="font-bold mt-2">Monto</h2>
         <p class="mt-2">
-          Enviado: <span>{{ data2.mountOrigin }} Dólares</span>
+          Enviado:
+          <span>{{ data2.mountOrigin }} {{ data2.currencyOrigin }}</span>
         </p>
         <p class="mt-2">
-          Recibido: <span>{{ data2.mountDestiny }} BTC</span>
+          Recibido:
+          <span>{{ data2.mountDestiny }} {{ data2.currencyDestiny }}</span>
         </p>
       </div>
       <div class="mt-6">
-        <p class="font-bold">1BTC = {{ data2.exchangeOne }} USD</p>
-        <p class="mt-2 font-bold">1USD = {{ data2.exchangeTwo }} BTC</p>
+        <p class="font-bold">
+          1{{ data2.currencyDestiny }} = {{ data2.exchangeOne }}
+          {{ data2.currencyOrigin }}
+        </p>
+        <p class="mt-2 font-bold">
+          1{{ data2.currencyOrigin }} = {{ data2.exchangeTwo }}
+          {{ data2.currencyDestiny }}
+        </p>
       </div>
     </div>
   </div>
@@ -47,6 +55,14 @@ export default {
     data3: {
       type: Object,
       default() {}
+    },
+    numberDestiny: {
+      type: String,
+      default: ""
+    },
+    currency: {
+      type: String,
+      default: ""
     }
   }
 };
