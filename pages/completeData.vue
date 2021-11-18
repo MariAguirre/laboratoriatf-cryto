@@ -182,18 +182,11 @@ export default {
         localStorage.getItem("token")
       );
       if (response.status === 200) {
-        localStorage.setItem("transaction", JSON.stringify(response));
+        localStorage.setItem("transaction", JSON.stringify(response.data.data));
         localStorage.setItem("transaccionValues", JSON.stringify(this.values));
-        this.redirect(response.data.data.cashIn.type);
+        window.location.href = "/transfers";
       } else {
         this.open = true;
-      }
-    },
-    redirect(property) {
-      if (property === "OWN") {
-        window.location.href = "/constancia";
-      } else {
-        window.location.href = "/constanciaopciones";
       }
     }
   }

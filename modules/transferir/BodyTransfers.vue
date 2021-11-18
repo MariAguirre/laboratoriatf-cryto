@@ -9,11 +9,9 @@
       <h1 class="mb-6 font-bold text-2xl">Transfiere a Kambista</h1>
     </TextTitle>
 
-    <p
-      for="first-name"
-      class="text-justify text-base"
-    >
-      Transfiere desde tu banco y guarda el <span class="underline">número de operación</span> para el siguiente paso.
+    <p for="first-name" class="text-justify text-base">
+      Transfiere desde tu banco y guarda el
+      <span class="underline">número de operación</span> para el siguiente paso.
     </p>
 
     <div class=" w-306 md:w-719 mt-4">
@@ -22,16 +20,22 @@
           <p class="font-bold">Monto a tranferir</p>
         </div>
         <div class="mr-8 flex justify-between">
-          <p class="font-bold"><span>{{montoOrigin}} Dólares</span></p>
+          <p class="font-bold">
+            <span>{{ montoOrigin }} {{ currencyOrigin }}</span>
+          </p>
           <img class="ml-5" src="@/assets/images/common/clipboard.svg" alt="" />
         </div>
       </div>
       <div class="flex justify-between">
         <div class="ml-8">
-          <p class="mt-4 font-bold">Nuemero de cuenta <span>¿.....?</span> </p>
+          <p class="mt-4 font-bold">
+            Nuemero de cuenta <span>{{ data3.cashIn.name }}</span>
+          </p>
         </div>
         <div class="mr-8 flex justify-between">
-          <p class="mt-4 font-bold"><span>{{data3.customerId}}</span></p>
+          <p class="mt-4 font-bold">
+            <span>{{ number }}</span>
+          </p>
           <img
             class="ml-5 mt-4"
             src="@/assets/images/common/clipboard.svg"
@@ -63,20 +67,34 @@ import TextTitle from "@/shared/ui/components/Typography/TextTitle.vue";
 
 export default {
   components: {
-    TextTitle,
+    TextTitle
   },
   props: {
     montoOrigin: {
       type: String,
-      default: ''
+      default: ""
     },
     data3: {
-            type: Object,
-            default(){
-
-            }
-        }
+      type: Object,
+      default() {}
+    },
+    currencyOrigin: {
+      type: String,
+      default: ""
+    },
+    number: {
+      type: String,
+      default: ""
+    }
+  },
+  methods: {
+    redirect(property) {
+      if (property === "OWN") {
+        window.location.href = "/constancia";
+      } else {
+        window.location.href = "/constanciaopciones";
+      }
+    }
   }
-  
 };
 </script>
