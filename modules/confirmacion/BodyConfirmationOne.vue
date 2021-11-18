@@ -5,7 +5,7 @@ flex flex-col
 justify-between
 items-center"><div><lottie-player src="https://assets6.lottiefiles.com/packages/lf20_xjtsxfxw.json" background="transparent"  speed="1"  style="width:250px; height:500px;" loop  autoplay></lottie-player>
 </div>
-<BaseCard class=" px-28 min-w-full text="><div class="flex justify-center flex flex-col items-center">
+<BaseCard class=" px-28 min-w-full" text=""><div class="flex justify-center flex flex-col items-center">
 <img class="w-60 pt-16 " src ="~/assets/images/banners/monedameta.png" alt="" />
  
 <h1 class=" mt-8  mb-3 font montserrat text-2xl">¡Constancia Enviada!</h1>
