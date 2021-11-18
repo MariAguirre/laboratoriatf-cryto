@@ -8,7 +8,7 @@
      </BaseText>
     <div class="m-18 ml-8 mr-8 mt-4 flex justify-center">
       <div>
-        <BaseCard class="w-400 md:w-719 p-1 " text="">
+        <BaseCard class=" w-400 md:w-719 p-1 " text="">
           <BaseText class="">
             <BodyTransfers
               class="flex h-359"
