@@ -72,10 +72,10 @@
         :custom="true"
       >
         <template #currentOption="e">
-          <i>{{ e.option }}</i>
+          <i>{{ e.option.name }}</i>
         </template>
         <template #option="e" class="flex flex-row">
-          <i>{{ e.option }}</i>
+          <i>{{ e.option.name }}</i>
         </template>
       </Select>
       <Button
@@ -146,7 +146,9 @@ export default {
       this.dataUtils = JSON.parse(localStorage.getItem("utils"));
       this.delay = this.dataQuote.delay;
       this.banks = this.dataUtils.banks;
-      this.funds = this.dataUtils.sourceOfFunds;
+      this.dataUtils.sourceOfFunds.forEach(e => {
+        this.funds.push({ name: e });
+      });
       this.accounts = (
         await this.$services.accounts.getAccount(
           localStorage.getItem("token"),
