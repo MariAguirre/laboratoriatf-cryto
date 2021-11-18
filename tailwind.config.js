@@ -70,6 +70,7 @@ module.exports = {
         "wave-shadow": "ping 1.75s cubic-bezier(0, 0, 0.2, 1) 0.75s infinite"
       },
       width: {
+        234: "234px",
         250: "250px",
         306: "306px",
         312: "312px",
@@ -88,6 +89,7 @@ module.exports = {
         52: "52px",
         70: "70px",
         81: "81px",
+        86: "86px",
         136: "136px",
         275: "275px",
         306: "306px",
@@ -95,7 +97,16 @@ module.exports = {
         455: "455px",
         507: "507px",
         719: "719px"
-      }
+      },
+      margin:{
+        '97': "26rem",
+        '98': "28rem",
+        '99': "30rem",
+      },
+      fontSize: {
+        'xxs': '.63rem',
+        'xxxs': '.6rem'
+      }   
     }
   },
   variants: {

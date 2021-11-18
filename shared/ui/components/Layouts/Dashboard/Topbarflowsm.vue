@@ -5,13 +5,14 @@
     style="z-index: 10"
   >
     <div
-      class="flex items-center  "
+      class="flex items-center"
       :class="[getContentBorderStyle]"
     >
       <div>
         <LogoV2 v-if="showLogo" class="" />
         <div >
-          <nav  class="ml-14 w-full flex justify-center items-center">
+         
+           <nav  class="ml-14 w-full -mt-2 flex justify-center items-center">
             <ul class="flex w-full pl-0 list-none ">
               <li>
                 <a
@@ -23,8 +24,8 @@
                   first:ml-0
                   text-xs
                   font-semibold
-                  w-4
-                  h-4
+                  w-3
+                  h-3
                   p-0
                   rounded-full
                   items-center
@@ -33,7 +34,7 @@
                   border border-solid border-gray-900
                   bg-gray-900
                 "
-                  ><p class="mt-4 -ml-5 text-xs ">Completa</p>
+                  ><p class="mt-5 -ml-5 text-xxxs">Completa</p>
                 </a>
               </li>
               <hr
@@ -47,8 +48,8 @@
                   text-xs
                   font-semibold
                   flex
-                  w-4
-                  h-4
+                  w-3
+                  h-3
                   p-0
                   rounded-full
                   items-center
@@ -58,7 +59,7 @@
                   border border-solid border-gray-200
                   bg-gray-200
                 "
-                  ><p class="mt-10 text-xs">Transfiere</p>
+                  ><p class="mt-10 text-xxxs">Transfiere</p>
                 </a>
               </li>
               <hr class="bg-gray-900 w-28 border-solid-3 object-center mt-2" />
@@ -70,8 +71,8 @@
                   text-xs
                   font-semibold
                   flex
-                  w-4
-                  h-4
+                  w-3
+                  h-3
                   p-0
                   rounded-full
                   items-center
@@ -81,7 +82,7 @@
                   border border-solid border-gray-200
                   bg-gray-200
                 "
-                  ><p class="mt-10 text-xs ">Envia</p>
+                  ><p class="mt-10 text-xxxs">Envia</p>
                 </a>
               </li>
             </ul>

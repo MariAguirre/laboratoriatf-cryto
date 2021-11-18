@@ -1,5 +1,6 @@
 <template>
-  <section class="w-375 sm:w-641 sm:flex sm:justify-center sm:flex-col">
+  <section >
+
     <Loader v-if="openLoader" class="h-full w-full bg-white" />
     <div>
       <Topbarflow class="hidden sm:block" variant="light" show-logo show-nav />
@@ -13,20 +14,19 @@
       />
     </div>
 
-    <div
-      class="m-2 sm:m-4"
-    >
+    <div class="w-340 sm:w-500 lg:w-full m-2 sm:m-4">
       <div>
-        <TextTitle
-          class="flex mt-8 sm:mt-12 text-center w-full sm:w-full"
+        <TextSubTitle
+          class=" mt-6 text-center w-full "
           text="Completa los datos de tu operación"
           alignment="center"
           
         />
       </div>
-      <BaseCardData :base-data="dataQuote" class="w-96 mt-4" />
+      <div class="flex flex-col items-center w-full h-full justify-center">
+      <BaseCardData :base-data="dataQuote" class="w-96 sm:mt-4" />
       <Highlight
-        class="mt-6 w-full"
+        class="mt-6 w-96 "
         title="Tiempo estimado de espera"
         :delay="delay"
       />
@@ -38,12 +38,16 @@
         :custom="true"
       >
         <template #currentOption="e">
+          <div class="flex flex-row justify-center">
           <img :src="e.option.image" />
-          <i>{{ e.option.name }}</i>
+          <i class=" ml-2 mt-2 not-italic">{{ e.option.name }}</i> 
+          </div>
         </template>
         <template #option="e" class="">
+          <div class="flex flex-row justify-center">
           <img :src="e.option.image" />
-          <i>{{ e.option.name }}</i>
+          <i class=" ml-2 mt-2 not-italic">{{ e.option.name }}</i>
+          </div>
         </template>
       </Select>
       <BaseText text="¿A qué dirección enviamos tus criptomonedas?" />
@@ -54,10 +58,11 @@
         :custom="true"
       >
         <template #currentOption="e">
-          <i>{{ e.option.id }}</i>
+        
+          <i class=" not-italic">{{ e.option.id }}</i>
         </template>
         <template #option="e" class="">
-          <i>{{ e.option.id }}</i>
+          <i class=" not-italic">{{ e.option.id }}</i>
         </template>
       </Select>
       <BaseText text="Origen de fondos" />
@@ -80,6 +85,7 @@
         text="Continuar"
         @click.native="createTransaccion"
       />
+      </div> 
     </div>
   </section>
 </template>
@@ -87,7 +93,7 @@
 <script>
 import Topbarflow from "~/shared/ui/components/Layouts/Dashboard/Topbarflow.vue";
 import Topbarflowsm from "~/shared/ui/components/Layouts/Dashboard/Topbarflowsm.vue";
-import TextTitle from "~/shared/ui/components/Typography/TextTitle.vue";
+import TextSubTitle from "~/shared/ui/components/Typography/TextSubtitle.vue";
 import BaseText from "~/shared/ui/components/Typography/BaseText.vue";
 import BaseCardData from "../modules/data/BaseCardData.vue";
 import Select from "~/shared/ui/components/Select.vue";
@@ -101,7 +107,7 @@ export default {
     Topbarflow,
     Topbarflowsm,
     Select,
-    TextTitle,
+    TextSubTitle,
     BaseCardData,
     Button,
     Highlight,
