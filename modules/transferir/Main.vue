@@ -6,10 +6,10 @@
     </BaseText>
     <div class="m-18 ml-8 mr-8 mt-4 flex justify-center">
       <div>
-        <BaseCard class="w-306 md:w-719 p-8 " text="">
+        <BaseCard class="w-306 md:w-719 p-1 " text="">
           <BaseText class="">
             <BodyTransfers
-              class="flex "
+              class="flex h-359"
               :monto-origin="mountOrigin"
               :currency-origin="currencyOrigin"
               :data3="data3"
@@ -22,11 +22,12 @@
       <div>
         <BaseCard class="hidden sm:block w-306 md:w-306 ml-9" text="">
           <DetalleTransfers
-            class="flex justify-left md:p-4"
+            class="flex justify-left md:p-4 h-330"
             :data2="data2"
             :data3="data3"
             :number-destiny="numberDestiny"
             :currency="currency"
+            :banco="banco"
           />
         </BaseCard>
       </div>
@@ -117,6 +118,7 @@ export default {
       this.numberDestiny = this.data3.account.number;
       this.currency = this.data3.account.currency;
       this.name = this.data3.cashIn.name;
+      this.banco = this.data3.bankId
       console.log(this.currency, this.numberDestiny, this.number);
     },
     sendtransfer(){       
