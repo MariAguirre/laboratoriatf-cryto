@@ -1,54 +1,89 @@
 <template>
-  <div class="w-340 sm:w-500 m-2 sm:m-4">
-    <Topbarflow3 variant="light" show-logo></Topbarflow3> 
-    <div class=" flex flex-col ">
-    
-    <BaseCard>
-    <ConstancyOpera/>
-    </BaseCard>
-    <BaseText/>
-    <DetalleTransfer 
-            class="flex justify-left md:p-4"
+  <div class=" Grid grid-flow-col">
+    <Topbarflow3 variant="light" show-logo></Topbarflow3>
+    <div class="m-18 ml-8 mr-8 mt-20 flex justify-center">
+      <div>
+        <BaseCard class="w-306 md:w-719 p-1 " text="">
+          <ConstancyOpera class="flex h-359" />
+        </BaseCard>
+        <BaseText />
+      </div>
+      <div>
+        <BaseCard class="hidden sm:block w-306 md:w-306 ml-9" text="">
+          <DetalleTransfer
+            class="flex justify-left md:p-4 h-330"
             :data2="data2"
             :data3="data3"
             :number-destiny="numberDestiny"
             :currency="currency"
-          
-/>
-    <div class="font-montserrat flex flex-col justify-center items-center pt-8">
-    <Button text="ENVIAR CONSTANCIA" >
-    </Button>
-   
+            :banco="banco"
+          />
+        </BaseCard>
+      </div>     
     </div>
+     <div
+        class="flex flex-col justify-center items-center">
+        <Button class="mt-8" text="ENVIAR CONSTANCIA"> </Button>
+      </div>
   </div>
 </template>
 
 <script>
-import Topbarflow3 from '~/shared/ui/components/Layouts/Dashboard/Topbarflow3.vue'
-import BaseCard from '@/shared/ui/components/Cards/BaseCard.vue'
-import BaseText from '@/shared/ui/components/Typography/BaseText.vue'
-import ConstancyOpera from '@/modules/constans/components/ConstancyOpera.vue'
-import Button from '@/shared/ui/components/Button/Button.vue'
-import DetalleTransfer from '@/modules/transferir/DetalleTransfers.vue'
+import Topbarflow3 from "~/shared/ui/components/Layouts/Dashboard/Topbarflow3.vue";
+import BaseCard from "@/shared/ui/components/Cards/BaseCard.vue";
+import BaseText from "@/shared/ui/components/Typography/BaseText.vue";
+import ConstancyOpera from "@/modules/constans/components/ConstancyOpera.vue";
+import Button from "@/shared/ui/components/Button/Button.vue";
+import DetalleTransfer from "@/modules/transferir/DetalleTransfers.vue";
 /* import ConstancyOpera from '@/modules/constans/components/ConstancySend.vue'
 import ConstancyOpera from '@/modules/constans/components/ConstancyTransfer.vue' */
 
 export default {
-  components: { BaseCard,BaseText,ConstancyOpera, Topbarflow3, Button, DetalleTransfer},
+  components: {
+    BaseCard,
+    BaseText,
+    ConstancyOpera,
+    Topbarflow3,
+    Button,
+    DetalleTransfer,
+  },
+  props: {
+    data2: {
+      type: Object,
+      default() {},
+    },
+    data3: {
+      type: Object,
+      default() {},
+    },
+    numberDestiny: {
+      type: String,
+      default: "",
+    },
+    currency: {
+      type: String,
+      default: "",
+    },
+    banco: {
+      type: String,
+      default: "",
+    },
+  },
   data() {
     return {
-      showView: false
-    }
+      showView: false,
+    };
   },
+
   mounted() {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     if (!token) {
-      console.log('NO TOKEN');
-      this.$router.push({path: 'login'});
+      console.log("NO TOKEN");
+      this.$router.push({ path: "login" });
     } else {
-      console.log('SI TOKEN');
+      console.log("SI TOKEN");
       this.showView = true;
     }
   },
-}
+};
 </script>
