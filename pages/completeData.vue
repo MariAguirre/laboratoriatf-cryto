@@ -1,5 +1,11 @@
 <template>
   <section class="w-375 sm:w-641 sm:flex sm:justify-center sm:flex-col">
+    <Modal v-model="open" closeable-by-backdrop>
+      <div class="flex flex-col items-center bg-white rounded-xl w-full">
+        <h1 class="pb-8">¡UPS!</h1>
+        <h2>Ocurrió un error inténtelo nuevamente.</h2>
+      </div>
+    </Modal>
     <Loader v-if="openLoader" class="h-full w-full bg-white" />
     <div>
       <Topbarflow class="hidden sm:block" variant="light" show-logo show-nav />
@@ -98,7 +104,7 @@ import Select from "~/shared/ui/components/Select.vue";
 import Button from "~/shared/ui/components/Button/Button.vue";
 import Highlight from "~/shared/ui/components/Highlight.vue";
 import Loader from "@/shared/ui/components/Loading/LoadingScreen.vue";
-import logger from "@/shared/ui/utils/logger.ts";
+import Modal from "@/shared/ui/components/Modal/Modal.vue";
 
 export default {
   components: {
@@ -110,7 +116,8 @@ export default {
     Button,
     Highlight,
     BaseText,
-    Loader
+    Loader,
+    Modal
   },
   data() {
     return {
@@ -125,7 +132,8 @@ export default {
         valueBank: "",
         valueWallet: "",
         fundsValue: ""
-      }
+      },
+      open: false
     };
   },
   computed: {
@@ -158,7 +166,6 @@ export default {
           }
         )
       ).data.data;
-      logger.info(this.accounts);
       this.openLoader = false;
     },
     async createTransaccion() {
@@ -174,10 +181,20 @@ export default {
         transaction,
         localStorage.getItem("token")
       );
-      logger.info(response);
-      localStorage.setItem("transaction", JSON.stringify(response));
-      localStorage.setItem("transaccionValues", JSON.stringify(this.values));
-      // window.location.href = "/transfers";
+      if (response.status === 200) {
+        localStorage.setItem("transaction", JSON.stringify(response));
+        localStorage.setItem("transaccionValues", JSON.stringify(this.values));
+        this.redirect(response.data.data.cashIn.type);
+      } else {
+        this.open = true;
+      }
+    },
+    redirect(property) {
+      if (property === "OWN") {
+        window.location.href = "/constancia";
+      } else {
+        window.location.href = "/constanciaopciones";
+      }
     }
   }
 };
