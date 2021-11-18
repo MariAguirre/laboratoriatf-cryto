@@ -12,7 +12,7 @@
       <div class="mt-4">
         <p>Origen</p>
         <p class="mt-2">
-          {{ data3 ? (data3.bankId ? data3.bankId : "no funciona") : "" }}
+          {{ data3 ? (data3.bankId ? data3.bankId : "") : "" }}
         </p>
       </div>
       <div class="mt-4">
