@@ -11,7 +11,9 @@
       </h1>
       <div class="mt-4">
         <p>Origen</p>
-        <p class="mt-2">{{ data3.bankId }}</p>
+        <p class="mt-2">
+          {{ data3 ? (data3.bankId ? data3.bankId : "no funciona") : "" }}
+        </p>
       </div>
       <div class="mt-4">
         <p>Direccion de destino {{ currency }}</p>
@@ -50,11 +52,15 @@ export default {
   props: {
     data2: {
       type: Object,
-      default() {}
+      default() {
+        return {};
+      }
     },
     data3: {
       type: Object,
-      default() {}
+      default() {
+        return {};
+      }
     },
     numberDestiny: {
       type: String,

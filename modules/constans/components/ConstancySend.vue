@@ -15,8 +15,10 @@
     <Modal v-model="open" closeable-by-backdrop>
       <div class="flex flex-col items-center bg-white rounded-xl w-full">
         <div class="flex flex-col w-11/12 sm:w-96">
-          <p class="pb-1 text-center text-2xl leading-6 font-normal">Ocurrió un error inténtelo nuevamente.</p>
-            <img src="@/assets/images/error/errorLogin.jpg"  alt="question" />
+          <p class="pb-1 text-center text-2xl leading-6 font-normal">
+            Ocurrió un error inténtelo nuevamente.
+          </p>
+          <img src="@/assets/images/error/errorLogin.jpg" alt="question" />
         </div>
       </div>
     </Modal>
@@ -201,13 +203,13 @@ export default {
       this.loading = true;
       try {
         if (this.checked === "uploadFile") {
-          // const data = new FormData();
-          // data.append("image", fs.createReadStream(this.file));
-          // const response = await this.$services.file.uploadFile(
-          //   data,
-          //   localStorage.getItem("token")
-          // );
-          // console.log(response);
+          const data = new FormData();
+          data.append("image", this.file);
+          const response = await this.$services.file.uploadFile(
+            data,
+            localStorage.getItem("token")
+          );
+          console.log(response);
           console.log(this.checked);
         } else {
           console.log(this.checked);

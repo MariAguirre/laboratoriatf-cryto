@@ -2,14 +2,12 @@
   <div class="w-340 sm:w-500 m-2 sm:m-4">
     <Topbarflow3 variant="light" show-logo></Topbarflow3>
     <div class=" flex flex-col ">
-      <BaseCard>
+      <BaseCard text="">
         <ConstancyOpera />
       </BaseCard>
       <BaseText />
       <DetalleTransfer
         class="flex justify-left md:p-4"
-        :data2="data2"
-        :data3="data3"
         :number-destiny="numberDestiny"
         :currency="currency"
       />

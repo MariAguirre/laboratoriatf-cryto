@@ -54,8 +54,9 @@ import BaseCard from "@/shared/ui/components/Cards/BaseCard.vue";
 import BodyTransfers from "~/modules/transferir/BodyTransfers.vue";
 import DetalleTransfers from "@/modules/transferir/DetalleTransfers.vue";
 import Button from "@/shared/ui/components/Button/Button.vue";
-import logger from "@/shared/ui/utils/logger.ts";
+// import logger from "@/shared/ui/utils/logger.ts";
 import Loader from "@/shared/ui/components/Loading/LoadingScreen.vue";
+import { mapState } from "vuex";
 
 export default {
   components: {
@@ -84,51 +85,29 @@ export default {
       openLoader: true
     };
   },
+  computed: {
+    ...mapState(["transaction", "quote"])
+  },
   mounted() {
     this.getdata();
     this.getdata2();
   },
   methods: {
     getdata() {
-      const data = JSON.parse(localStorage.getItem("quote"));
-      this.data2 = data;
-      logger.info(this.data2);
+      this.data2 = this.quote;
+      // logger.info(this.data2);
       this.mountOrigin = this.data2.mountOrigin;
       this.currencyOrigin = this.data2.currencyOrigin;
     },
     getdata2() {
-      // this.data3 = JSON.parse(localStorage.getItem("transaction"));
-      this.data3 = {
-        id: "kmGNWBYSUS3Jx4D2Wr",
-        customerId: "200e2f2b-829b-4de6-8cbb-19774882f005",
-        operationNumber: "kmGNWBY",
-        amountEstimated: 0.00038,
-        exchangeRate: 261905,
-        originCurrency: "PEN",
-        destinationCurrency: "BTC",
-        amountSent: 100,
-        bankId: "BCP",
-        account: {
-          id: "6de6f675-bb1f-41eb-8147-4702849210b5",
-          customerId: "129be299-22ed-4407-b7b8-91daf26d867a",
-          type: "crypto",
-          number: "3AEcLU8NkukFRP5kGVikbmHVLXhL5KWuGv",
-          currency: "BTC",
-          alias: "U1 Mi cuenta BTC"
-        },
-        sourceOfFunds: "Otros",
-        cashIn: {
-          name: "BCP",
-          number: "2003001399567",
-          type: "OWN"
-        }
-      };
+      this.data3 = this.transaction;
+      this.data3;
       this.number = this.data3.cashIn.number;
-      this.numberDestiny = this.data3.account.number;
-      this.currency = this.data3.account.currency;
+      this.numberDestiny = this.data3.account[0].number;
+      this.currency = this.data3.account[0].currency;
       this.name = this.data3.cashIn.name;
-      this.banco = this.data3.bankId
-      console.log(this.currency, this.numberDestiny, this.number);
+      this.banco = this.data3.bankId;
+      console.log(this.currency, this.numberDestiny, this.number, this.banco);
       this.openLoader = false;
     },
     sendtransfer() {

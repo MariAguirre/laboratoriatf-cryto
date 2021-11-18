@@ -3,7 +3,9 @@ export const state = () => ({
   company: {},
   profile: "customer",
   requerimients: [],
-  loading: true
+  loading: true,
+  transaction: {},
+  quote: {}
 });
 
 export const mutations = {
@@ -16,7 +18,7 @@ export const mutations = {
   SET_REQUERIMIENTS(state, data) {
     state.requerimients = data;
   },
-  SET_LOADING(state,value) {
+  SET_LOADING(state, value) {
     state.loading = value;
   },
   setPersonalInfo: (state, customer) => {
@@ -27,11 +29,17 @@ export const mutations = {
     state.company = {};
     state.profile = "customer";
   },
+  SET_TRANSACTION(state, data) {
+    state.transaction = data;
+  },
+  SET_QUOTE(state, data) {
+    state.quote = data;
+  }
 };
 
 export const actions = {
-  setLoading({commit},value) {
-    commit('SET_LOADING',value);
+  setLoading({ commit }, value) {
+    commit("SET_LOADING", value);
   },
   setPersonalInfo: ({ commit }, data) => {
     commit("setPersonalInfo", data);
@@ -59,6 +67,12 @@ export const actions = {
       console.log(error);
     }
   },
+  setTransaction: ({ commit }, data) => {
+    commit("SET_TRANSACTION", data);
+  },
+  setQuote: ({ commit }, data) => {
+    commit("SET_QUOTE", data);
+  }
 };
 
 export const getters = {
@@ -67,7 +81,7 @@ export const getters = {
   },
   firstName(state) {
     const customer = state.customer;
-    const fullName = customer.fullName || '';
+    const fullName = customer.fullName || "";
     return fullName.split(/\s+/)[0];
   }
 };
