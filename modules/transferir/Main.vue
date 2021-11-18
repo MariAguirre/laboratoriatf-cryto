@@ -100,7 +100,6 @@ export default {
     },
     getdata2() {
       this.data3 = this.transaction;
-      console.log(this.data3);
       this.number = this.data3.cashIn.number;
       this.numberDestiny = this.data3.account[0].number;
       this.currency = this.data3.account[0].currency;
