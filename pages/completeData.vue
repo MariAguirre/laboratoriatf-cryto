@@ -1,6 +1,15 @@
 <template>
-  <section >
-
+  <section class="w-375 sm:w-641 sm:flex sm:justify-center sm:flex-col">
+    <Modal v-model="open" closeable-by-backdrop>
+      <div class="flex flex-col items-center bg-white rounded-xl w-full">
+        <div class="flex flex-col w-11/12 sm:w-96">
+          <p class="pb-1 text-center text-2xl leading-6 font-normal">
+            Ocurrió un error inténtelo nuevamente.
+          </p>
+          <img src="@/assets/images/error/errorLogin.jpg" alt="question" />
+        </div>
+      </div>
+    </Modal>
     <Loader v-if="openLoader" class="h-full w-full bg-white" />
     <div>
       <Topbarflow class="hidden sm:block" variant="light" show-logo show-nav />
@@ -13,79 +22,91 @@
         show-nav
       />
     </div>
-
-    <div class="w-340 sm:w-500 lg:w-full m-2 sm:m-4">
+    <div
+      class="
+      flex flex-col
+      justify-center
+      items-center
+      backdrop-blur-sm
+      m-2 sm:m-4
+    "
+    >
       <div>
         <TextSubTitle
-          class=" mt-6 text-center w-full "
+          class="flex mt-8 text-2xl sm:mt-12 text-center w-full sm:w-full"
           text="Completa los datos de tu operación"
           alignment="center"
-          
         />
       </div>
-      <div class="flex flex-col items-center w-full h-full justify-center">c
-      <BaseCardData :base-data="dataQuote" class="w-96 sm:mt-4" />
-      <Highlight
-        class="mt-6 w-96 "
-        title="Tiempo estimado de espera"
-        :delay="delay"
-      />
-      <BaseText class=" mt-4" text="¿Desde qué banco nos envías tu dinero?" />
-      <Select
-        v-model="values.valueBank"
-        :options="banks"
-        class="mt-1 w-96 bg-white"
-        :custom="true"
-      >
-        <template #currentOption="e">
-          <div class="flex flex-row justify-center">
-          <img :src="e.option.image" />
-          <i class=" ml-2 mt-2 not-italic">{{ e.option.name }}</i> 
-          </div>
-        </template>
-        <template #option="e" class="">
-          <div class="flex flex-row justify-center">
-          <img :src="e.option.image" />
-          <i class=" ml-2 mt-2 not-italic">{{ e.option.name }}</i>
-          </div>
-        </template>
-      </Select>
-      <BaseText text="¿A qué dirección enviamos tus criptomonedas?" />
-      <Select
-        v-model="values.valueWallet"
-        :options="accounts"
-        class="mt-1 w-96 bg-white"
-        :custom="true"
-      >
-        <template #currentOption="e">
-        
-          <i class=" not-italic">{{ e.option.id }}</i>
-        </template>
-        <template #option="e" class="">
-          <i class=" not-italic">{{ e.option.id }}</i>
-        </template>
-      </Select>
-      <BaseText text="Origen de fondos" />
-      <Select
-        v-model="values.fundsValue"
-        class="mt-1 w-96 bg-white"
-        :options="funds"
-        :custom="true"
-      >
-        <template #currentOption="e">
-          <i>{{ e.option }}</i>
-        </template>
-        <template #option="e" class="flex flex-row">
-          <i>{{ e.option }}</i>
-        </template>
-      </Select>
-      <Button
-        :disabled="disabled"
-        class="w-96 mt-3"
-        text="Continuar"
-        @click.native="createTransaccion"
-      />
-      </div> 
+      <div class="flex flex-col items-center w-full h-full justify-center">
+        c
+        <BaseCardData :base-data="dataQuote" class="w-96 sm:mt-4" />
+        <Highlight
+          class="mt-6 w-96 "
+          title="Tiempo estimado de espera"
+          :delay="delay"
+        />
+        <BaseText
+          class="w-96 mt-8 pl-1 text-7"
+          text="¿Desde qué banco nos envías tu dinero?"
+        />
+        <Select
+          v-model="values.valueBank"
+          :options="banks"
+          class="mt-1 w-96 bg-white"
+          :custom="true"
+        >
+          <template #currentOption="e">
+            <div class="flex flex-row justify-center">
+              <img :src="e.option.image" />
+              <i class=" ml-2 mt-2 not-italic">{{ e.option.name }}</i>
+            </div>
+          </template>
+          <template #option="e" class="">
+            <div class="flex flex-row justify-center">
+              <img :src="e.option.image" />
+              <i class=" ml-2 mt-2 not-italic">{{ e.option.name }}</i>
+            </div>
+          </template>
+        </Select>
+        <BaseText
+          class="w-96 pl-1 text-7  mt-4 "
+          text="¿A qué dirección enviamos tus criptomonedas?"
+        />
+        <Select
+          v-model="values.valueWallet"
+          :options="accounts"
+          class="mt-1 w-96 bg-white"
+          :custom="true"
+        >
+          <template #currentOption="e">
+            <i class=" not-italic">{{ e.option.id }}</i>
+          </template>
+          <template #option="e" class="">
+            <i class=" not-italic">{{ e.option.id }}</i>
+          </template>
+        </Select>
+        <BaseText class="w-96 pl-1 text-7  mt-4 " text="Origen de fondos" />
+        <Select
+          v-model="values.fundsValue"
+          class="mt-1 w-96 bg-white"
+          :options="funds"
+          :custom="true"
+        >
+          <template #currentOption="e">
+            <i>{{ e.option }}</i>
+          </template>
+          <template #option="e" class="flex flex-row">
+            <i>{{ e.option }}</i>
+          </template>
+        </Select>
+        <Button
+          :disabled="disabled"
+          class="w-96 mt-8 mb-28"
+          text="Continuar"
+          @click.native="createTransaccion"
+        />
+      </div>
     </div>
   </section>
 </template>
@@ -140,9 +161,9 @@ export default {
     }
   },
   mounted() {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     if (!token) {
-      this.$router.push({path: 'login'});
+      this.$router.push({ path: "login" });
     } else {
       this.getdata();
     }
@@ -152,7 +173,7 @@ export default {
     async getdata() {
       this.dataQuote = JSON.parse(localStorage.getItem("quote"));
       this.dataUtils = JSON.parse(localStorage.getItem("utils"));
-      this.delay = this.dataQuote.delay;
+      this.delay = this.convertTime(this.dataQuote.delay);
       this.banks = this.dataUtils.banks;
       this.funds = this.dataUtils.sourceOfFunds;
       this.accounts = (
@@ -168,22 +189,30 @@ export default {
       this.openLoader = false;
     },
     async createTransaccion() {
-      const transaction = {
-        originCurrency: this.dataQuote.currencyOrigin,
-        destinationCurrency: this.dataQuote.currencyDestiny,
-        amountSent: this.dataQuote.mountOrigin,
-        bankId: this.values.valueBank.id,
-        account: this.accounts,
-        sourceOfFunds: this.values.fundsValue
-      };
-      const response = await this.$services.transaction.createTransaction(
-        transaction,
-        localStorage.getItem("token")
-      );
-      logger.info(response);
-      localStorage.setItem("transaction", JSON.stringify(response));
-      localStorage.setItem("transaccionValues", JSON.stringify(this.values));
-      // window.location.href = "/transfers";
+      try {
+        const transaction = {
+          originCurrency: this.dataQuote.currencyOrigin,
+          destinationCurrency: this.dataQuote.currencyDestiny,
+          amountSent: this.dataQuote.mountOrigin,
+          bankId: this.values.valueBank.id,
+          account: this.accounts,
+          sourceOfFunds: this.values.fundsValue
+        };
+        const response = await this.$services.transaction.createTransaction(
+          transaction,
+          localStorage.getItem("token")
+        );
+        localStorage.setItem("transaction", JSON.stringify(response.data.data));
+        localStorage.setItem("transactionValues", JSON.stringify(this.values));
+        window.location.href = "/transfers";
+      } catch (err) {
+        this.open = true;
+      }
+    },
+    convertTime(time) {
+      const minutes = Math.floor(time / 60);
+      const seconds = time - minutes * 60;
+      return `${minutes}:${seconds > 10 ? seconds : `0${seconds}`}`;
     }
   }
 };

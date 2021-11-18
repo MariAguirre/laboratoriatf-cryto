@@ -14,8 +14,10 @@
   >
     <Modal v-model="open" closeable-by-backdrop>
       <div class="flex flex-col items-center bg-white rounded-xl w-full">
-        <h1 class="pb-8">¡UPS!</h1>
-        <h2>Ocurrió un error inténtelo nuevamente.</h2>
+        <div class="flex flex-col w-11/12 sm:w-96">
+          <p class="pb-1 text-center text-2xl leading-6 font-normal">Ocurrió un error inténtelo nuevamente.</p>
+            <img src="@/assets/images/error/errorLogin.jpg"  alt="question" />
+        </div>
       </div>
     </Modal>
     <img
