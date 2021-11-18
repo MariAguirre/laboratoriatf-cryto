@@ -14,6 +14,7 @@
               :currency-origin="currencyOrigin"
               :data3="data3"
               :number="number"
+              :name="name"
             />
           </BaseText>
         </BaseCard>
@@ -36,7 +37,7 @@
                     justify-center
                     items-center"
     >
-      <Button class="mt-8" text="CONFIRMO TRANSFERENCIA"> </Button>
+      <Button class="mt-8" text="CONFIRMO TRANSFERENCIA" @click.native="sendtransfer"> </Button>
     </div>
   </div>
 </template>
@@ -69,7 +70,8 @@ export default {
       destino: "",
       data3: {},
       currency: "",
-      numberDestiny: ""
+      numberDestiny: "",
+      name:"",
     };
   },
   mounted() {
@@ -114,8 +116,19 @@ export default {
       this.number = this.data3.cashIn.number;
       this.numberDestiny = this.data3.account.number;
       this.currency = this.data3.account.currency;
+      this.name = this.data3.cashIn.name;
       console.log(this.currency, this.numberDestiny, this.number);
+    },
+    sendtransfer(){       
+      if (this.data3.cashIn.type === "OWN") {        
+        window.location.href = "/constancia";
+
+      } else {
+        window.location.href = "/constanciaopciones";
+      }    
     }
-  }
+
+  },
+
 };
 </script>

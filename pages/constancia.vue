@@ -7,8 +7,7 @@
     </BaseCard>
     <BaseText/>
     <div class="font-montserrat flex flex-col justify-center items-center pt-8">
-    <Button text="ENVIAR CONSTANCIA" >
-    </Button>
+    
     </div>
     </div>
    
@@ -23,7 +22,7 @@ import Topbar from '~/shared/ui/components/Layouts/Dashboard/Topbar.vue'
 import BaseCard from '@/shared/ui/components/Cards/BaseCard.vue'
 import BaseText from '@/shared/ui/components/Typography/BaseText.vue'
 import ConstancyOpera from '@/modules/constans/components/ConstancyOpera.vue'
-import Button from '@/shared/ui/components/Button/Button.vue'
+//import Button from '@/shared/ui/components/Button/Button.vue'
 /* import ConstancyOpera from '@/modules/constans/components/ConstancySend.vue'
 import ConstancyOpera from '@/modules/constans/components/ConstancyTransfer.vue' */
 
@@ -31,6 +30,6 @@ import ConstancyOpera from '@/modules/constans/components/ConstancyTransfer.vue'
 
 
 export default {
-  components: { Topbar,BaseCard,BaseText,ConstancyOpera,Button},
+  components: { Topbar,BaseCard,BaseText,ConstancyOpera},
 }
 </script>
