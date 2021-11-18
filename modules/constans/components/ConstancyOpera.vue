@@ -40,17 +40,20 @@
       >Escribe el código de operación del banco aquí</label
     >
     <div>
-      <Input v-model="codigo" />
+      <Input 
+      v-model="codigo"
+      class="w-410"
+       />
     </div>
-    <div class="flex mb-4">
+    <div class="flex justify-center mb-2">
       <img src="@/assets/images/common/question-icon.svg" alt="question" />
       <span
-        class="font-medium text-12 md:text-14 leading-24 tracking-0.03 md:tracking-normal"
+        class="font-medium text-12 w-410 mt-2 md:text-14 flex justify-center tracking-0.03 md:tracking-normal"
         >¿Dónde encuentro el código de operación?</span
       >
     </div>
     <p
-      class="mb-2 font-light md:font-normal text-14 md:text-16 md:leading-20 leading-17 p-1 px-8 md:p-0"
+      class="mb-2 font-light md:font-normal text-14 mt-1 md:text-16 md:leading-20 leading-17 p-1 px-8 md:p-0"
     >
       Verificaremos tu operación para enviarte<span>
         {{ transaction.amountEstimated }}
@@ -58,6 +61,7 @@
       >a tu dirección.
     </p>
     <Button
+    class="w-410 "
       :disabled="disabled"
       :loading="loading"
       text="ENVIAR CONSTANCIA"
