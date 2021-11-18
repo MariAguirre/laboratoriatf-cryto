@@ -9,8 +9,9 @@ export default class AccountsService implements AccountsRepository {
     this.axios = axios;
   }
 
-  async getAccount(data, accessToken, params): Promise<any> {
-    return this.axios.post(`/transactions?currency=${params.currency}`, data, {
+  async getAccount(accessToken, params): Promise<any> {
+    return this.axios.get(`/accounts`, {
+      params,
       headers: { Authorization: accessToken }
     });
   }

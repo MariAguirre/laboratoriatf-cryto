@@ -53,15 +53,15 @@
       <BaseText text="¿A qué dirección enviamos tus criptomonedas?" />
       <Select
         v-model="values.valueWallet"
-        :options="wallets"
+        :options="accounts"
         class="mt-1 w-96 bg-white"
         :custom="true"
       >
         <template #currentOption="e">
-          <i>{{ e.option }}</i>
+          <i>{{ e.number }}</i>
         </template>
         <template #option="e" class="">
-          <i>{{ e.option }}</i>
+          <i>{{ e.number }}</i>
         </template>
       </Select>
       <BaseText text="Origen de fondos" />
@@ -114,7 +114,7 @@ export default {
   },
   data() {
     return {
-      wallets: [],
+      accounts: [],
       funds: [],
       dataQuote: {},
       dataUtils: {},
@@ -141,13 +141,22 @@ export default {
     this.getdata();
   },
   methods: {
-    getdata() {
+    async getdata() {
       this.dataQuote = JSON.parse(localStorage.getItem("quote"));
       this.dataUtils = JSON.parse(localStorage.getItem("utils"));
       this.delay = this.dataQuote.delay;
       this.banks = this.dataUtils.banks;
-      this.wallets = this.dataUtils.originWallets;
       this.funds = this.dataUtils.sourceOfFunds;
+      this.accounts = (
+        await this.$services.accounts.getAccount(
+          localStorage.getItem("token"),
+          {
+            currency: this.dataQuote.currencyDestiny,
+            type: "crypto"
+          }
+        )
+      ).data.data;
+      logger.info(this.accounts);
       this.openLoader = false;
     },
     async createTransaccion() {
@@ -156,14 +165,7 @@ export default {
         destinationCurrency: this.dataQuote.currencyDestiny,
         amountSent: this.dataQuote.mountOrigin,
         bankId: this.values.valueBank.id,
-        account: {
-          id: "6de6f675-bb1f-41eb-8147-4702849210b5",
-          customerId: "129be299-22ed-4407-b7b8-91daf26d867a",
-          type: "crypto",
-          number: "3AEcLU8NkukFRP5kGVikbmHVLXhL5KWuGv",
-          currency: "BTC",
-          alias: "U1 Mi cuenta BTC"
-        },
+        account: this.accounts,
         sourceOfFunds: this.values.fundsValue
       };
       const response = await this.$services.transaction.createTransaction(
@@ -173,6 +175,7 @@ export default {
       logger.info(response);
       localStorage.setItem("transaction", JSON.stringify(response));
       localStorage.setItem("transaccionValues", JSON.stringify(this.values));
+      // window.location.href = "/transfers";
     }
   }
 };
