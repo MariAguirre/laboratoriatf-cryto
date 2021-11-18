@@ -20,12 +20,7 @@
     </Button>
     
     </div>
-    </div>
-   
-
-
   </div>
-
 </template>
 
 <script>
@@ -37,9 +32,6 @@ import Button from '@/shared/ui/components/Button/Button.vue'
 import DetalleTransfer from '@/modules/transferir/DetalleTransfers.vue'
 /* import ConstancyOpera from '@/modules/constans/components/ConstancySend.vue'
 import ConstancyOpera from '@/modules/constans/components/ConstancyTransfer.vue' */
-
-
-
 
 export default {
   components: { Topbarflow3,BaseCard,BaseText,ConstancyOpera,Button,DetalleTransfer},

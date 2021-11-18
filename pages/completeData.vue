@@ -23,7 +23,7 @@
           
         />
       </div>
-      <div class="flex flex-col items-center w-full h-full justify-center">
+      <div class="flex flex-col items-center w-full h-full justify-center">c
       <BaseCardData :base-data="dataQuote" class="w-96 sm:mt-4" />
       <Highlight
         class="mt-6 w-96 "
