@@ -70,9 +70,6 @@
           </div>
         </div>
       </div>
-      <div class="Block sm:hidden">
-        <p>Detalle de la operación</p>
-      </div>
     </div>
 
     <div class="block sm:hidden">
