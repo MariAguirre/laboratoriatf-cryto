@@ -11,7 +11,7 @@
 
     <p for="first-name" class="text-justify text-base">
       Transfiere desde tu banco y guarda el
-      <span class="underline">número de operación</span> para el siguiente paso.
+      <span class="underline">Número de operación</span> para el siguiente paso.
     </p>
 
     <div class=" w-306 md:w-719 mt-4">
@@ -30,7 +30,7 @@
       <div class="flex justify-between">
         <div class="ml-8">
           <p class="mt-4 font-bold">
-            Nuemero de cuenta <span>{{ name }}</span>
+            Número de cuenta <span>{{ name }}</span>
           </p>
         </div>
         <div class="mr-8 flex justify-between">

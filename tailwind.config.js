@@ -72,6 +72,7 @@ module.exports = {
       width: {
         234: "234px",
         250: "250px",
+        284: "284.52",
         306: "306px",
         312: "312px",
         330: "330px",
@@ -81,9 +82,11 @@ module.exports = {
         410: "410px",
         500: "500px",
         719: "719px",
+
         
       },
       height: {
+        2: "2px",
         40: "40px",
         50: "50px",
         52: "52px",
@@ -104,9 +107,11 @@ module.exports = {
         '99': "30rem",
       },
       fontSize: {
-        'xxs': '.63rem',
-        'xxxs': '.6rem'
-      }   
+        'xxs': ".63rem",
+        'xxxs': ".6rem",
+        'xxxxs': ".5rem",
+        
+      }
     }
   },
   variants: {
