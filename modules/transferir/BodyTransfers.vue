@@ -11,7 +11,7 @@
 
     <p for="first-name" class="text-justify text-base">
       Transfiere desde tu banco y guarda el
-      <span class="underline">número de operación</span> para el siguiente paso.
+      <span class="underline">Número de operación</span> para el siguiente paso.
     </p>
 
     <div class=" w-306 md:w-719 mt-4">

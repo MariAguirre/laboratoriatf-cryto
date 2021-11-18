@@ -1,5 +1,5 @@
 <template>
-  <div class="w-340 sm:w-500 m-2 sm:m-4">
+  <div class=" Grid grid-flow-col">
     <Topbarflow3 variant="light" show-logo></Topbarflow3>
     <div class=" flex flex-col ">
       <BaseCard text="">
@@ -19,6 +19,21 @@
       >
         <Button text="ENVIAR CONSTANCIA"> </Button>
       </div>
+      <div>
+        <BaseCard class="hidden sm:block w-306 md:w-306 ml-9" text="">
+          <DetalleTransfer
+            class="flex justify-left md:p-4 h-330"
+            :data2="data2"
+            :data3="data3"
+            :number-destiny="numberDestiny"
+            :currency="currency"
+            :banco="banco"
+          />
+        </BaseCard>
+      </div>
+    </div>
+    <div class="flex flex-col justify-center items-center">
+      <Button class="mt-8" text="ENVIAR CONSTANCIA"> </Button>
     </div>
   </div>
 </template>
@@ -41,11 +56,31 @@ export default {
     Button,
     DetalleTransfer
   },
+  props: {
+    data2: {
+      type: Object,
+      default() {}
+    },
+    data3: {
+      type: Object,
+      default() {}
+    },
+    numberDestiny: {
+      type: String,
+      default: ""
+    },
+    currency: {
+      type: String,
+      default: ""
+    },
+    banco: {
+      type: String,
+      default: ""
+    }
+  },
   data() {
     return {
       showView: false,
-      numberDestiny: "",
-      currency: "",
       name: ""
     };
   },
