@@ -2,15 +2,15 @@
     <div
     clas="p-2 sm:p-4 ml-9 w-719 h-96 bg-white
 flex flex-col
-justify-center
-items-center"><BaseCard class="" text="">
-    
-<div class="flex justify-center flex flex-col items-center">
+justify-between
+items-center"><div><lottie-player src="https://assets6.lottiefiles.com/packages/lf20_xjtsxfxw.json" background="transparent"  speed="1"  style="width:250px; height:500px;" loop  autoplay></lottie-player>
+</div>
+<BaseCard class=" px-28 min-w-full text="><div class="flex justify-center flex flex-col items-center">
 <img class="w-60 pt-16 " src ="~/assets/images/banners/monedameta.png" alt="" />
  
 <h1 class=" mt-8  mb-3 font montserrat text-2xl">¡Constancia Enviada!</h1>
 </div>
-<div class="py-8 px-2 sm:flex-grow-0 hidden sm:block ">
+<div class="py-8 px-2 sm:flex-grow-0 min-w-full hidden sm:block ">
 <div class="flex justify-between md:justify-between">
   <p class="text-kambista-7 font-bold">Código Kambista</p>
   <p class="font-bold">{{codeIdK}}</p>
@@ -28,7 +28,7 @@ items-center"><BaseCard class="" text="">
   <p class="font-bold"> {{time}} min aprox</p>
 </div>
 </div>
-<div class="py-2 px-2 block sm:hidden">
+<div class="py-2 px-2 min-w-full block sm:hidden">
   
 <div class="sm:flex-grow-0">
   <p class="text-kambista-7 font-bold">Código Kambista</p>
@@ -48,7 +48,8 @@ items-center"><BaseCard class="" text="">
   </div>
 </div>
 </div>
-    </BaseCard></div>
+    </BaseCard><div><lottie-player src="https://assets6.lottiefiles.com/packages/lf20_xjtsxfxw.json" background="transparent"  speed="1"  style="width:250px; height:500px;" loop  autoplay></lottie-player>
+</div></div>
 </template>
 <script>
 import BaseCard from '@/shared/ui/components/Cards/BaseCard.vue'
