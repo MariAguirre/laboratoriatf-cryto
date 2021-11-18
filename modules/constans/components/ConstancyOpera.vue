@@ -52,7 +52,10 @@
     <p
       class="mb-2 font-light md:font-normal text-14 md:text-16 md:leading-20 leading-17 p-1 px-8 md:p-0"
     >
-      Verificaremos tu operación para enviarte<span> BTC </span>a tu dirección.
+      Verificaremos tu operación para enviarte<span>
+        {{ transaction.amountEstimated }}
+        {{ transaction.destinationCurrency }}</span
+      >a tu dirección.
     </p>
     <Button
       :disabled="disabled"
@@ -67,6 +70,7 @@
 import Input from "@/shared/ui/components/Input.vue";
 import Button from "@/shared/ui/components/Button/Button.vue";
 import Modal from "@/shared/ui/components/Modal/Modal.vue";
+import { mapState } from "vuex";
 
 export default {
   components: { Input, Button, Modal },
@@ -78,6 +82,7 @@ export default {
     };
   },
   computed: {
+    ...mapState(["transaction", "quote", "check"]),
     disabled() {
       return !(this.codigo !== "");
     }

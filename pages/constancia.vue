@@ -1,12 +1,23 @@
 <template>
   <div class=" Grid grid-flow-col">
     <Topbarflow3 variant="light" show-logo></Topbarflow3>
-    <div class="m-18 ml-8 mr-8 mt-20 flex justify-center">
-      <div>
-        <BaseCard class="w-306 md:w-719 p-1 " text="">
-          <ConstancyOpera class="flex h-359" />
-        </BaseCard>
-        <BaseText />
+    <div class=" flex flex-col ">
+      <BaseCard text="">
+        <ConstancyOpera />
+      </BaseCard>
+      <BaseText />
+      <DetalleTransfer
+        class="flex justify-left md:p-4"
+        :data2="quote"
+        :data3="transaction"
+        :number-destiny="numberDestiny"
+        :currency="currency"
+        :banco="banco"
+      />
+      <div
+        class="font-montserrat flex flex-col justify-center items-center pt-8"
+      >
+        <Button text="ENVIAR CONSTANCIA"> </Button>
       </div>
       <div>
         <BaseCard class="hidden sm:block w-306 md:w-306 ml-9" text="">
@@ -19,12 +30,11 @@
             :banco="banco"
           />
         </BaseCard>
-      </div>     
-    </div>
-     <div
-        class="flex flex-col justify-center items-center">
-        <Button class="mt-8" text="ENVIAR CONSTANCIA"> </Button>
       </div>
+    </div>
+    <div class="flex flex-col justify-center items-center">
+      <Button class="mt-8" text="ENVIAR CONSTANCIA"> </Button>
+    </div>
   </div>
 </template>
 
@@ -35,6 +45,7 @@ import BaseText from "@/shared/ui/components/Typography/BaseText.vue";
 import ConstancyOpera from "@/modules/constans/components/ConstancyOpera.vue";
 import Button from "@/shared/ui/components/Button/Button.vue";
 import DetalleTransfer from "@/modules/transferir/DetalleTransfers.vue";
+import { mapState } from "vuex";
 
 export default {
   components: {
@@ -43,36 +54,39 @@ export default {
     ConstancyOpera,
     Topbarflow3,
     Button,
-    DetalleTransfer,
+    DetalleTransfer
   },
   props: {
     data2: {
       type: Object,
-      default() {},
+      default() {}
     },
     data3: {
       type: Object,
-      default() {},
+      default() {}
     },
     numberDestiny: {
       type: String,
-      default: "",
+      default: ""
     },
     currency: {
       type: String,
-      default: "",
+      default: ""
     },
     banco: {
       type: String,
-      default: "",
-    },
+      default: ""
+    }
   },
   data() {
     return {
       showView: false,
+      name: ""
     };
   },
-
+  computed: {
+    ...mapState(["transaction", "quote", "check"])
+  },
   mounted() {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -80,6 +94,11 @@ export default {
     } else {
       this.showView = true;
     }
-  },
+    this.data2 = this.quote;
+    this.data3 = this.transaction;
+    this.numberDestiny = this.data3.account[0].number;
+    this.currency = this.data3.account[0].currency;
+    this.name = this.data3.cashIn.name;
+  }
 };
 </script>
