@@ -28,6 +28,16 @@ import { mapState } from "vuex";
 
 export default {
   components: { Topbar, BaseCard, BaseText, ConstancySend, DetalleTransfer },
+
+  data() {
+    return {
+      data2: {},
+      data3: {},
+      numberDestiny: "",
+      currency: "",
+      banco: ""
+    };
+  },
   computed: {
     ...mapState(["transaction", "quote", "check"])
   },
@@ -40,7 +50,7 @@ export default {
     this.data3 = this.transaction;
     this.numberDestiny = this.data3.account[0].number;
     this.currency = this.data3.account[0].currency;
-    this.name = this.data3.cashIn.name;
+    this.banco = this.data3.bankId;
   }
 };
 </script>

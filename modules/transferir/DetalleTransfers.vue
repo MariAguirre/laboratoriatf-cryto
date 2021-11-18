@@ -62,6 +62,14 @@ export default {
         return {};
       }
     },
-   }
+    numberDestiny: {
+      type: String,
+      default: ""
+    },
+    currency: {
+      type: String,
+      default: ""
+    }
+  }
 };
 </script>
