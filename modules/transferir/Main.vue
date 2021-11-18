@@ -86,7 +86,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["transaction", "quote"])
+    ...mapState(["transaction", "quote", "check"])
   },
   mounted() {
     this.getdata();
@@ -95,26 +95,28 @@ export default {
   methods: {
     getdata() {
       this.data2 = this.quote;
-      // logger.info(this.data2);
       this.mountOrigin = this.data2.mountOrigin;
       this.currencyOrigin = this.data2.currencyOrigin;
     },
     getdata2() {
       this.data3 = this.transaction;
-      this.data3;
+      console.log(this.data3);
       this.number = this.data3.cashIn.number;
       this.numberDestiny = this.data3.account[0].number;
       this.currency = this.data3.account[0].currency;
       this.name = this.data3.cashIn.name;
       this.banco = this.data3.bankId;
-      console.log(this.currency, this.numberDestiny, this.number, this.banco);
       this.openLoader = false;
     },
     sendtransfer() {
       if (this.data3.cashIn.type === "OWN") {
-        window.location.href = "/constancia";
+        this.$router.push({ path: "constancia" }, console.log, console.log);
       } else {
-        window.location.href = "/constanciaopciones";
+        this.$router.push(
+          { path: "constanciaopciones" },
+          console.log,
+          console.log
+        );
       }
     }
   }

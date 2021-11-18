@@ -19,7 +19,7 @@ export default {
     Main
   },
   computed: {
-    ...mapState(["transaction", "quote"])
+    ...mapState(["transaction", "quote", "check"])
   },
   mounted() {
     const token = localStorage.getItem("token");
