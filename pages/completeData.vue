@@ -58,10 +58,10 @@
         :custom="true"
       >
         <template #currentOption="e">
-          <i>{{ e.number }}</i>
+          <i>{{ e.option.id }}</i>
         </template>
         <template #option="e" class="">
-          <i>{{ e.number }}</i>
+          <i>{{ e.option.id }}</i>
         </template>
       </Select>
       <BaseText text="Origen de fondos" />
