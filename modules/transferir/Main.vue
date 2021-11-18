@@ -6,7 +6,7 @@
       >
         <BaseCard class="w-306 md:w-306 my-2" text="">
           <DetalleTransfers
-            class="flex justify-left p-4 px-6 md:p-4 h-330"
+            class="flex justify-left p-4 px-6 h-330"
             :data2="data2"
             :data3="data3"
             :number-destiny="numberDestiny"
