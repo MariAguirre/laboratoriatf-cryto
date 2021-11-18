@@ -93,7 +93,7 @@
             >
               {{ selectTwo }}
               <ChevronDown
-                class="pl-3 sm:pl-6"
+                class="pl-3 sm:pl-8"
                 :size="19"
                 aria-hidden="true"
                 aria-label="select options"

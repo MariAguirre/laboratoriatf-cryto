@@ -2,8 +2,12 @@
   <section class="w-375 sm:w-641 sm:flex sm:justify-center sm:flex-col">
     <Modal v-model="open" closeable-by-backdrop>
       <div class="flex flex-col items-center bg-white rounded-xl w-full">
-        <h1 class="pb-8">¡UPS!</h1>
-        <h2>Ocurrió un error inténtelo nuevamente.</h2>
+        <div class="flex flex-col w-11/12 sm:w-96">
+          <p class="pb-1 text-center text-2xl leading-6 font-normal">
+            Ocurrió un error inténtelo nuevamente.
+          </p>
+          <img src="@/assets/images/error/errorLogin.jpg" alt="question" />
+        </div>
       </div>
     </Modal>
     <Loader v-if="openLoader" class="h-full w-full bg-white" />
@@ -18,7 +22,6 @@
         show-nav
       />
     </div>
-
     <div
       class="
       flex flex-col
@@ -30,7 +33,7 @@
     >
       <div>
         <TextTitle
-          class="flex mt-8 sm:mt-12 text-center w-full sm:w-full"
+          class="flex mt-8 text-2xl sm:mt-12 text-center w-full sm:w-full"
           text="Completa los datos de tu operación"
         />
       </div>
@@ -40,7 +43,10 @@
         title="Tiempo estimado de espera"
         :delay="delay"
       />
-      <BaseText class=" mt-4" text="¿Desde qué banco nos envías tu dinero?" />
+      <BaseText
+        class="w-96 mt-8 pl-1 text-7"
+        text="¿Desde qué banco nos envías tu dinero?"
+      />
       <Select
         v-model="values.valueBank"
         :options="banks"
@@ -48,15 +54,18 @@
         :custom="true"
       >
         <template #currentOption="e">
-          <img :src="e.option.image" />
+          <img class="w-5" :src="e.option.image" />
           <i>{{ e.option.name }}</i>
         </template>
-        <template #option="e" class="">
-          <img :src="e.option.image" />
+        <template #option="e">
+          <img class="w-5" :src="e.option.image" />
           <i>{{ e.option.name }}</i>
         </template>
       </Select>
-      <BaseText text="¿A qué dirección enviamos tus criptomonedas?" />
+      <BaseText
+        class="w-96 pl-1 text-7  mt-4 "
+        text="¿A qué dirección enviamos tus criptomonedas?"
+      />
       <Select
         v-model="values.valueWallet"
         :options="accounts"
@@ -70,7 +79,7 @@
           <i>{{ e.option.id }}</i>
         </template>
       </Select>
-      <BaseText text="Origen de fondos" />
+      <BaseText class="w-96 pl-1 text-7  mt-4 " text="Origen de fondos" />
       <Select
         v-model="values.fundsValue"
         class="mt-1 w-96 bg-white"
@@ -86,7 +95,7 @@
       </Select>
       <Button
         :disabled="disabled"
-        class="w-96 mt-3"
+        class="w-96 mt-8 mb-28"
         text="Continuar"
         @click.native="createTransaccion"
       />
@@ -152,7 +161,7 @@ export default {
     async getdata() {
       this.dataQuote = JSON.parse(localStorage.getItem("quote"));
       this.dataUtils = JSON.parse(localStorage.getItem("utils"));
-      this.delay = this.dataQuote.delay;
+      this.delay = this.convertTime(this.dataQuote.delay);
       this.banks = this.dataUtils.banks;
       this.dataUtils.sourceOfFunds.forEach(e => {
         this.funds.push({ name: e });
@@ -188,6 +197,11 @@ export default {
       } catch (err) {
         this.open = true;
       }
+    },
+    convertTime(time) {
+      const minutes = Math.floor(time / 60);
+      const seconds = time - minutes * 60;
+      return `${minutes}:${seconds > 10 ? seconds : `0${seconds}`}`;
     }
   }
 };
