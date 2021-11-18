@@ -1,10 +1,11 @@
 <template>
   <div class="Grid grid-flow-col">
     <Loader v-if="openLoader" class="h-full w-full bg-white" />
-    <BaseText class="flex justify-center mt-20 ml-14 mr-8 md:px-20 ">
-      <p class="flex font-bold mr-4">El tipo de cambio se actualizará en</p>
-      <span class="flex font-bold">00:15:00</span>
-    </BaseText>
+     <BaseText class="flex justify-center mt-20 ml-14 mr-8 md:ml-0 md:px-20 ">
+     <TextParagraph  class="text-lg-xs-xxxs-xxxxs ml-8-2-0 -ml-6 text-gray-500"
+     text="El tipo de cambio se actualizará:"
+     alignment="center left" /> <span class="flex text-lg-xs-xxxs font-bold text-gray-500"> 00:15 min</span>
+     </BaseText>
     <div class="m-18 ml-8 mr-8 mt-4 flex justify-center">
       <div>
         <BaseCard class="w-306 md:w-719 p-1 " text="">
@@ -40,7 +41,7 @@
                     items-center"
     >
       <Button
-        class="mt-8"
+        class="mt-8 w-410"
         text="CONFIRMO TRANSFERENCIA"
         @click.native="sendtransfer"
       >
@@ -56,6 +57,7 @@ import DetalleTransfers from "@/modules/transferir/DetalleTransfers.vue";
 import Button from "@/shared/ui/components/Button/Button.vue";
 // import logger from "@/shared/ui/utils/logger.ts";
 import Loader from "@/shared/ui/components/Loading/LoadingScreen.vue";
+import TextParagraph from "@/shared/ui/components/Typography/TextParagraph.vue"
 import { mapState } from "vuex";
 
 export default {
@@ -64,7 +66,8 @@ export default {
     BodyTransfers,
     DetalleTransfers,
     Button,
-    Loader
+    Loader,
+    TextParagraph
   },
   data() {
     return {

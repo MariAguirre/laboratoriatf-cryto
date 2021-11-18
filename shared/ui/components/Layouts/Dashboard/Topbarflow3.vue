@@ -35,13 +35,13 @@
                   justify-center
                   leading-tight
                   
-                  border border-solid border-gray-900
-                  bg-gray-900
+                  border border-solid border-bg-kambista-blue
+                  bg-kambista-blue
                 "
               ><p class="mt-5 -ml-4">Completa</p>
               </a>
             </li>
-            <hr class="bg-gray-900 md:w-72 sm:w-20  border-solid-2 z-40 object-center mt-2.5" />
+            <hr class="bg-bg-kambista-blue md:w-72 sm:w-20  border-solid-2 z-40 object-center mt-2.5" />
             <li>
               <a
                 href=""
@@ -58,13 +58,13 @@
                   justify-center
                   leading-tight
                   
-                  border border-solid border-gray-900
-                  bg-gray-900
+                  border border-solid border-bg-kambista-blue
+                  bg-kambista-blue
                 "
               ><p class="mt-10">Transfiere</p>
               </a>
             </li>
-            <hr class="bg-gray-900 md:w-72 sm:w-20 border-solid-2 object-center mt-2.5" />
+            <hr class="bg-kambista-blue md:w-72 sm:w-20 border-solid-2 object-center mt-2.5" />
             <li>
               <a
                 href=""
@@ -81,8 +81,8 @@
                   justify-center
                   leading-tight
                   
-                  border border-solid border-gray-900
-                  bg-gray-900
+                  border border-solid border-bg-kambista-blue
+                  bg-kambista-blue
                 "
               ><p class="mt-10 ">Envia</p>
               </a>
