@@ -48,10 +48,17 @@
               :delay="delay"
             />
             <BaseText
+              v-if="dataQuote.stateBuy"
               class="w-96 mt-8 pl-1 text-7"
               text="¿Desde qué banco nos envías tu dinero?"
             />
+            <BaseText
+              v-else
+              class="w-96 mt-8 pl-1 text-7"
+              text="¿Desde dónde nos envías tus cryptos?"
+            />
             <Select
+              v-if="dataQuote.stateBuy"
               v-model="values.valueBank"
               :options="banks"
               class="mt-1 w-96 bg-white"
@@ -70,11 +77,36 @@
                 </div>
               </template>
             </Select>
+            <Select
+              v-else
+              v-model="values.cryptoWallet"
+              :options="cryptoWallets"
+              class="mt-1 w-96 bg-white"
+              :custom="true"
+            >
+              <template #currentOption="e">
+                <div class="flex flex-row items-start w-full">
+                  <i class=" ml-2 mt-2 not-italic">{{ e.option.name }}</i>
+                </div>
+              </template>
+              <template #option="e" class="">
+                <div class="flex flex-row items-start w-full">
+                  <i class=" ml-2 mt-2 not-italic">{{ e.option.name }}</i>
+                </div>
+              </template>
+            </Select>
             <BaseText
+              v-if="dataQuote.stateBuy"
               class="w-96 pl-1 text-7  mt-4 "
               text="¿A qué dirección enviamos tus criptomonedas?"
             />
+            <BaseText
+              v-else
+              class="w-96 pl-1 text-7  mt-4 "
+              text="¿A qué cuenta enviamos tu dinero?"
+            />
             <Select
+              v-if="dataQuote.stateBuy"
               v-model="values.valueWallet"
               :options="accounts"
               class="mt-1 w-96 bg-white"
@@ -85,6 +117,31 @@
               </template>
               <template #option="e" class="">
                 <i class=" not-italic">{{ e.option.id }}</i>
+              </template>
+            </Select>
+            <Select
+              v-else
+              v-model="values.valueBank"
+              :options="accounts"
+              class="mt-1 w-96 bg-white"
+              :custom="true"
+            >
+              <template #currentOption="e">
+                <i class="pl-1 not-italic">{{ e.option.currency }} - </i>
+                <i class="pl-1 not-italic">{{ e.option.number }}</i>
+              </template>
+              <template #option="e" class="">
+                <div class="flex items-center">
+                  <img
+                    :src="getImageBank(e.option.bankId)"
+                    class=" not-italic"
+                  />
+                  <i class="pl-2 not-italic"
+                    >{{ e.option.alias.substring(0, 10) }}... -
+                  </i>
+                  <i class="pl-1 not-italic">{{ e.option.currency }} - </i>
+                  <i class="pl-1 not-italic">{{ e.option.number }}</i>
+                </div>
               </template>
             </Select>
             <BaseText class="w-96 pl-1 text-7  mt-4 " text="Origen de fondos" />
@@ -149,11 +206,13 @@ export default {
       dataUtils: {},
       delay: "",
       banks: [],
+      cryptoWallets: [],
       openLoader: true,
       values: {
         valueBank: "",
         valueWallet: "",
-        fundsValue: ""
+        fundsValue: "",
+        cryptoWallet: ""
       },
       open: false
     };
@@ -161,9 +220,16 @@ export default {
   computed: {
     ...mapState(["transaction", "quote"]),
     disabled() {
+      if (this.dataQuote.stateBuy) {
+        return !(
+          this.values.valueBank !== "" &&
+          this.values.valueWallet !== "" &&
+          this.values.fundsValue !== ""
+        );
+      }
       return !(
+        this.values.cryptoValue !== "" &&
         this.values.valueBank !== "" &&
-        this.values.valueWallet !== "" &&
         this.values.fundsValue !== ""
       );
     }
@@ -178,11 +244,18 @@ export default {
   },
 
   methods: {
+    getImageBank(id) {
+      const img = this.banks.filter(e => e.id === id);
+      return img[0].image;
+    },
     async getdata() {
       this.dataQuote = this.quote;
       this.dataUtils = JSON.parse(localStorage.getItem("utils"));
       this.delay = this.convertTime(this.dataQuote.delay);
       this.banks = this.dataUtils.banks;
+      this.dataUtils.originWallets.forEach(e => {
+        this.cryptoWallets.push({ name: e });
+      });
       this.dataUtils.sourceOfFunds.forEach(e => {
         this.funds.push({ name: e });
       });
@@ -191,7 +264,7 @@ export default {
           localStorage.getItem("token"),
           {
             currency: this.dataQuote.currencyDestiny,
-            type: "crypto"
+            type: this.dataQuote.stateBuy ? "crypto" : "bank"
           }
         )
       ).data.data;
@@ -204,7 +277,9 @@ export default {
           originCurrency: this.dataQuote.currencyOrigin,
           destinationCurrency: this.dataQuote.currencyDestiny,
           amountSent: this.dataQuote.mountOrigin,
-          bankId: this.values.valueBank.id,
+          bankId: this.dataQuote.stateBuy
+            ? this.values.valueBank.id
+            : this.values.cryptoWallet.name,
           account: this.accounts,
           sourceOfFunds: this.values.fundsValue
         };
@@ -214,6 +289,7 @@ export default {
         );
         this.$store.dispatch("setTransaction", response.data.data);
         localStorage.setItem("transactionValues", JSON.stringify(this.values));
+
         /* if (this.data3.cashIn.type === "OWN") {
         this.$router.push({ path: "transfers" }, console.log, console.log);
       } else {
@@ -223,10 +299,11 @@ export default {
           console.log
         );
       } */
-        this.$router.push({ path: "transfers" }, console.log, console.log);
+        this.$router.push({ path: "transferencia" }, console.log, console.log);
+
       } catch (err) {
         this.open = true;
-      }     
+      }
     },
     convertTime(time) {
       const minutes = Math.floor(time / 60);

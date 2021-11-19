@@ -1,5 +1,6 @@
 <template>
-  <div class="flex flex-col justify-center items-center bg-white mr-4 ml-4">
+  <div class=" flex-col justify-center items-center bg-white mr-4 ml-4">
+    
     <img
       class="mt-4 mb-2"
       src="@/assets/images/navigation/Group7084.svg"
@@ -14,7 +15,7 @@
       Transfiere desde tu banco y guarda el
       <span class="underline">Número de operación</span> para el siguiente paso.
     </p>
-    <p for="first-name" class="text-justify text-sm block sm:hidden">
+    <p for="first-name" class="text-justify text-sm block sm:hidden ml-1 mr-1">
       Transfiere desde tu banco y guarda el
       <span class="underline">Número de operación</span> para el siguiente paso.
     </p>
@@ -79,7 +80,7 @@
         <div class="mr-8 flex justify-between">
           <p class="font-bold flex justify-between">
             <span class="flex justify-center text-xl ml-1">{{ montoOrigin }}</span>
-            <span class="flex justify-center text-xl ml-1">{{ currencyOrigin }}</span>
+            <span class="flex justify-center text-xl ml-2 mb-2">{{ currencyOrigin }}</span>
           </p>
           <button @click.native="capture">
             <img
@@ -91,7 +92,7 @@
         </div>
         
         <div class="">
-          <p class="font-bold text-left text-sm -ml-8">
+          <p class="font-bold text-left text-sm -ml-8 mt-2 mb-2">
             Número de cuenta <span>{{ name }}</span>
           </p>
         </div>
@@ -107,7 +108,9 @@
         </div>
       
     </div>
+    
   </div>
+
 </template>
 
 <script>
