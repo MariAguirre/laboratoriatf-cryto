@@ -1,7 +1,7 @@
 <template>
-<div class="flex flex-col">
-  <div
-    class="
+  <div class="flex flex-col">
+    <div
+      class="
       font-montserrat
       flex flex-col
       justify-center
@@ -9,59 +9,59 @@
       bg-white
       backdrop-blur-sm
       "
-  >
-    <Modal v-model="open" closeable-by-backdrop>
-      <div class="flex flex-col items-center bg-white rounded-xl">
-        <div class="flex flex-col w-11/12 sm:w-96">
-          <p class="pb-1 text-center text-2xl leading-6 font-normal">
-            Ocurrió un error inténtelo nuevamente.
-          </p>
-          <img src="@/assets/images/error/errorLogin.jpg" alt="question" />
-        </div>
-      </div>
-    </Modal>
-    <img
-      class="mb-0.5"
-      src="@/assets/images/document/document-icon.svg"
-      alt=""
-    />
-    <h1 class="mb-4 font-bold text-24 text-blue leading-29">
-      Envía constancia
-    </h1>
-    <fieldset class="w-277 sm:w-auto">
-      <div>
-        <p
-          class="pl-3 mb-5 font-normal text-16 leading-20 text-left sm:text-center"
-        >
-          Selecciona una forma de envío de la constancia de tu transferencia
-        </p>
-      </div>
-      <div class="flex flex-col mt-4 space-y-2 items-center">
-        <div
-          class="flex flex-col inputContainer justify-center items-center w-306 sm:w-396"
-        >
-          <div class="flex w-full py-5">
-            <input
-              id="push-upload"
-              v-model="checked"
-              value="uploadFile"
-              name="push-notifications"
-              type="radio"
-              class="focus:ring-indigo-500 w-396 h-70  text-indigo-600 border-gray-300"
-              @change="handlingChecked"
-            />
-            <label
-              for="push-upload"
-              class="ml-3 w-5/6 text-14 sm:text-16 font-normal text-blue leading-24 tracking-wider"
-            >
-              Enviar una imagen del voucher
-            </label>
+    >
+      <Modal v-model="open" closeable-by-backdrop>
+        <div class="flex flex-col items-center bg-white rounded-xl">
+          <div class="flex flex-col w-11/12 sm:w-96">
+            <p class="pb-1 text-center text-2xl leading-6 font-normal">
+              Ocurrió un error inténtelo nuevamente.
+            </p>
+            <img src="@/assets/images/error/errorLogin.jpg" alt="question" />
           </div>
-          <div v-if="check" class="block w-full pb-3">
-            <div class="text-sm text-grey">
+        </div>
+      </Modal>
+      <img
+        class="mb-0.5"
+        src="@/assets/images/document/document-icon.svg"
+        alt=""
+      />
+      <h1 class="mb-4 font-bold text-24 text-blue leading-29">
+        Envía constancia
+      </h1>
+      <fieldset class="w-277 sm:w-auto">
+        <div>
+          <p
+            class="pl-3 mb-5 font-normal text-16 leading-20 text-left sm:text-center"
+          >
+            Selecciona una forma de envío de la constancia de tu transferencia
+          </p>
+        </div>
+        <div class="flex flex-col mt-4 space-y-2 items-center">
+          <div
+            class="flex flex-col inputContainer justify-center items-center w-306 sm:w-396"
+          >
+            <div class="flex w-full py-5">
+              <input
+                id="push-upload"
+                v-model="checked"
+                value="uploadFile"
+                name="push-notifications"
+                type="radio"
+                class="focus:ring-indigo-500 text-indigo-600 border-gray-300"
+                @change="handlingChecked"
+              />
               <label
-                for="file-upload"
-                class="
+                for="push-upload"
+                class="ml-3 w-5/6 text-14 sm:text-16 font-normal text-blue leading-24 tracking-wider"
+              >
+                Enviar una imagen del voucher
+              </label>
+            </div>
+            <div v-if="check" class="block w-full pb-3">
+              <div class="text-sm text-grey">
+                <label
+                  for="file-upload"
+                  class="
                   w-250
                   sm:w-330
                   h-50
@@ -77,80 +77,76 @@
                   justify-around
                   items-center
                 "
-              >
-                <span v-if="image">Adjunta una imagen</span>
-                <input
-                  id="file-upload"
-                  name="file-upload"
-                  type="file"
-                  class="sr-only w-4 h-4"
-                  @change="captureFile"
-                />
-                <span v-if="imageUpload">{{ fileName }}</span>
-                <img
-                  src="@/assets/images/common/upload-icon.svg"
-                  alt="upload"
-                />
-              </label>
+                >
+                  <span v-if="image">Adjunta una imagen</span>
+                  <input
+                    id="file-upload"
+                    name="file-upload"
+                    type="file"
+                    class="sr-only w-4 h-4"
+                    @change="captureFile"
+                  />
+                  <span v-if="imageUpload">{{ fileName }}</span>
+                  <img
+                    src="@/assets/images/common/upload-icon.svg"
+                    alt="upload"
+                  />
+                </label>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="flex items-center inputContainer ">
-          <input
-            id="push-email"
-            v-model="checked"
-            value="email"
-            name="push-notifications"
-            type="radio"
-            class="focus:ring-indigo-500 h-4 w-4  text-indigo-600 border-gray-300"
-            @change="handlingChecked"
-          />
-          <label
-            for="push-email"
-            class="ml-3  text-14 w-396 h-70 sm:text-16 font-normal text-blue leading-24 tracking-wider"
-          >
-            Enviar comprobante por correo
-            <a
-              class="underline font-bold w-5/6 tracking-wider text-blue leading-24 text-14 sm:text-16"
-              >operaciones@kambista.com</a
+          <div class="flex items-center inputContainer ">
+            <input
+              id="push-email"
+              v-model="checked"
+              value="email"
+              name="push-notifications"
+              type="radio"
+              class="focus:ring-indigo-500 h-4 w-4  text-indigo-600 border-gray-300"
+              @change="handlingChecked"
+            />
+            <label
+              for="push-email"
+              class="ml-3  text-14 w-396 h-70 sm:text-16 font-normal text-blue leading-24 tracking-wider"
             >
-          </label>
+              Enviar comprobante por correo
+              <a
+                class="underline font-bold w-5/6 tracking-wider text-blue leading-24 text-14 sm:text-16"
+                >operaciones@kambista.com</a
+              >
+            </label>
+          </div>
         </div>
-      </div>
-    </fieldset>
-    <div class="flex items-center mt-8">
-      <input
-        id="check"
-        name="remember-me"
-        type="checkbox"
-        :value="true"
-        class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
-        @change="handlingInmediate"
-      />
-      <label
-        for="check"
-        class="ml-2 font-normal text-12 sm:text-14 text-gray-2 leading-15 w-396 h-70 sm:w-auto"
-      >
-        Realicé una
-        <b class="text-12 sm:text-14 text-gray-2 leading-15"
-          >transferencia interbancaria</b
+      </fieldset>
+      <div class="flex items-center mt-8">
+        <input
+          id="check"
+          name="remember-me"
+          type="checkbox"
+          :value="true"
+          class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+          @change="handlingInmediate"
+        />
+        <label
+          for="check"
+          class="ml-2 font-normal text-12 sm:text-14 text-gray-2 leading-15 w-396 h-70 sm:w-auto"
         >
-        inmediata a la cuenta de Kambista</label
-      >
+          Realicé una
+          <b class="text-12 sm:text-14 text-gray-2 leading-15"
+            >transferencia interbancaria</b
+          >
+          inmediata a la cuenta de Kambista</label
+        >
+      </div>
     </div>
-    
-  </div>
-   <Button
-   class="mt-8 w-410 text-right"
+    <Button
+      class="mt-8 w-410 text-right"
       :disabled="disabled"
       :loading="loading"
       text="ENVIAR CONSTANCIA"
       @click.native="sendconstancia"
     />
   </div>
-  
- 
-   
 </template>
 <script>
 import Button from "@/shared/ui/components/Button/Button.vue";
