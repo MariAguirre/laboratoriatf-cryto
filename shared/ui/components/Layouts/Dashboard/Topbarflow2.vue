@@ -92,7 +92,7 @@
             </ul>
             <Nuxt-link to="/">
               <img
-                class="ml-20 "
+                class="ml-96 -mr-20 mb-3 w-12 h-12"
                 src="@/assets/images/navigation/x-circle.svg"
                 alt="close"
               />

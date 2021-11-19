@@ -16,15 +16,36 @@
           {{ baseData.mountDestiny }} {{ baseData.currencyDestiny }}
         </p>
       </div>
-      <hr class="bg-gray-900 w-72 border-solid-2 z-40 mt-2.5" />
+      <hr class="bg-gray-900 w-full border-solid-2 z-40 mt-2.5" />
       <div class="font-bold flex justify-between">
         <p class="py-4">
-          1 {{ baseData.currencyDestiny }} = {{ baseData.exchangeOne }}
-          {{ baseData.currencyOrigin }}
+          1
+          {{
+            baseData.stateBuy
+              ? baseData.currencyDestiny
+              : baseData.currencyOrigin
+          }}
+          =
+          {{ baseData.exchangeOne }}
+          {{
+            baseData.stateBuy
+              ? baseData.currencyOrigin
+              : baseData.currencyDestiny
+          }}
         </p>
         <p class="py-4">
-          1 {{ baseData.currencyOrigin }} = {{ baseData.exchangeTwo }}
-          {{ baseData.currencyDestiny }}
+          1
+          {{
+            baseData.stateBuy
+              ? baseData.currencyOrigin
+              : baseData.currencyDestiny
+          }}
+          = {{ baseData.exchangeTwo }}
+          {{
+            baseData.stateBuy
+              ? baseData.currencyDestiny
+              : baseData.currencyOrigin
+          }}
         </p>
       </div>
     </div>
