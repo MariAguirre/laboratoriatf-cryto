@@ -173,7 +173,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["transaction", "quote", "check"]),
+    ...mapState(["transaction", "quote"]),
     disabled() {
       return !(this.checked !== "");
     }

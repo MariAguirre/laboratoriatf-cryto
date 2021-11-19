@@ -1,40 +1,38 @@
 <template>
-  <div >
+  <div>
     <div>
-    <Topbarflow3 class="hidden sm:block" variant="light" show-logo show-nav/>
+      <Topbarflow3 class="hidden sm:block" variant="light" show-logo show-nav />
     </div>
     <div>
-    <Topbarflowsm3
+      <Topbarflowsm3
         class="block sm:hidden"
         variant="light"
         show-logo
         show-nav
       />
-      </div>
+    </div>
     <div class="m-18 ml-8 mr-8 mt-20 flex justify-center">
       <div>
         <BaseCard class=" p-14" text="">
-           <ConstancyOpera class="flex h-359" />
-       </BaseCard>
-       <BaseText />
-       </div>
-       <div>
+          <ConstancyOpera class="flex h-359" />
+        </BaseCard>
+        <BaseText />
+      </div>
+      <div>
         <BaseCard class="hidden sm:block w-306 md:w-306 ml-9" text="">
-       <DetalleTransfer
-        class="flex justify-left md:p-4 h-330"
-        :data2="quote"
-        :data3="transaction"
-        :number-destiny="numberDestiny"
-        :currency="currency"
-        :banco="banco"
-       />
-       </BaseCard>
-       
-      </div>     
+          <DetalleTransfer
+            class="flex justify-left md:p-4 h-330"
+            :data2="quote"
+            :data3="transaction"
+            :number-destiny="numberDestiny"
+            :currency="currency"
+            :banco="banco"
+          />
+        </BaseCard>
+      </div>
     </div>
-      
-      
-        <!-- <BaseCard class="hidden sm:block w-306 md:w-306 ml-9" text="">
+
+    <!-- <BaseCard class="hidden sm:block w-306 md:w-306 ml-9" text="">
           <DetalleTransfer
             class="flex justify-left md:p-4 h-330"
             :data2="data2"
@@ -44,9 +42,7 @@
             :banco="banco"
           />
         </BaseCard>  -->
-      </div>
-    
-  
+  </div>
 </template>
 
 <script>
@@ -78,7 +74,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["transaction", "quote", "check"])
+    ...mapState(["transaction", "quote"])
   },
   mounted() {
     const token = localStorage.getItem("token");

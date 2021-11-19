@@ -89,7 +89,7 @@ import Loader from "@/shared/ui/components/Loading/LoadingScreen.vue";
 import TextParagraph from "@/shared/ui/components/Typography/TextParagraph.vue";
 import { mapState } from "vuex";
 import Modal from "@/shared/ui/components/Modal/Modal.vue";
-import BaseText from '@/shared/ui/components/Typography/BaseText.vue';
+import BaseText from "@/shared/ui/components/Typography/BaseText.vue";
 
 export default {
   components: {
@@ -100,7 +100,7 @@ export default {
     Loader,
     TextParagraph,
     Modal,
-    BaseText 
+    BaseText
   },
   data() {
     return {
@@ -123,7 +123,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["transaction", "quote", "check"])
+    ...mapState(["transaction", "quote"])
   },
   mounted() {
     this.getdata();
