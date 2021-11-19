@@ -40,10 +40,7 @@
       >Escribe el código de operación del banco aquí</label
     >
     <div>
-      <Input 
-      v-model="codigo"
-      class="w-410"
-       />
+      <Input v-model="codigo" class="w-410" />
     </div>
     <div class="flex justify-center mb-2">
       <img src="@/assets/images/common/question-icon.svg" alt="question" />
@@ -61,7 +58,7 @@
       >a tu dirección.
     </p>
     <Button
-    class="w-410 "
+      class="w-410 "
       :disabled="disabled"
       :loading="loading"
       text="ENVIAR CONSTANCIA"
@@ -95,12 +92,13 @@ export default {
     async sendconstancia() {
       this.loading = true;
       try {
-        const id = JSON.parse(localStorage.getItem("transaction")).id;
-        await this.$services.transaction.checkTransaction(
+        const id = this.transaction.id;
+        const response = await this.$services.transaction.checkTransaction(
           { voucher: this.codigo },
           localStorage.getItem("token"),
           id
         );
+        console.log(response);
         window.location.href = "/confirmacion";
       } catch (err) {
         this.open = true;

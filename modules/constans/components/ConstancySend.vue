@@ -211,7 +211,7 @@ export default {
             localStorage.getItem("token")
           );
           await this.$services.transaction.checkTransaction(
-            { voucherImage: img.data.data.url, inmediate: this.inmediate },
+            { voucherImage: img.data.data.url, immediate: this.inmediate },
             localStorage.getItem("token"),
             id
           );
@@ -219,13 +219,14 @@ export default {
         } else {
           const id = this.transaction.id;
           await this.$services.transaction.checkTransaction(
-            { voucherEmail: true, inmediate: this.inmediate },
+            { voucherEmail: true, immediate: this.inmediate },
             localStorage.getItem("token"),
             id
           );
           this.$router.push({ path: "confirmacion" }, console.log, console.log);
         }
       } catch (err) {
+        this.loading = null;
         this.open = true;
       }
     }
