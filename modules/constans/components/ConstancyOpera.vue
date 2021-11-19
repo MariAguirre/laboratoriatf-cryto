@@ -113,9 +113,9 @@
             </div>
           </div>
         </BaseCard>
-        <div class="flex-col justify-center items-center">
+        <div class="flex flex-col  justify-end sm:ml-72 items-center">
           <Button
-            class="mt-8 w-410 mb-10 justify-center items-center"
+            class="mt-8 w-80 sm:w-410 mb-10"
             :disabled="disabled"
             :loading="loading"
             text="ENVIAR CONSTANCIA"

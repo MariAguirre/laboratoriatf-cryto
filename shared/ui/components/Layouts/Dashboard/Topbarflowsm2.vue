@@ -12,7 +12,7 @@
         <LogoV2 v-if="showLogo" class="" />
         <div >
          
-           <nav  class="ml-14 w-full -mt-2 flex justify-center items-center">
+           <nav  class="ml-20 w-full -mt-2 mb-2 flex justify-center items-center">
             <ul class="flex w-full pl-0 list-none ">
               <li>
                 <a

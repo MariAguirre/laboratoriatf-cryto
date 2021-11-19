@@ -9,7 +9,7 @@
         </div>
       </div>
     </Modal>
-    <BaseCard class="p-12" text="">
+    <BaseCard class="sm:p-12 pb-8 pt-8" text="">
       <div class="flex flex-col justify-center items-center">
         <img
           class="mb-0.5"
@@ -116,7 +116,7 @@
             name="remember-me"
             type="checkbox"
             :value="true"
-            class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+            class="h-4 ml-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
             @change="handlingInmediate"
           />
           <label
@@ -132,7 +132,7 @@
         </div>
       </div>
     </BaseCard>
-    <div class="mt-4 w-full flex justify-center pt-10">
+    <div class="mt-4 w-full flex  justify-center sm:justify-end pt-10">
       <Button
         class="mt-8 w-80 sm:w-410 mb-10"
         :disabled="disabled"

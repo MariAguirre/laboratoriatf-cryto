@@ -107,6 +107,7 @@ export default {
           localStorage.setItem("token", data.data.data.token);
           this.goToHome();
         } else if (data.status == 400) {
+          this.loading = false;
           this.open = true;
           this.errorMessage = data.data.error.message;
         }

@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col sm:mt-6">
     <SidebarItem
-      text="Cambios"
+      text="Crypto"
       icon="exchange"
       to="/"
       @onPressed="$emit('onPressed')"

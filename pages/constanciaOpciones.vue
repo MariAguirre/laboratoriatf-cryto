@@ -12,7 +12,7 @@
       />
     </div>
     <div class=" Grid grid-flow-col">
-    <div class="m-18 ml-8 mr-8 mt-20 flex justify-center">
+    <div class="m-18 ml-8 mr-8 mt-10 sm:mt-20 flex justify-center">
       <div>      
         <ConstancySend />      
       <BaseText />
