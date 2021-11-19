@@ -13,9 +13,7 @@
     </div>
     <div class="m-18 ml-8 mr-8 mt-20 flex justify-center">
       <div>
-        <BaseCard class=" p-14" text="">
-          <ConstancyOpera class="flex h-359" />
-        </BaseCard>
+        <ConstancyOpera class="flex h-359" />
         <BaseText />
       </div>
       <div>
@@ -31,23 +29,12 @@
         </BaseCard>
       </div>
     </div>
-
-    <!-- <BaseCard class="hidden sm:block w-306 md:w-306 ml-9" text="">
-          <DetalleTransfer
-            class="flex justify-left md:p-4 h-330"
-            :data2="data2"
-            :data3="data3"
-            :number-destiny="numberDestiny"
-            :currency="currency"
-            :banco="banco"
-          />
-        </BaseCard>  -->
   </div>
 </template>
 
 <script>
 import Topbarflow3 from "~/shared/ui/components/Layouts/Dashboard/Topbarflow3.vue";
-import BaseCard from "@/shared/ui/components/Cards/BaseCard.vue";
+
 import BaseText from "@/shared/ui/components/Typography/BaseText.vue";
 import ConstancyOpera from "@/modules/constans/components/ConstancyOpera.vue";
 import Topbarflowsm3 from "~/shared/ui/components/Layouts/Dashboard/Topbarflowsm3.vue";
@@ -56,7 +43,6 @@ import { mapState } from "vuex";
 
 export default {
   components: {
-    BaseCard,
     BaseText,
     ConstancyOpera,
     Topbarflow3,
@@ -70,11 +56,17 @@ export default {
       data3: {},
       numberDestiny: "",
       currency: "",
-      banco: ""
+      banco: "",
+      codigo: "",
+      open: false,
+      loading: null
     };
   },
   computed: {
-    ...mapState(["transaction", "quote"])
+    ...mapState(["transaction", "quote"]),
+    disabled() {
+      return !(this.codigo !== "");
+    }
   },
   mounted() {
     const token = localStorage.getItem("token");
@@ -88,6 +80,24 @@ export default {
     this.numberDestiny = this.data3.account[0].number;
     this.currency = this.data3.account[0].currency;
     this.banco = this.data3.bankId;
+  },
+  methods: {
+    async sendconstancia() {
+      this.loading = true;
+      try {
+        const id = this.transaction.id;
+        const response = await this.$services.transaction.checkTransaction(
+          { voucher: this.codigo },
+          localStorage.getItem("token"),
+          id
+        );
+        console.log(response);
+        window.location.href = "/confirmacion";
+      } catch (err) {
+        this.open = true;
+        this.loading = null;
+      }
+    }
   }
 };
 </script>

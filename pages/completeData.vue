@@ -287,7 +287,18 @@ export default {
         );
         this.$store.dispatch("setTransaction", response.data.data);
         localStorage.setItem("transactionValues", JSON.stringify(this.values));
+
+        /* if (this.data3.cashIn.type === "OWN") {
         this.$router.push({ path: "transfers" }, console.log, console.log);
+      } else {
+        this.$router.push(
+          { path: "transferenciaInterbancaria" },
+          console.log,
+          console.log
+        );
+      } */
+        this.$router.push({ path: "transferencia" }, console.log, console.log);
+
       } catch (err) {
         this.open = true;
       }
