@@ -107,8 +107,7 @@ export default {
       this.codIdK = dataConfirmation.operationNumber;
       this.count = dataConfirmation.amountSent;
       this.tipeMoney = dataConfirmation.destinationCurrency;
-      console.log(dataConfirmation);
-      this.time = this.convertTime(this.quote.delay);
+      this.time = this.convertTime(Number(this.quote.delay));
     },
     convertTime(time) {
       const minutes = Math.floor(time / 60);
