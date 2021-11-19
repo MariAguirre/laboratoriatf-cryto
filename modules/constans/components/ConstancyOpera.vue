@@ -73,20 +73,8 @@
                     src="@/assets/images/common/question-icon.svg"
                     alt="question"
                   />
-                  <span
-                    class="
-                      font-medium
-                      text-12                                      
-                      md:text-14
-                      flex
-                      justify-center
-                      -mt-5
-                      
-                    "
-                  >
-                    ¿Dónde encuentro el código de operación?</span
-                  > 
-                  </div>             
+               
+               v>             
                   <p
                     class="                      
                       font-light
