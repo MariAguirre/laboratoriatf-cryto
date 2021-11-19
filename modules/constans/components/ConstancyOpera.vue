@@ -43,22 +43,16 @@
       <Input v-model="codigo" class="w-410" />
     </div>
     <div class="flex justify-center mb-2">
-      <img src="@/assets/images/common/question-icon.svg" alt="question" />
-      <span
-        class="font-medium text-12 w-410 mt-2 md:text-14 flex justify-center tracking-0.03 md:tracking-normal"
-        >¿Dónde encuentro el código de operación?</span
-      >
+      <span class="font-medium text-12 w-410 mt-2 md:text-14 flex justify-center tracking-0.03 md:tracking-normal">
+        <img src="@/assets/images/common/question-icon.svg" alt="question"/> ¿Dónde encuentro el código de operación?</span>
     </div>
-    <p
-      class="mb-2 font-light md:font-normal text-14 mt-1 md:text-16 md:leading-20 leading-17 p-1 px-8 md:p-0"
-    >
+    <p class="mb-2 font-light md:font-normal text-14 mt-1 md:text-16 md:leading-20 leading-17 p-1 px-8 md:p-0">
       Verificaremos tu operación para enviarte<span>
         {{ transaction.amountEstimated }}
-        {{ transaction.destinationCurrency }}</span
-      >a tu dirección.
+        {{ transaction.destinationCurrency }}</span>a tu dirección.
     </p>
     <Button
-      class="w-410 "
+      class="w-410"
       :disabled="disabled"
       :loading="loading"
       text="ENVIAR CONSTANCIA"
