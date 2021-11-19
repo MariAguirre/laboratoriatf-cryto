@@ -1,6 +1,12 @@
 <template>
   <div class=" Grid grid-flow-col">
     <Topbarflow3 variant="light" show-logo></Topbarflow3>
+    <Topbarflowsm2
+        class="block sm:hidden"
+        variant="light"
+        show-logo
+        show-nav
+      />
     <div class="m-18 ml-8 mr-8 mt-20 flex justify-center">
       <div>
         <BaseCard class="w-306 md:w-719 p-1 " text="">
