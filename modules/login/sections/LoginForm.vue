@@ -33,7 +33,6 @@
         :helper="password.helper"
         @is-valid="isValidInput"
       />
-      <RecoveryPasswordTitle />
       <KButton
         text="Iniciar Sesión"
         size="lg"
@@ -49,14 +48,12 @@
 import KInput from "@/shared/ui/components/Input.vue";
 import KButton from "@/shared/ui/components/Button/Button.vue";
 import { is } from "@/shared/ui/utils/validators";
-import RecoveryPasswordTitle from "../components/RecoveryPasswordTitle.vue";
-import Modal from "@/shared/ui/components/Modal/Modal.vue";
+import Modal from '@/shared/ui/components/Modal/Modal.vue';
 
 export default {
   components: {
     KInput,
     KButton,
-    RecoveryPasswordTitle,
     Modal
   },
   data() {
@@ -93,6 +90,7 @@ export default {
     },
     goToHome() {
       window.location.href = "/";
+      this.loading = false;
     },
     async handleSubmit() {
       this.loading = true;
@@ -102,7 +100,6 @@ export default {
       };
       try {
         const data = await this.$services.login.login(formData);
-        this.loading = false;
         if (data.status == 200) {
           const utils = await this.$services.utils2.findUtils();
           localStorage.setItem("utils", JSON.stringify(utils));
@@ -110,10 +107,12 @@ export default {
           localStorage.setItem("token", data.data.data.token);
           this.goToHome();
         } else if (data.status == 400) {
+          this.loading = false;
           this.open = true;
           this.errorMessage = data.data.error.message;
         }
       } catch (error) {
+        this.loading = false;
         this.open = true;
         this.errorMessage = "¡Ups! Sucedió un error, inténtelo nuevamente.";
       }

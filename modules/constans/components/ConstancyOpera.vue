@@ -10,10 +10,13 @@
         </div>
       </div>
     </Modal>
-    <div class="Grid grid-flow-col">
-      <div class=" flex-col justify-center">
-        <BaseCard class=" flex-col justify-center items-center p-14 w-400 md:w-719 h-359" text="">
-          <div class=" flex-col items-center "> 
+    <div class="">
+      <div class=" flex-col justify-center items-center w-full">
+        <BaseCard
+          class=" flex-col justify-center items-center p-0 sm:p-14 w-404 md:w-719 h-359"
+          text=""
+        >
+          <div class=" flex-col items-center ">
             <div
               class="font-montserrat flex flex-col justify-center items-center"
             >
@@ -36,24 +39,22 @@
                 Envía constancia
               </h1>
               <div class="flex-col items-center">
-                 <span
-                class="
+                <span
+                  class="
                   block
                   md:hidden
                   mb-3
                   font-bold
-                  text-2xl-x1 text-blue
+                  text-2xl text-blue
                   leading-24
-                  text-center
-                  
-
+                  text-center 
                 "
-              >
-                Envía constancia de tu transferencia
-              </span>
+                >
+                  Envía constancia de tu transferencia
+                </span>
               </div>
-             
-              <div class="w-full flex-col items-center">
+
+              <div class="w-full flex-col items-center justify-center">
                 <label
                   for="first-name"
                   class="
@@ -65,44 +66,47 @@
                   "
                   >Escribe el código de operación del banco aquí</label
                 >
-                <div class="flex-col w-full items-center">
-                  <Input v-model="codigo" class="w-330 md:w-410" />
-                </div>
-                <div class="flex-col justify-between items-center ">
-                  <img class="w-5 mt-4 ml-16 -mr-8"
-                    src="@/assets/images/common/question-icon.svg"
-                    alt="question"
-                  />
-               
-               v>             
-                  <p
-                    class="                      
+
+                <Input
+                  v-model="codigo"
+                  class=" mx-6 sm:mx-20 w-330 md:w-410 mt-6"
+                />
+
+                <div class="flex-col justify-between items-center mt-4">
+                  
+                  <div
+                    class="flex justify-center items-center mt-10 px-8 sm:p-0"
+                  >
+                    <p
+                      class="                      
                       font-light
                       md:font-normal
                       text-14
-                      mt-1
                       md:text-16 md:leading-20
                       leading-17
                       flex-col 
                       items-center
-                      
-                      
+                      justify-center
+                      items-center
                     "
-                  >
-                    Verificaremos tu operación para enviarte<span>
+                    >
+                      Verificaremos tu operación para enviarte
+                    </p>
+                    <span class="ml-0 sm:ml-2">
                       {{ transaction.amountEstimated }}
-                      {{ transaction.destinationCurrency }}</span
-                    >a tu dirección.
-                  </p>
-                
+                      {{ transaction.destinationCurrency }}
+                    </span>
+                    <span class="ml-0 sm:ml-2">a tu dirección.</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
           </div>
         </BaseCard>
-        <div class="flex-col justify-center items-center">
+        <div class="flex flex-col  justify-end sm:ml-72 items-center">
           <Button
-            class="mt-8 ml-80 w-410 mb-10 justify-center items-center"
+            class="mt-8 w-80 sm:w-410 mb-10"
             :disabled="disabled"
             :loading="loading"
             text="ENVIAR CONSTANCIA"
@@ -127,32 +131,31 @@ export default {
     return {
       codigo: "",
       open: false,
-      loading: null,
+      loading: null
     };
   },
   computed: {
     ...mapState(["transaction", "quote", "check"]),
     disabled() {
       return !(this.codigo !== "");
-    },
+    }
   },
   methods: {
     async sendconstancia() {
       this.loading = true;
       try {
         const id = this.transaction.id;
-        const response = await this.$services.transaction.checkTransaction(
+        await this.$services.transaction.checkTransaction(
           { voucher: this.codigo },
           localStorage.getItem("token"),
           id
         );
-        console.log(response);
-        window.location.href = "/confirmacion";
+        this.$router.push({ path: "confirmacion" }, console.log, console.log);
       } catch (err) {
         this.open = true;
         this.loading = null;
       }
-    },
-  },
+    }
+  }
 };
 </script>

@@ -1,15 +1,15 @@
 <template>
   <div class="flex flex-col sm:mt-6">
     <SidebarItem
-      text="Cambios"
+      text="Crypto"
       icon="exchange"
       to="/"
       @onPressed="$emit('onPressed')"
     />
     <SidebarItem
+      class="disabled:cursor-not-allowed"
       text="Historial de operaciones"
       icon="historial"
-      to="/historial"
       @onPressed="$emit('onPressed')"
     />
     <SidebarItem
