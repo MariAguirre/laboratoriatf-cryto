@@ -65,24 +65,22 @@
                   "
                   >Escribe el código de operación del banco aquí</label
                 >
-                <div class="flex-col items-center ">
-                  <Input v-model="codigo" class="flex justify-center w-400 md:w-410 pt-2  " />
+                <div class="flex-col w-full items-center">
+                  <Input v-model="codigo" class="w-330 md:w-410" />
                 </div>
-                <div class="flex-col items-center justify-between ">
-                  <img class="w-6"
+                <div class="flex-col justify-between items-center ">
+                  <img class="w-5 mt-4 ml-16 -mr-8"
                     src="@/assets/images/common/question-icon.svg"
                     alt="question"
                   />
                   <span
                     class="
                       font-medium
-                      text-12
-                      w-410
-                      
+                      text-12                                      
                       md:text-14
                       flex
                       justify-center
-                      
+                      -mt-5
                       
                     "
                   >
@@ -90,17 +88,16 @@
                   > 
                   </div>             
                   <p
-                    class="
-                      mb-2
+                    class="                      
                       font-light
                       md:font-normal
                       text-14
                       mt-1
                       md:text-16 md:leading-20
                       leading-17
-                      p-1
-                      px-8
-                      md:p-0
+                      flex-col 
+                      items-center
+                      
                       
                     "
                   >
