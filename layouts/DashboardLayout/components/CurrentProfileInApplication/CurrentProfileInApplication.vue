@@ -1,5 +1,5 @@
 <template>
-    <UserDropdownItem :text="nameUser" icon="company" />
+    <UserDropdownItem :text="nameUser" icon="customer" />
 </template>
 
 <script>
