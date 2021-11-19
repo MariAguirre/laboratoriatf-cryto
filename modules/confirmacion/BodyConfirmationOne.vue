@@ -6,6 +6,7 @@ justify-between
 items-center"
   >
     <div>
+      <Loader v-if="openLoader" class="h-full w-full bg-white" />
       <lottie-player
         src="https://assets4.lottiefiles.com/packages/lf20_bgrlh8or.json"
         background="transparent"
@@ -80,18 +81,23 @@ items-center"
 </template>
 <script>
 import BaseCard from "@/shared/ui/components/Cards/BaseCard.vue";
+import Loader from "@/shared/ui/components/Loading/LoadingScreen.vue";
 import { mapState } from "vuex";
 
 export default {
   components: {
-    BaseCard
+    BaseCard,
+    Loader
   },
   data() {
     return {
       codIdK: "",
       count: "",
       tipeMoney: "",
-      time: ""
+      time: "",
+      openLoader: true,
+      dataConfirmation: "",
+      quoteData: ""
     };
   },
   computed: {
@@ -101,13 +107,21 @@ export default {
     this.getdata();
   },
   methods: {
-    async getdata() {
-      const dataConfirmation = this.transaction;
+    getdata() {
+      this.dataConfirmation = this.transaction;
+      this.quoteData = this.quote;
+      this.codIdK = this.dataConfirmation
+        ? this.dataConfirmation.operationNumber
+        : "";
+      this.count = this.dataConfirmation
+        ? this.dataConfirmation.amountEstimated
+        : "";
+      this.tipeMoney = this.dataConfirmation.destinationCurrency;
 
-      this.codIdK = dataConfirmation.operationNumber;
-      this.count = dataConfirmation.amountSent;
-      this.tipeMoney = dataConfirmation.destinationCurrency;
-      this.time = this.convertTime(Number(this.quote.delay));
+      this.time = this.quoteData
+        ? this.convertTime(Number(this.quoteData.delay))
+        : "";
+      this.openLoader = false;
     },
     convertTime(time) {
       const minutes = Math.floor(time / 60);
