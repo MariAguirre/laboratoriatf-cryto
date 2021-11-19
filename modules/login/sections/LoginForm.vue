@@ -3,8 +3,10 @@
     <Modal v-model="open" closeable-by-backdrop>
       <div class="flex flex-col items-center bg-white rounded-xl w-full">
         <div class="flex flex-col w-11/12 sm:w-96">
-          <p class="pb-1 text-center text-2xl leading-6 font-normal">{{errorMessage}}</p>
-            <img src="@/assets/images/error/errorLogin.jpg"  alt="question" />
+          <p class="pb-1 text-center text-2xl leading-6 font-normal">
+            {{ errorMessage }}
+          </p>
+          <img src="@/assets/images/error/errorLogin.jpg" alt="question" />
         </div>
       </div>
     </Modal>
@@ -98,7 +100,6 @@ export default {
       try {
         const data = await this.$services.login.login(formData);
         this.loading = false;
-        console.log(data);
         if (data.status == 200) {
           const utils = await this.$services.utils2.findUtils();
           localStorage.setItem("utils", JSON.stringify(utils));
@@ -110,7 +111,8 @@ export default {
           this.errorMessage = data.data.error.message;
         }
       } catch (error) {
-        console.log(error);
+        this.open = true;
+        this.errorMessage = "¡Ups! Sucedió un error, inténtelo nuevamente.";
       }
     }
   }
