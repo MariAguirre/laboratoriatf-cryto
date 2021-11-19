@@ -107,7 +107,7 @@
             />
             <Select
               v-if="dataQuote.stateBuy"
-              v-model="values.valueBank"
+              v-model="values.valueWallet"
               :options="accounts"
               class="mt-1 w-96 bg-white"
               :custom="true"
