@@ -11,7 +11,7 @@
 
     <p for="first-name" class="text-justify text-base">
       Transfiere desde tu banco y guarda el
-      <span class="underline">número de operación</span> para el siguiente paso.
+      <span class="underline">Número de operación</span> para el siguiente paso.
     </p>
 
     <div class=" w-306 md:w-719 mt-4">
@@ -24,13 +24,19 @@
             <span>{{ montoOrigin }}</span>
             <span class="ml-1">{{ currencyOrigin }}</span>
           </p>
-          <button @click.native="capture"><img class="ml-5" src="@/assets/images/common/clipboard.svg" alt="" /></button>
+          <button @click.native="capture">
+            <img
+              class="ml-5"
+              src="@/assets/images/common/clipboard.svg"
+              alt=""
+            />
+          </button>
         </div>
       </div>
       <div class="flex justify-between">
         <div class="ml-8">
           <p class="mt-4 font-bold">
-            Nuemero de cuenta <span>{{ name }}</span>
+            Número de cuenta <span>{{ name }}</span>
           </p>
         </div>
         <div class="mr-8 flex justify-between">
@@ -69,13 +75,11 @@
 <script>
 import TextTitle from "@/shared/ui/components/Typography/TextTitle.vue";
 
-
 export default {
   components: {
-    TextTitle,
-    
-  }, 
-  
+    TextTitle
+  },
+
   props: {
     montoOrigin: {
       type: String,
@@ -99,19 +103,16 @@ export default {
     }
   },
   methods: {
-   capture(){
-     if(this.montoOrigin === '' && this.currencyOrigin === ''){
-       alert('No se encontraron los datos');
-       console.log('no hay datos');       
-    }else{
-      const copy1 = JSON.parse(localStorage.setItem("transaction"));
-      console.log(copy1);
-      const copy2 = JSON.parse(localStorage.setItem("transaction"));
-      console.log(copy2);
-      alert('mensaje copiado')
+    capture() {
+      if (this.montoOrigin === "" && this.currencyOrigin === "") {
+        alert("No se encontraron los datos");
+      } else {
+        // const copy1 = JSON.parse(localStorage.setItem("transaction"))
+        // const copy2 = JSON.parse(localStorage.setItem("transaction"));
+        // console.log(copy2);
+        alert("mensaje copiado");
+      }
     }
-   }
-    
   }
 };
 </script>

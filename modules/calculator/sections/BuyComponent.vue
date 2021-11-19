@@ -2,7 +2,7 @@
   <section>
     <Loader v-if="openLoader" class="h-full w-full bg-white" />
     <Modal v-model="open" closeable-by-backdrop>
-      <div class="flex flex-row items-center bg-white rounded-xl w-full">
+      <div class="flex flex-col items-center bg-white rounded-xl w-full">
         <div class="flex flex-col w-11/12 sm:w-96">
           <span class="pb-1 text-7 text-base leading-6 font-normal"
             >Selecciona tu criptomoneda</span
@@ -228,8 +228,8 @@ export default {
         exchangeTwo: this.valueTwoRound,
         delay: this.filterCurrency(this.currencyTwo)[0].delay
       };
-      localStorage.setItem("quote", JSON.stringify(data));
-      window.location.href = "/completedata";
+      this.$store.dispatch("setQuote", data);
+      this.$router.push({ path: "completedata" }, console.log, console.log);
     }
   }
 };

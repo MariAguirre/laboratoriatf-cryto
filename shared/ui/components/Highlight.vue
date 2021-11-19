@@ -53,8 +53,8 @@ export default {
       default: "info"
     },
     delay: {
-      type: Number,
-      default: 0
+      type: String,
+      default: ""
     }
   },
   computed: {

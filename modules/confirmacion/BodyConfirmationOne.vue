@@ -1,5 +1,5 @@
 <template>
-    <div
+  <div
     clas="p-2 sm:p-4 ml-9 w-719 h-96 bg-white
 flex flex-col
 justify-between
@@ -13,7 +13,7 @@ items-center"><div><lottie-player src="https://assets4.lottiefiles.com/packages/
 <div class="py-8 px-2 sm:flex-grow-0 min-w-full hidden sm:block ">
 <div class="flex justify-between md:justify-between">
   <p class="text-kambista-7 font-bold">Código Kambista</p>
-  <p class="font-bold">{{codeIdK}}</p>
+  <p class="font-bold">{{codIdK}}</p>
 </div>
 <p class="py-4">*Usa tu código para dar seguimiento a tu operación o si tuvieras una consulta.</p>
 <div class= "flex justify-between md:justify-between">
@@ -31,7 +31,7 @@ items-center"><div><lottie-player src="https://assets4.lottiefiles.com/packages/
 <div class="py-2 px-2 flex flex-col min-w-full block sm:hidden">
  
   <p class="text-kambista-7 font-bold">Código Kambista</p>
-  <p class="font-bold">{{codeIdK}}</p>
+  <p class="font-bold">{{codIdK}}</p>
 
   <p class="py-4">*Usa tu código para dar seguimiento a tu operación o si tuvieras una consulta.</p>
 <div class= "flex">
@@ -50,58 +50,41 @@ items-center"><div><lottie-player src="https://assets4.lottiefiles.com/packages/
 </div></div>
 </template>
 <script>
-import BaseCard from '@/shared/ui/components/Cards/BaseCard.vue'
+import BaseCard from "@/shared/ui/components/Cards/BaseCard.vue";
+import { mapState } from "vuex";
 
 export default {
-  components:{
-     BaseCard,
-    },
-    data(){
-      return{
-        codeIdK:'',
-        count:'',
-        tipeMoney:'',
-        time:'',
-      }
-    },
-   mounted(){
-   this.getdata()
+  components: {
+    BaseCard
   },
-  methods:{
-    async getdata(){
-    //const dataConfirmation = JSON.parse(localStorage.getItem('dataConfirmation'));
-    const dataConfirmation= {
-        "id": "kmMts15u7nJUYv8bX7",
-        "customerId": "200e2f2b-829b-4de6-8cbb-19774882f005",
-        "operationNumber": "KMMTS15",
-        "amountEstimated": 0.00038,
-        "exchangeRate": 261905,
-        "originCurrency": "PEN",
-        "destinationCurrency": "BTC",
-        "amountSent": 100,
-        "bankId": "BCP",
-        "waitTime": 31,
+  data() {
+    return {
+      codIdK: "",
+      count: "",
+      tipeMoney: "",
+      time: ""
+    };
+  },
+  computed: {
+    ...mapState(["transaction", "quote", "check"])
+  },
+  mounted() {
+    this.getdata();
+  },
+  methods: {
+    async getdata() {
+      const dataConfirmation = this.transaction;
 
-        "account": {
-            "id": "6de6f675-bb1f-41eb-8147-4702849210b5",
-            "customerId": "129be299-22ed-4407-b7b8-91daf26d867a",
-            "type": "crypto",
-            "number": "3AEcLU8NkukFRP5kGVikbmHVLXhL5KWuGv",
-            "currency": "BTC",
-            "alias": "U1 Mi cuenta BTC"
-        },
-        "sourceOfFunds": "Otros",
-        "cashIn": {
-            "name": "2003001399567",
-            "type": "OWN"
-        }
+      this.codIdK = dataConfirmation.operationNumber;
+      this.count = dataConfirmation.amountSent;
+      this.tipeMoney = dataConfirmation.destinationCurrency;
+      this.time = this.convertTime(this.quote.delay);
+    },
+    convertTime(time) {
+      const minutes = Math.floor(time / 60);
+      const seconds = time - minutes * 60;
+      return `${minutes}:${seconds > 10 ? seconds : `0${seconds}`}`;
     }
-
-    this.codeIdK=dataConfirmation.operationNumber;
-    this.count=dataConfirmation.amountSent;
-    this.tipeMoney = dataConfirmation.destinationCurrency;
-    this.time=dataConfirmation.waitTime;
-   },
   }
-}
+};
 </script>

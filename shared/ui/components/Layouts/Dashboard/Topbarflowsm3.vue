@@ -1,19 +1,19 @@
 <template>
   <header
+    class="md:sticky md:top-0 "
     :class="[getWrapperStyle, getAutoHideStyle, getAutoContentStyle]"
     style="z-index: 10"
   >
     <div
-      class="flex items-center box-border h-14"
+      class="flex items-center"
       :class="[getContentBorderStyle]"
     >
-      <div class="">
-        <div>
-          <LogoV3 v-if="showLogo" class="" />
-        </div>
-        <div class="flex items-center justify-center w-full">
-          <nav class="flex items-center -mt-14 w-full">
-            <ul class="flex pl-0 ml-97 justify-center rounded list-none ">
+      <div>
+        <LogoV2 v-if="showLogo" class="" />
+        <div >
+         
+           <nav  class="ml-14 w-full -mt-2 flex justify-center items-center">
+            <ul class="flex w-full pl-0 list-none ">
               <li>
                 <a
                   href=""
@@ -24,9 +24,32 @@
                   first:ml-0
                   text-xs
                   font-semibold
-                  md:w-5
-                  md:h-5
-                  
+                  w-3
+                  h-3
+                  p-0
+                  rounded-full
+                  items-center
+                  justify-center
+                  leading-tight
+                  border border-solid border-kambista-blue
+                  bg-kambista-blue
+                "
+                  ><p class="mt-5 -ml-5 text-xxxs">Completa</p>
+                </a>
+              </li>
+              <hr
+                class="bg-kambista-blue w-28 h-1 border-solid-3 z-40 object-center mt-1"
+              />
+              <li>
+                <a
+                  href=""
+                  class="
+                  first:ml-0
+                  text-xs
+                  font-semibold
+                  flex
+                  w-3
+                  h-3
                   p-0
                   rounded-full
                   items-center
@@ -36,12 +59,10 @@
                   border border-solid border-kambista-blue
                   bg-kambista-blue
                 "
-                  ><p class="mt-5 -ml-4">Completa</p>
+                  ><p class="mt-10 text-xxxs">Transfiere</p>
                 </a>
               </li>
-              <hr
-                class="bg-gray-200 md:w-72 sm:w-20 h-1  border-solid-2 z-40 object-center mt-2.5"
-              />
+              <hr class="bg-kambista-blue w-28 h-1 border-solid-3 object-center mt-1" />
               <li>
                 <a
                   href=""
@@ -50,65 +71,34 @@
                   text-xs
                   font-semibold
                   flex
-                  md:w-5
-                  md:h-5
+                  w-3
+                  h-3
                   p-0
                   rounded-full
                   items-center
                   justify-center
                   leading-tight
-                  
-                  border border-solid border-gray-200
-                  bg-gray-200
+                 
+                  border border-solid border-kambista-blue
+                  bg-kambista-blue
                 "
-                  ><p class="mt-10">Transfiere</p>
-                </a>
-              </li>
-              <hr
-                class="bg-gray-200 md:w-72 sm:w-20 h-1 border-solid-2 object-center mt-2.5"
-              />
-              <li>
-                <a
-                  href=""
-                  class="
-                  first:ml-0
-                  text-xs
-                  font-semibold
-                  flex
-                  md:w-5
-                  md:h-5
-                  p-0
-                  rounded-full
-                  items-center
-                  justify-center
-                  leading-tight
-                  
-                  border border-solid border-gray-200
-                  bg-gray-200
-                "
-                  ><p class="mt-10 ">Envia</p>
+                  ><p class="mt-10 text-xxxs">Envia</p>
                 </a>
               </li>
             </ul>
-            <Nuxt-link to="/">
-              <img
-                class="ml-20 "
-                src="@/assets/images/navigation/x-circle.svg"
-                alt="close"
-              />
-            </Nuxt-link>
           </nav>
         </div>
       </div>
+      <slot />
     </div>
-    <slot />
   </header>
 </template>
 
 <script>
-import LogoV3 from "../../Logo/LogoV3.vue";
+import LogoV2 from "../../Logo/LogoV2.vue";
+
 export default {
-  components: { LogoV3 },
+  components: { LogoV2},
   props: {
     variant: {
       type: String,
@@ -135,10 +125,10 @@ export default {
       }[this.variant || "default"];
     },
     getAutoHideStyle() {
-      return this.autoHide ? "hidden" : "";
+      return this.autoHide ;
     },
     getContentBorderStyle() {
-      return this.variant === "default" ? "border-b" : "";
+      return this.variant === "default" ;
     },
     getAutoContentStyle() {
       return this.autoContent ? "px-4 lg:px-7" : "";

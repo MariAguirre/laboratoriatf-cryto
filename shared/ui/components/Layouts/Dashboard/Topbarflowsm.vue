@@ -31,14 +31,14 @@
                   items-center
                   justify-center
                   leading-tight
-                  border border-solid border-gray-900
-                  bg-gray-900
+                  border border-solid border-kambista-blue
+                  bg-kambista-blue
                 "
                   ><p class="mt-5 -ml-5 text-xxxs">Completa</p>
                 </a>
               </li>
               <hr
-                class="bg-gray-900 w-28  border-solid-3 z-40 object-center mt-2"
+                class="bg-gray-200 w-28 h-1 border-solid-3 z-40 object-center mt-1"
               />
               <li>
                 <a
@@ -62,7 +62,7 @@
                   ><p class="mt-10 text-xxxs">Transfiere</p>
                 </a>
               </li>
-              <hr class="bg-gray-900 w-28 border-solid-3 object-center mt-2" />
+              <hr class="bg-gray-200 w-28 h-1 border-solid-3 object-center mt-1" />
               <li>
                 <a
                   href=""
