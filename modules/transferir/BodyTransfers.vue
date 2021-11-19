@@ -29,7 +29,7 @@
             <span>{{ montoOrigin }}</span>
             <span class="ml-1">{{ currencyOrigin }}</span>
           </p>
-          <button @click.native="capture">
+          <button @click="capture">
             <img
               class="ml-5"
               src="@/assets/images/common/clipboard.svg"
@@ -81,7 +81,7 @@
             <span class="flex justify-center text-xl ml-1">{{ montoOrigin }}</span>
             <span class="flex justify-center text-xl ml-1">{{ currencyOrigin }}</span>
           </p>
-          <button @click.native="capture">
+          <button @click="capture">
             <img
               class="ml-2"
               src="@/assets/images/common/clipboard.svg"
