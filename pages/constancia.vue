@@ -50,7 +50,7 @@
 
 <script>
 import Topbarflow3 from "~/shared/ui/components/Layouts/Dashboard/Topbarflow3.vue";
-
+import BaseCard from "@/shared/ui/components/Cards/BaseCard.vue";
 import BaseText from "@/shared/ui/components/Typography/BaseText.vue";
 import ConstancyOpera from "@/modules/constans/components/ConstancyOpera.vue";
 import Topbarflowsm3 from "~/shared/ui/components/Layouts/Dashboard/Topbarflowsm3.vue";
@@ -63,7 +63,8 @@ export default {
     ConstancyOpera,
     Topbarflow3,
     Topbarflowsm3,
-    DetalleTransfer
+    DetalleTransfer,
+    BaseCard
   },
   data() {
     return {

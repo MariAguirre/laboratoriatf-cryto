@@ -98,6 +98,7 @@
               </div>
             </div>
           </div>
+          </div>
         </BaseCard>
         <div class="flex-col justify-center items-center">
           <Button

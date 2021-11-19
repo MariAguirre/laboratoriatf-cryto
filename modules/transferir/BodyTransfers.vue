@@ -31,11 +31,7 @@
             <span class="ml-1">{{ currencyOrigin }}</span>
           </p>
           <button @click.native="capture">
-            <img
-              class="ml-5"
-              src="@/assets/images/common/clipboard.svg"
-              alt=""
-            />
+            <Clipboard />
           </button>
         </div>
       </div>
@@ -49,11 +45,7 @@
           <p class="mt-4 font-bold">
             <span>{{ number }}</span>
           </p>
-          <img
-            class="ml-5 mt-4"
-            src="@/assets/images/common/clipboard.svg"
-            alt=""
-          />
+          <Clipboard />
         </div>
       </div>
       <div class="block sm:hidden">
@@ -82,13 +74,7 @@
             <span class="flex justify-center text-xl ml-1">{{ montoOrigin }}</span>
             <span class="flex justify-center text-xl ml-2 mb-2">{{ currencyOrigin }}</span>
           </p>
-          <button @click.native="capture">
-            <img
-              class="ml-2"
-              src="@/assets/images/common/clipboard.svg"
-              alt=""
-            />
-          </button>
+          <Clipboard />
         </div>
         
         <div class="">
@@ -100,11 +86,7 @@
           <p class="font-bold">
             <span class="flex justify-center text-xl ml-1">{{ number }}</span>
           </p>
-          <img
-            class=""
-            src="@/assets/images/common/clipboard.svg"
-            alt=""
-          />
+          <Clipboard />
         </div>
       
     </div>
@@ -115,10 +97,13 @@
 
 <script>
 import TextTitle from "@/shared/ui/components/Typography/TextTitle.vue";
+import Clipboard from "@/shared/ui/components/Clipboard.vue"
+
 
 export default {
   components: {
-    TextTitle
+    TextTitle,
+    Clipboard
   },
 
   props: {
