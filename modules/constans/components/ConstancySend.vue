@@ -35,7 +35,7 @@
               value="uploadFile"
               name="push-notifications"
               type="radio"
-              class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+              class="focus:ring-indigo-500 w-396 h-70  text-indigo-600 border-gray-300"
               @change="handlingChecked"
             />
             <label
@@ -71,7 +71,7 @@
                   id="file-upload"
                   name="file-upload"
                   type="file"
-                  class="sr-only"
+                  class="sr-only w-4 h-4"
                   @change="captureFile"
                 />
                 <span v-if="imageUpload">{{ fileName }}</span>
@@ -90,7 +90,7 @@
             value="email"
             name="push-notifications"
             type="radio"
-            class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+            class="focus:ring-indigo-500 h-4 w-4  text-indigo-600 border-gray-300"
             @change="handlingChecked"
           />
           <label

@@ -1,10 +1,20 @@
 <template>
-  <div class=" Grid grid-flow-col">
-    <Topbarflow3 variant="light" show-logo></Topbarflow3>
+  <div >
+    <div>
+    <Topbarflow3 class="hidden sm:block" variant="light" show-logo show-nav/>
+    </div>
+    <div>
+    <Topbarflowsm3
+        class="block sm:hidden"
+        variant="light"
+        show-logo
+        show-nav
+      />
+      </div>
     <div class="m-18 ml-8 mr-8 mt-20 flex justify-center">
       <div>
-        <BaseCard class="w-306 md:w-719 p-1 " text="">
-           <ConstancyOpera class="flex h-359" :codigo="codigo"/>
+        <BaseCard class=" p-14" text="">
+           <ConstancyOpera class="flex h-359" />
        </BaseCard>
        <BaseText />
        </div>
@@ -20,15 +30,7 @@
         
        />
        </BaseCard>
-
-       <Button
-      class="w-410 "
-      
-      :loading="loading"
-      
-      text="ENVIAR CONSTANCIA"
-      @click.native="sendconstancia"
-    />
+       
       </div>     
     </div>
       
@@ -42,7 +44,7 @@
             :currency="currency"
             :banco="banco"
           />
-        </BaseCard> -->
+        </BaseCard>  -->
       </div>
     
   
@@ -53,7 +55,7 @@ import Topbarflow3 from "~/shared/ui/components/Layouts/Dashboard/Topbarflow3.vu
 import BaseCard from "@/shared/ui/components/Cards/BaseCard.vue";
 import BaseText from "@/shared/ui/components/Typography/BaseText.vue";
 import ConstancyOpera from "@/modules/constans/components/ConstancyOpera.vue";
-import Button from "@/shared/ui/components/Button/Button.vue";
+import Topbarflowsm3 from "~/shared/ui/components/Layouts/Dashboard/Topbarflowsm3.vue";
 import DetalleTransfer from "@/modules/transferir/DetalleTransfers.vue";
 import { mapState } from "vuex";
 
@@ -63,7 +65,7 @@ export default {
     BaseText,
     ConstancyOpera,
     Topbarflow3,
-    Button,
+    Topbarflowsm3,
     DetalleTransfer
   },
   data() {

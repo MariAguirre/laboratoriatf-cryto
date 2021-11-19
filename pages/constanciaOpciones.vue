@@ -19,12 +19,10 @@
        
       </div>
     </div>
-  </div>
 </template>
 
 <script>
 import Topbarflow3 from "~/shared/ui/components/Layouts/Dashboard/Topbarflow3.vue";
-
 import BaseText from "@/shared/ui/components/Typography/BaseText.vue";
 import ConstancySend from "@/modules/constans/components/ConstancySend.vue";
 import DetalleTransfer from "@/modules/transferir/DetalleTransfers.vue";
