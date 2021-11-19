@@ -7,7 +7,7 @@ items-center"
   >
     <div>
       <lottie-player
-        src="https://assets6.lottiefiles.com/packages/lf20_xjtsxfxw.json"
+        src="https://assets4.lottiefiles.com/packages/lf20_bgrlh8or.json"
         background="transparent"
         speed="1"
         style="width:250px; height:500px;"
@@ -15,7 +15,7 @@ items-center"
         autoplay
       ></lottie-player>
     </div>
-    <BaseCard class=" px-28 min-w-full" text=""
+    <BaseCard class=" px-2 sm:px-28 w-330 min-w-full" text=""
       ><div class="flex justify-center flex flex-col items-center">
         <img
           class="w-60 pt-16 "
@@ -23,7 +23,7 @@ items-center"
           alt=""
         />
 
-        <h1 class=" mt-8  mb-3 font montserrat text-2xl">
+        <h1 class=" text-center pt-4  mb-3 font montserrat text-lg md:text-2xl">
           ¡Constancia Enviada!
         </h1>
       </div>
@@ -43,34 +43,32 @@ items-center"
         <div class="py-2 flex justify-between md:justify-between"></div>
         <div class="py-2 flex justify-between md:justify-between">
           <p class="text-kambista-7 font-bold">Tiempo de espera</p>
-          <p class="font-bold">{{ time }} aprox</p>
+          <p class="font-bold">{{ time }} min aprox</p>
         </div>
       </div>
-      <div class="py-2 px-2 min-w-full block sm:hidden">
-        <div class="sm:flex-grow-0">
-          <p class="text-kambista-7 font-bold">Código Kambista</p>
-          <p class="font-bold">{{ codIdK }}</p>
-        </div>
+      <div class="py-2 px-2 flex flex-col min-w-full block sm:hidden">
+        <p class="text-kambista-7 font-bold">Código Kambista</p>
+        <p class="font-bold">{{ codIdK }}</p>
 
         <p class="py-4">
           *Usa tu código para dar seguimiento a tu operación o si tuvieras una
           consulta.
         </p>
-        <div class="sm:flex  ">
-          <div class="py-2  sm:flex-grow">
+        <div class="flex">
+          <div class="py-2 w-1/2 ">
             <p class="text-kambista-7 font-bold">Monto a recibir</p>
             <p class="font-bold ">{{ count }} {{ tipeMoney }}</p>
           </div>
-          <div class="py-2 sm:flex-grow text-right">
+          <div class="py-2 w-1/2">
             <p class="text-kambista-7 font-bold">Tiempo de espera</p>
-            <p class="font-bold">{{ time }} aprox</p>
+            <p class="font-bold">{{ time }} min aprox</p>
           </div>
         </div>
       </div>
     </BaseCard>
     <div>
       <lottie-player
-        src="https://assets6.lottiefiles.com/packages/lf20_xjtsxfxw.json"
+        src="https://assets4.lottiefiles.com/packages/lf20_bgrlh8or.json"
         background="transparent"
         speed="1"
         style="width:250px; height:500px;"
@@ -109,12 +107,11 @@ export default {
       this.codIdK = dataConfirmation.operationNumber;
       this.count = dataConfirmation.amountSent;
       this.tipeMoney = dataConfirmation.destinationCurrency;
-      this.time = this.convertTime(this.quote.delay);
+      this.time = this.convertTime(Number(this.quote.delay));
     },
     convertTime(time) {
       const minutes = Math.floor(time / 60);
-      const seconds = time - minutes * 60;
-      return `${minutes}:${seconds > 10 ? seconds : `0${seconds}`}`;
+      return `${minutes}`;
     }
   }
 };

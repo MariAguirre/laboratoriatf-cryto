@@ -12,7 +12,7 @@
       <div class="mt-4">
         <p class="text-gray-500 font-bold">Origen</p>
         <p class="mt-2 text-gray-500">
-          {{ data3 ? (data3.bankId ? data3.bankId : "") : "" }}
+          {{ data3 ? (data3.bankId ? data3.bankId : "no funciona") : "" }}
         </p>
       </div>
       <div class="mt-4">
@@ -63,14 +63,6 @@ export default {
         return {};
       }
     },
-    numberDestiny: {
-      type: String,
-      default: ""
-    },
-    currency: {
-      type: String,
-      default: ""
-    }
-  }
+   }
 };
 </script>
