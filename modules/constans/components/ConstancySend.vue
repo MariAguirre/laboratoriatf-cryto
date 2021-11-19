@@ -226,6 +226,7 @@ export default {
           this.$router.push({ path: "confirmacion" }, console.log, console.log);
         }
       } catch (err) {
+        this.loading = null;
         this.open = true;
       }
     }
