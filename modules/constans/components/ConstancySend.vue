@@ -134,7 +134,7 @@
     </BaseCard>
     <div class="mt-4 w-full flex justify-center pt-10">
       <Button
-        class="w-330 mb-6 md:w-410"
+        class="mt-8 w-80 sm:w-410 mb-10"
         :disabled="disabled"
         :loading="loading"
         text="ENVIAR CONSTANCIA"
