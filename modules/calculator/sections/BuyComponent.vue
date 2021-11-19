@@ -41,13 +41,13 @@
       </div>
     </Modal>
     <div class="flex w-full">
-      <ButtonC text="Compra" class="bg-kambista-blue text-white" />
-      <ButtonC
-        text="Venta"
-        class="bg-white hover:border hover:border-black hover:bg-kambista-blue hover:text-white"
-      />
+      <ButtonC text="Compra" :class="classBuy" @click.native="changeToBuy" />
+      <ButtonC text="Venta" :class="classSell" @click.native="changeToSell" />
     </div>
-    <div class="flex flex-col w-full justify-center items-center bg-white">
+    <div
+      v-if="stateBuy"
+      class="flex flex-col w-full justify-center items-center bg-white"
+    >
       <div class="w-312 sm:w-404">
         <div
           class="font-semibold sm:font-medium flex w-full justify-between pt-5 pb-3.5 px-1.5 text-xs sm:text-base leading-7"
@@ -109,6 +109,71 @@
         />
       </div>
     </div>
+    <div
+      v-else
+      class="flex flex-col w-full justify-center items-center bg-white"
+    >
+      <div class="w-312 sm:w-404">
+        <div
+          class="font-semibold sm:font-medium flex w-full justify-between pt-5 pb-3.5 px-1.5 text-xs sm:text-base leading-7"
+        >
+          <span
+            >1 {{ currencyTwo }} {{ valueOneRound }} {{ currencyOne }}
+          </span>
+          <span
+            >1 {{ currencyOne }} {{ valueTwoRound }} {{ currencyTwo }}
+          </span>
+        </div>
+        <div class="pb-2 sm:pb-6 pt-1 sm:pt-6 w-312 sm:w-404 bg-white">
+          <div class="flex h-70 sm:h-81 w-full my-2 sm:my-6">
+            <label
+              class="flex flex-col bg-kambista-8 w-3/4 h-70 sm:h-81 rounded-l-lg pl-7 pt-3.5 text-sm font-medium leading-4"
+              >Entonces recibes
+              <input
+                v-model="exchangeTwo"
+                class="bg-kambista-8 text-sm sm:text-lg font-medium leading-5 outline-none mt-2.5"
+                @keyup="onKeyup2"
+              />
+            </label>
+            <div
+              class="flex items-center justify-end bg-kambista-blue text-white w-36 h-70 sm:h-81 rounded-r-lg text-base sm:text-xl font-black"
+              @click="handleClick"
+            >
+              {{ selectTwo }}
+              <ChevronDown
+                class="pl-3 sm:pl-8"
+                :size="19"
+                aria-hidden="true"
+                aria-label="select options"
+              />
+            </div>
+          </div>
+          <div class="flex h-81 w-full my-2 sm:my-6 rounded-sm">
+            <label
+              class="flex flex-col bg-kambista-8 w-3/4 h-70 sm:h-81 rounded-l-lg pl-7 pt-3.5 text-sm font-medium leading-4"
+              >¿Cuánto tienes?
+              <input
+                v-model="exchangeOne"
+                class="bg-kambista-8 text-sm sm:text-lg font-medium leading-5 outline-none mt-1 sm:mt-2.5"
+                @keyup="onKeyup"
+              />
+            </label>
+            <Select
+              v-model="selectOne"
+              class="w-36 h-70 sm:h-81 rounded-r-lg text-base sm:text-xl font-black"
+              :options="optionsOne"
+              @send="receiveOne"
+            />
+          </div>
+        </div>
+        <Button
+          class="w-full mt-10 sm:mt-0 mb-4 sm:mb-8 text-sm"
+          text="INICIAR OPERACIÓN"
+          :loading="loading"
+          @click.native="setQuote"
+        />
+      </div>
+    </div>
   </section>
 </template>
 <script>
@@ -119,6 +184,7 @@ import ButtonC from "../components/ButtonC.vue";
 import Modal from "@/shared/ui/components/Modal/Modal.vue";
 import ChevronDown from "vue-material-design-icons/ChevronDown.vue";
 import Loader from "@/shared/ui/components/Loading/LoadingScreen.vue";
+import logger from "@/shared/ui/utils/logger.ts";
 
 export default {
   components: {
@@ -132,6 +198,7 @@ export default {
   },
   data() {
     return {
+      stateBuy: true,
       valueOne: "",
       valueTwo: "",
       valueOneRound: "",
@@ -153,51 +220,91 @@ export default {
       loading: null
     };
   },
+  computed: {
+    classBuy() {
+      if (this.stateBuy) {
+        return "bg-kambista-blue text-white";
+      }
+      return "bg-white hover:border hover:border-black hover:bg-kambista-blue hover:text-white";
+    },
+    classSell() {
+      if (!this.stateBuy) {
+        return "bg-kambista-blue text-white";
+      }
+      return "bg-white hover:border hover:border-black hover:bg-kambista-blue hover:text-white";
+    }
+  },
   mounted() {
     this.showData();
   },
   methods: {
-    async showData() {
+    changeToBuy() {
+      this.stateBuy = true;
+      this.filterSellOrBuy(this.currencyOne, this.currencyTwo, "bid");
+    },
+    changeToSell() {
+      this.stateBuy = false;
+      this.filterSellOrBuy(this.currencyOne, this.currencyTwo, "ask");
+    },
+    showData() {
       this.currencyOne = this.selectOne;
       this.currencyTwo = this.selectTwo;
+      this.filterSellOrBuy(this.currencyOne, this.currencyTwo, "bid");
+    },
+    async filterSellOrBuy(currencyOne, currencyTwo, state) {
       const data = await this.$services.markets.findAll();
       localStorage.setItem("markets", JSON.stringify(data));
       this.markets = JSON.parse(localStorage.getItem("markets"));
-      this.filterPrice(this.currencyOne, this.currencyTwo);
+      const filter = this.filterPrice(currencyOne, currencyTwo, state);
+      console.log("filter", state);
+      logger.info(filter);
       this.openLoader = false;
+      this.optionsTwo = [];
       data.forEach(e => {
         this.optionsTwo.push({
           name: e.id,
           value: e.name,
-          currency: e.bid.filter(i => i.currency === this.currencyOne)[0]
+          currency: e[state].filter(i => i.currency === currencyOne)[0]
             .currency,
-          price: e.bid.filter(i => i.currency === this.currencyOne)[0].price,
-          delay: e.bid.filter(i => i.currency === this.currencyOne)[0].delay
+          price: e[state].filter(i => i.currency === currencyOne)[0].price,
+          delay: e[state].filter(i => i.currency === currencyOne)[0].delay
         });
       });
     },
     filterCurrency(currencyTwo) {
       return this.markets.filter(e => e.id === currencyTwo);
     },
-    filterPrice(currencyOne, currencyTwo) {
+    filterPrice(currencyOne, currencyTwo, state) {
       const crypto = this.filterCurrency(currencyTwo);
-      const exchange = crypto[0].bid.filter(e => e.currency === currencyOne);
+      console.log("crypto", state);
+      logger.info(crypto);
+      const exchange = crypto[0][state].filter(e => e.currency === currencyOne);
       this.valueOne = Number(exchange[0].price);
       this.valueOneRound = this.separator(this.valueOne.toFixed(3));
-      this.valueTwo = 1 / this.valueOne;
-      this.valueTwoRound = this.valueTwo.toFixed(5);
+      this.valueTwo = Number(1 / this.valueOne);
+      this.valueTwoRound = Number(this.valueTwo).toFixed(5);
     },
     receiveOne(childData) {
       this.currencyOne = childData;
-      this.filterPrice(this.currencyOne, this.currencyTwo);
-      this.exchangeTwo = (Number(this.exchangeOne) * this.valueTwo).toFixed(5);
+      const state = this.stateBuy ? "bid" : "ask";
+      this.filterPrice(this.currencyOne, this.currencyTwo, state);
+      console.log(this.exchangeOne);
+      this.exchangeOne = this.exchangeOne.replace(/,/g, "");
+      this.exchangeTwo = (
+        Number(this.exchangeOne) * Number(this.valueTwo)
+      ).toFixed(5);
     },
     selectCrypto(value) {
       this.open = false;
       this.currencyTwo = value;
       this.selectTwo = value;
-      this.filterPrice(this.currencyOne, this.currencyTwo);
-      this.exchangeTwo = (Number(this.exchangeOne) * this.valueTwo).toFixed(5);
+      const state = this.stateBuy ? "bid" : "ask";
+      this.filterPrice(this.currencyOne, this.currencyTwo, state);
+      console.log(this.exchangeOne);
+      this.exchangeOne = this.exchangeOne.replace(/,/g, "");
+      this.exchangeTwo = (
+        Number(this.exchangeOne) * Number(this.valueTwo)
+      ).toFixed(5);
     },
     onKeyup() {
       this.exchangeTwo = this.separator(
