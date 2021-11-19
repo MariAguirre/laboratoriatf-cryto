@@ -16,11 +16,11 @@
 
     <p for="first-name" class="text-justify text-base hidden sm:block ">
       Transfiere desde tu banco y guarda el
-      <span class="underline">Número de operación</span> para el siguiente paso.
+      <span class="font-bold">Número de operación</span> para el siguiente paso.
     </p>
     <p for="first-name" class="text-justify text-sm block sm:hidden ml-1 mr-1">
       Transfiere desde tu banco y guarda el
-      <span class="underline">Número de operación</span> para el siguiente paso.
+      <span class="font-bold">Número de operación</span> para el siguiente paso.
     </p>
 
     <div class=" w-306 md:w-719 mt-4 hidden sm:block">
@@ -76,16 +76,16 @@
       </div>
     </div>
 
-    <div class="block sm:hidden flex flex-col">
-      <p class=" font-bold text-left text-sm -ml-8 pl-5 pt-4 pb-4">
+    <div class=" sm:hidden flex flex-col">
+      <p class=" font-bold text-center text-l -ml-8 pl-5 pt-4 pb-4">
         Monto a tranferir
       </p>
       <div class="mr-8 flex justify-center items-center pb-2">
         <p class="font-bold flex justify-between">
-          <span class="flex justify-center text-xs ml-1">{{
+          <span class="flex justify-center text-xl ml-1">{{
             montoOrigin
           }}</span>
-          <span class="flex justify-center text-xs ml-2 ">{{
+          <span class="flex justify-center text-xl ml-2 ">{{
             currencyOrigin
           }}</span>
         </p>
@@ -94,15 +94,15 @@
         </button>
       </div>
 
-      <p class="font-bold text-left text-sm -ml-8 mt-2 mb-2 pl-5 pb-2">
+      <p class="font-bold text-center text-l -ml-8 mt-2 mb-2 pl-5 pb-2">
         Número de cuenta <span class="">{{ name }}</span>
       </p>
 
-      <div class="flex justify-between items-center mb-6">
+      <div class="flex justify-center items-center mb-6">
         <p class="font-bold">
-          <span class="flex justify-center text-xxs ml-1">{{ number }}</span>
+          <span class="flex justify-center text-xs ml-1">{{ number }}</span>
         </p>
-        <img class="" src="@/assets/images/common/clipboard.svg" alt="" />
+        <img class="ml-2" src="@/assets/images/common/clipboard.svg" alt="" />
       </div>
     </div>
   </div>

@@ -35,33 +35,33 @@
         >
           <div>
             <TextSubTitle
-              class="flex mt-8 text-2xl sm:mt-12 text-center w-full sm:w-full"
+              class="flex mt-8 text-xl sm:text-2xl  sm:mt-12 text-center w-full sm:w-full"
               text="Completa los datos de tu operación"
               alignment="center"
             />
           </div>
           <div class="flex flex-col items-center w-full h-full justify-center">
-            <BaseCardData :base-data="dataQuote" class="w-96 sm:mt-4" />
+            <BaseCardData :base-data="dataQuote" class="w-80  sm:w-96 mt-4 sm:mt-4" />
             <Highlight
-              class="mt-6 w-96 "
+              class="mt-6 w-80  sm:w-96 "
               title="Tiempo estimado de espera"
               :delay="delay"
             />
             <BaseText
               v-if="dataQuote.stateBuy"
-              class="w-96 mt-8 pl-1 text-7"
+              class="w-80  sm:w-96 mt-8 pl-1 text-7"
               text="¿Desde qué banco nos envías tu dinero?"
             />
             <BaseText
               v-else
-              class="w-96 mt-8 pl-1 text-7"
+              class="w-80  sm:w-96 mt-8 pl-1 text-7"
               text="¿Desde dónde nos envías tus cryptos?"
             />
             <Select
               v-if="dataQuote.stateBuy"
               v-model="values.valueBank"
               :options="banks"
-              class="mt-1 w-96 bg-white"
+              class="mt-1 w-80  sm:w-96 bg-white"
               :custom="true"
             >
               <template #currentOption="e">
@@ -81,7 +81,7 @@
               v-else
               v-model="values.cryptoWallet"
               :options="cryptoWallets"
-              class="mt-1 w-96 bg-white"
+              class="mt-1 w-80  sm:w-96 bg-white"
               :custom="true"
             >
               <template #currentOption="e">
@@ -97,19 +97,19 @@
             </Select>
             <BaseText
               v-if="dataQuote.stateBuy"
-              class="w-96 pl-1 text-7  mt-4 "
+              class="w-80  sm:w-96 pl-1 text-7  mt-4 "
               text="¿A qué dirección enviamos tus criptomonedas?"
             />
             <BaseText
               v-else
-              class="w-96 pl-1 text-7  mt-4 "
+              class="w-80  sm:w-96 pl-1 text-7  mt-4 "
               text="¿A qué cuenta enviamos tu dinero?"
             />
             <Select
               v-if="dataQuote.stateBuy"
               v-model="values.valueWallet"
               :options="accounts"
-              class="mt-1 w-96 bg-white"
+              class="mt-1 w-80  sm:w-96 bg-white"
               :custom="true"
             >
               <template #currentOption="e">
@@ -123,7 +123,7 @@
               v-else
               v-model="values.valueBank"
               :options="accounts"
-              class="mt-1 w-96 bg-white"
+              class="mt-1 w-80  sm:w-96 bg-white"
               :custom="true"
             >
               <template #currentOption="e">
@@ -144,23 +144,24 @@
                 </div>
               </template>
             </Select>
-            <BaseText class="w-96 pl-1 text-7  mt-4 " text="Origen de fondos" />
+            <BaseText class="w-80  sm:w-96 pl-1 text-7  mt-4 " text="Origen de fondos" />
             <Select
               v-model="values.fundsValue"
-              class="mt-1 w-96 bg-white"
+              class="mt-1 w-80  sm:w-96 bg-white"
               :options="funds"
               :custom="true"
             >
               <template #currentOption="e">
-                <i>{{ e.option.name }}</i>
+                <i class="not-italic">{{ e.option.name }}</i>
               </template>
               <template #option="e" class="flex flex-row">
-                <i>{{ e.option.name }}</i>
+                <i class="not-italic">{{ e.option.name }}</i>
               </template>
             </Select>
             <Button
-              :disabled="disabled"
-              class="w-96 mt-8 mb-28"
+            :loading="loading"
+            :disabled="disabled"
+              class="w-80  sm:w-96 mt-8 mb-28"
               text="Continuar"
               @click.native="createTransaccion"
             />
@@ -211,10 +212,14 @@ export default {
         valueBank: "",
         valueWallet: "",
         fundsValue: "",
-        cryptoWallet: ""
+        cryptoWallet: "",
+        
       },
-      open: false
+      open: false,
+      loading: null
+
     };
+
   },
   computed: {
     ...mapState(["transaction", "quote"]),
@@ -270,6 +275,7 @@ export default {
       this.openLoader = false;
     },
     async createTransaccion() {
+      this.loading = true;
       try {
         const transaction = {
           originCurrency: this.dataQuote.currencyOrigin,
@@ -288,18 +294,11 @@ export default {
         this.$store.dispatch("setTransaction", response.data.data);
         localStorage.setItem("transactionValues", JSON.stringify(this.values));
 
-        /* if (this.data3.cashIn.type === "OWN") {
-        this.$router.push({ path: "transfers" }, console.log, console.log);
-      } else {
-        this.$router.push(
-          { path: "transferenciaInterbancaria" },
-          console.log,
-          console.log
-        );
-      } */
+    
         this.$router.push({ path: "transferencia" }, console.log, console.log);
 
       } catch (err) {
+        this.loading = null;
         this.open = true;
       }
     },

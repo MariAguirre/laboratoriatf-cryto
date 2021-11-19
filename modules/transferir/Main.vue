@@ -24,19 +24,19 @@
       </div>
     </Modal>
     <Loader v-if="openLoader" class="h-full w-full bg-white" />
-    <BaseText class="flex justify-center mt-20 ml-14 mr-8 md:ml-0 md:px-20 ">
+    <BaseText class="flex justify-center mt-10 sm:mt-20 ml-14 mr-8 md:ml-0 md:px-20 ">
       <TextParagraph
         class="text-lg-xs-xxxs-xxxxs ml-8-2-0 -ml-6 text-gray-500"
         text="El tipo de cambio se actualizará:"
         alignment="center left"
       />
-      <span class="flex text-lg-xs-xxxs font-bold text-gray-500">
-        00:15 min</span
+      <span class="flex text-lg-xs-xxxs pl-2 font-bold text-gray-500">
+        15 min</span
       >
     </BaseText>
     <div class="m-18 ml-8 mr-8 mt-4 flex justify-center">
       <div>
-        <BaseCard class="w-400 md:w-719 p-1" text="">
+        <BaseCard class="w-400 md:w-719 pb-11 sm:py-14" text="">
           <BaseText class="">
             <BodyTransfers
               class="flex"
