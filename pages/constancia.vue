@@ -12,10 +12,8 @@
       />
       </div>
     <div class="m-18 ml-8 mr-8 mt-20 flex justify-center">
-      <div>
-        <BaseCard class=" p-14" text="">
-           <ConstancyOpera class="flex h-359" />
-       </BaseCard>
+      <div>        
+           <ConstancyOpera class="flex h-359" />       
        <BaseText />
        </div>
        <div>
@@ -52,7 +50,7 @@
 
 <script>
 import Topbarflow3 from "~/shared/ui/components/Layouts/Dashboard/Topbarflow3.vue";
-import BaseCard from "@/shared/ui/components/Cards/BaseCard.vue";
+
 import BaseText from "@/shared/ui/components/Typography/BaseText.vue";
 import ConstancyOpera from "@/modules/constans/components/ConstancyOpera.vue";
 import Topbarflowsm3 from "~/shared/ui/components/Layouts/Dashboard/Topbarflowsm3.vue";
@@ -60,8 +58,7 @@ import DetalleTransfer from "@/modules/transferir/DetalleTransfers.vue";
 import { mapState } from "vuex";
 
 export default {
-  components: {
-    BaseCard,
+  components: {    
     BaseText,
     ConstancyOpera,
     Topbarflow3,
