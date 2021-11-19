@@ -180,6 +180,7 @@ export default {
   methods: {
     async getdata() {
       this.dataQuote = this.quote;
+      console.log(this.dataQuote);
       this.dataUtils = JSON.parse(localStorage.getItem("utils"));
       this.delay = this.convertTime(this.dataQuote.delay);
       this.banks = this.dataUtils.banks;
@@ -226,7 +227,7 @@ export default {
         this.$router.push({ path: "transfers" }, console.log, console.log);
       } catch (err) {
         this.open = true;
-      }     
+      }
     },
     convertTime(time) {
       const minutes = Math.floor(time / 60);

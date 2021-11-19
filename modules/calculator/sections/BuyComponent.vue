@@ -128,7 +128,7 @@
           <div class="flex h-70 sm:h-81 w-full my-2 sm:my-6">
             <label
               class="flex flex-col bg-kambista-8 w-3/4 h-70 sm:h-81 rounded-l-lg pl-7 pt-3.5 text-sm font-medium leading-4"
-              >Entonces recibes
+              >¿Cuánto tienes?
               <input
                 v-model="exchangeTwo"
                 class="bg-kambista-8 text-sm sm:text-lg font-medium leading-5 outline-none mt-2.5"
@@ -151,7 +151,7 @@
           <div class="flex h-81 w-full my-2 sm:my-6 rounded-sm">
             <label
               class="flex flex-col bg-kambista-8 w-3/4 h-70 sm:h-81 rounded-l-lg pl-7 pt-3.5 text-sm font-medium leading-4"
-              >¿Cuánto tienes?
+              >Entonces recibes
               <input
                 v-model="exchangeOne"
                 class="bg-kambista-8 text-sm sm:text-lg font-medium leading-5 outline-none mt-1 sm:mt-2.5"
@@ -184,7 +184,6 @@ import ButtonC from "../components/ButtonC.vue";
 import Modal from "@/shared/ui/components/Modal/Modal.vue";
 import ChevronDown from "vue-material-design-icons/ChevronDown.vue";
 import Loader from "@/shared/ui/components/Loading/LoadingScreen.vue";
-import logger from "@/shared/ui/utils/logger.ts";
 
 export default {
   components: {
@@ -255,9 +254,7 @@ export default {
       const data = await this.$services.markets.findAll();
       localStorage.setItem("markets", JSON.stringify(data));
       this.markets = JSON.parse(localStorage.getItem("markets"));
-      const filter = this.filterPrice(currencyOne, currencyTwo, state);
-      console.log("filter", state);
-      logger.info(filter);
+      this.filterPrice(currencyOne, currencyTwo, state);
       this.openLoader = false;
       this.optionsTwo = [];
       data.forEach(e => {
@@ -276,8 +273,6 @@ export default {
     },
     filterPrice(currencyOne, currencyTwo, state) {
       const crypto = this.filterCurrency(currencyTwo);
-      console.log("crypto", state);
-      logger.info(crypto);
       const exchange = crypto[0][state].filter(e => e.currency === currencyOne);
       this.valueOne = Number(exchange[0].price);
       this.valueOneRound = this.separator(this.valueOne.toFixed(3));
@@ -288,7 +283,6 @@ export default {
       this.currencyOne = childData;
       const state = this.stateBuy ? "bid" : "ask";
       this.filterPrice(this.currencyOne, this.currencyTwo, state);
-      console.log(this.exchangeOne);
       this.exchangeOne = this.exchangeOne.replace(/,/g, "");
       this.exchangeTwo = (
         Number(this.exchangeOne) * Number(this.valueTwo)
@@ -300,7 +294,6 @@ export default {
       this.selectTwo = value;
       const state = this.stateBuy ? "bid" : "ask";
       this.filterPrice(this.currencyOne, this.currencyTwo, state);
-      console.log(this.exchangeOne);
       this.exchangeOne = this.exchangeOne.replace(/,/g, "");
       this.exchangeTwo = (
         Number(this.exchangeOne) * Number(this.valueTwo)
@@ -327,13 +320,14 @@ export default {
     setQuote() {
       this.loading = true;
       const data = {
-        mountOrigin: this.exchangeOne,
-        mountDestiny: this.exchangeTwo,
-        currencyOrigin: this.currencyOne,
-        currencyDestiny: this.currencyTwo,
+        mountOrigin: this.stateBuy ? this.exchangeOne : this.exchangeTwo,
+        mountDestiny: this.stateBuy ? this.exchangeTwo : this.exchangeOne,
+        currencyOrigin: this.stateBuy ? this.currencyOne : this.currencyTwo,
+        currencyDestiny: this.stateBuy ? this.currencyTwo : this.currencyOne,
         exchangeOne: this.valueOneRound,
         exchangeTwo: this.valueTwoRound,
-        delay: this.filterCurrency(this.currencyTwo)[0].delay
+        delay: this.filterCurrency(this.currencyTwo)[0].delay,
+        stateBuy: this.stateBuy
       };
       this.$store.dispatch("setQuote", data);
       this.$router.push({ path: "completedata" }, console.log, console.log);
