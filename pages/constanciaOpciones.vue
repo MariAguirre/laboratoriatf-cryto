@@ -1,6 +1,17 @@
 <template>
-  <div class=" Grid grid-flow-col">
-    <Topbarflow3 variant="light" show-logo></Topbarflow3>
+  <div>
+    <div>
+      <Topbarflow3 class="hidden sm:block" variant="light" show-logo show-nav />
+    </div>
+    <div>
+      <Topbarflowsm3
+        class="block sm:hidden"
+        variant="light"
+        show-logo
+        show-nav
+      />
+    </div>
+    <div class=" Grid grid-flow-col">
     <div class="m-18 ml-8 mr-8 mt-20 flex justify-center">
       <div>      
         <ConstancySend />      
@@ -16,7 +27,7 @@
         :currency="currency"
         :banco="banco"
       />
-       
+       </div>
       </div>
     </div>
   </div>
@@ -24,6 +35,7 @@
 
 <script>
 import Topbarflow3 from "~/shared/ui/components/Layouts/Dashboard/Topbarflow3.vue";
+import Topbarflowsm3 from "~/shared/ui/components/Layouts/Dashboard/Topbarflowsm3.vue";
 import BaseText from "@/shared/ui/components/Typography/BaseText.vue";
 import ConstancySend from "@/modules/constans/components/ConstancySend.vue";
 import DetalleTransfer from "@/modules/transferir/DetalleTransfers.vue";
@@ -31,7 +43,7 @@ import { mapState } from "vuex";
 
 
 export default {
-  components: { BaseText, ConstancySend, DetalleTransfer, Topbarflow3 },
+  components: { BaseText, ConstancySend, DetalleTransfer, Topbarflow3, Topbarflowsm3 },
 
   data() {
     return {

@@ -10,14 +10,16 @@
         </div>
       </div>
     </Modal>
-   <BaseCard text="">
+   <BaseCard 
+   class="p-12"
+   text="">
    <div  class="flex flex-col justify-center items-center">
      <img
       class="mb-0.5"
       src="@/assets/images/document/document-icon.svg"
       alt=""
     />
-    <h1 class="mb-4 font-bold text-24 text-blue leading-29">
+    <h1 class="mb-4 font-bold text-2xl text-blue leading-29">
       Envía constancia
     </h1>
      <fieldset class="w-277 sm:w-auto">
@@ -28,14 +30,14 @@
        </div>
        <div class="flex flex-col mt-4 space-y-2 items-center">
          <div class="flex flex-col inputContainer justify-center items-center w-306 sm:w-396">
-           <div class="flex w-full py-5">
+           <div class="flex w-full h-70 py-5">
               <input
               id="push-upload"
               v-model="checked"
               value="uploadFile"
               name="push-notifications"
               type="radio"
-              class="focus:ring-indigo-500 w-396 h-70  text-indigo-600 border-gray-300"
+              class="focus:ring-indigo-500 text-indigo-600 border-gray-300"
               @change="handlingChecked"
             />
             <label
@@ -118,8 +120,9 @@
     </div>
    </div>
    </BaseCard>
-   <div class="mt-14">
+   <div class="mt-4 w-full flex justify-center pt-10">
     <Button
+    class="w-330 mb-6 md:w-410"
       :disabled="disabled"
       :loading="loading"
       text="ENVIAR CONSTANCIA"
