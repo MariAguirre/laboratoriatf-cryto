@@ -1,9 +1,9 @@
 <template>
 
-  <div>
+  <div class="flex flex-col">
     <Topbar variant="light" show-logo><div class="hidden lg:inline-block"><TextParagraph weight="medium" text="Horario: Lunes a viernes 9:00 am a 7:00 p.m"/>
     <TextParagraph weight="medium" text="Sábados de 09:00 am a 2:00 pm"/></div></Topbar>
-   <Main />
+   <Main/>
    
 
     </div>
