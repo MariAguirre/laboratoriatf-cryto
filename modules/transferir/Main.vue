@@ -89,6 +89,7 @@ import Loader from "@/shared/ui/components/Loading/LoadingScreen.vue";
 import TextParagraph from "@/shared/ui/components/Typography/TextParagraph.vue";
 import { mapState } from "vuex";
 import Modal from "@/shared/ui/components/Modal/Modal.vue";
+import BaseText from '@/shared/ui/components/Typography/BaseText.vue';
 
 export default {
   components: {
@@ -98,7 +99,8 @@ export default {
     ButtonC,
     Loader,
     TextParagraph,
-    Modal
+    Modal,
+    BaseText 
   },
   data() {
     return {

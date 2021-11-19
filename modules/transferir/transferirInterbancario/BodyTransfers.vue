@@ -25,7 +25,7 @@
             <span>{{ montoOrigin }}</span>
             <span class="ml-1">{{ currencyOrigin }}</span>
           </p>
-          <button @click.native="capture">
+          <button @click="capture">
             <img
               class="ml-5"
               src="@/assets/images/common/clipboard.svg"

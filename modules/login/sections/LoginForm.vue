@@ -90,6 +90,7 @@ export default {
     },
     goToHome() {
       window.location.href = "/";
+      this.loading = false;
     },
     async handleSubmit() {
       this.loading = true;
@@ -99,7 +100,6 @@ export default {
       };
       try {
         const data = await this.$services.login.login(formData);
-        this.loading = false;
         if (data.status == 200) {
           const utils = await this.$services.utils2.findUtils();
           localStorage.setItem("utils", JSON.stringify(utils));
@@ -111,6 +111,7 @@ export default {
           this.errorMessage = data.data.error.message;
         }
       } catch (error) {
+        this.loading = false;
         this.open = true;
         this.errorMessage = "¡Ups! Sucedió un error, inténtelo nuevamente.";
       }
