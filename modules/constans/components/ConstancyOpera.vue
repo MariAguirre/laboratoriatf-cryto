@@ -40,7 +40,7 @@
       >Escribe el código de operación del banco aquí</label
     >
     <div>
-      <Input v-model="codigo" class="w-410" />
+      <Input v-model="codigo" class="w-330 md:w-410" />
     </div>
     <div class="flex justify-center mb-2">
       <span class="font-medium text-12 w-410 mt-2 md:text-14 flex justify-center tracking-0.03 md:tracking-normal">
@@ -52,7 +52,7 @@
         {{ transaction.destinationCurrency }}</span>a tu dirección.
     </p>
     <Button
-      class="w-410"
+      class="w-330 md:w-410"
       :disabled="disabled"
       :loading="loading"
       text="ENVIAR CONSTANCIA"
