@@ -113,10 +113,10 @@
               :custom="true"
             >
               <template #currentOption="e">
-                <i class=" not-italic">{{ e.option.id }}</i>
+                <i class=" not-italic">{{ e.option.number }}</i>
               </template>
               <template #option="e" class="">
-                <i class=" not-italic">{{ e.option.id }}</i>
+                <i class=" not-italic">{{ e.option.number }}</i>
               </template>
             </Select>
             <Select
@@ -181,7 +181,6 @@ import Select from "~/shared/ui/components/Select.vue";
 import Button from "~/shared/ui/components/Button/Button.vue";
 import Highlight from "~/shared/ui/components/Highlight.vue";
 import Loader from "@/shared/ui/components/Loading/LoadingScreen.vue";
-import logger from "@/shared/ui/utils/logger.ts";
 import Modal from "@/shared/ui/components/Modal/Modal.vue";
 import { mapState } from "vuex";
 
@@ -268,7 +267,6 @@ export default {
           }
         )
       ).data.data;
-      logger.info(this.accounts);
       this.openLoader = false;
     },
     async createTransaccion() {

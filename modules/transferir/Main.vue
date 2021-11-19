@@ -36,10 +36,10 @@
     </BaseText>
     <div class="m-18 ml-8 mr-8 mt-4 flex justify-center">
       <div>
-        <BaseCard class="w-400 md:w-719 p-1 " text="">
+        <BaseCard class="w-400 md:w-719 p-1" text="">
           <BaseText class="">
             <BodyTransfers
-              class="flex h-359"
+              class="flex"
               :monto-origin="mountOrigin"
               :currency-origin="currencyOrigin"
               :data3="data3"
@@ -71,7 +71,7 @@
     </div>
     <div class="flex flex-col justify-center items-center">
       <ButtonC
-        class="mt-8 w-410 mb-10"
+        class="mt-8 w-80 sm:w-410 mb-10"
         text="CONFIRMO TRANSFERENCIA"
         @click.native="sendtransfer"
       >
@@ -89,6 +89,7 @@ import Loader from "@/shared/ui/components/Loading/LoadingScreen.vue";
 import TextParagraph from "@/shared/ui/components/Typography/TextParagraph.vue";
 import { mapState } from "vuex";
 import Modal from "@/shared/ui/components/Modal/Modal.vue";
+import BaseText from "@/shared/ui/components/Typography/BaseText.vue";
 
 export default {
   components: {
@@ -98,7 +99,8 @@ export default {
     ButtonC,
     Loader,
     TextParagraph,
-    Modal
+    Modal,
+    BaseText
   },
   data() {
     return {
@@ -121,7 +123,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["transaction", "quote", "check"])
+    ...mapState(["transaction", "quote"])
   },
   mounted() {
     this.getdata();
