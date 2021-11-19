@@ -1,4 +1,5 @@
 <template>
+<div class="flex flex-col">
   <div
     class="
       font-montserrat
@@ -6,14 +7,11 @@
       justify-center
       items-center
       bg-white
-      w-330
-      h-465
       backdrop-blur-sm
-      sm:w-719 sm:h-434
-    "
+      "
   >
     <Modal v-model="open" closeable-by-backdrop>
-      <div class="flex flex-col items-center bg-white rounded-xl w-full">
+      <div class="flex flex-col items-center bg-white rounded-xl">
         <div class="flex flex-col w-11/12 sm:w-96">
           <p class="pb-1 text-center text-2xl leading-6 font-normal">
             Ocurrió un error inténtelo nuevamente.
@@ -49,7 +47,7 @@
               value="uploadFile"
               name="push-notifications"
               type="radio"
-              class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+              class="focus:ring-indigo-500 w-396 h-70  text-indigo-600 border-gray-300"
               @change="handlingChecked"
             />
             <label
@@ -85,7 +83,7 @@
                   id="file-upload"
                   name="file-upload"
                   type="file"
-                  class="sr-only"
+                  class="sr-only w-4 h-4"
                   @change="captureFile"
                 />
                 <span v-if="imageUpload">{{ fileName }}</span>
@@ -97,19 +95,19 @@
             </div>
           </div>
         </div>
-        <div class="flex items-center inputContainer w-306 h-70 sm:w-396">
+        <div class="flex items-center inputContainer ">
           <input
             id="push-email"
             v-model="checked"
             value="email"
             name="push-notifications"
             type="radio"
-            class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+            class="focus:ring-indigo-500 h-4 w-4  text-indigo-600 border-gray-300"
             @change="handlingChecked"
           />
           <label
             for="push-email"
-            class="ml-3 w-5/6 text-14 sm:text-16 font-normal text-blue leading-24 tracking-wider"
+            class="ml-3  text-14 w-396 h-70 sm:text-16 font-normal text-blue leading-24 tracking-wider"
           >
             Enviar comprobante por correo
             <a
@@ -131,7 +129,7 @@
       />
       <label
         for="check"
-        class="ml-2 font-normal text-12 sm:text-14 text-gray-2 leading-15 w-277 sm:w-auto"
+        class="ml-2 font-normal text-12 sm:text-14 text-gray-2 leading-15 w-396 h-70 sm:w-auto"
       >
         Realicé una
         <b class="text-12 sm:text-14 text-gray-2 leading-15"
@@ -140,13 +138,19 @@
         inmediata a la cuenta de Kambista</label
       >
     </div>
-    <Button
+    
+  </div>
+   <Button
+   class="mt-8 w-410 text-right"
       :disabled="disabled"
       :loading="loading"
       text="ENVIAR CONSTANCIA"
       @click.native="sendconstancia"
     />
   </div>
+  
+ 
+   
 </template>
 <script>
 import Button from "@/shared/ui/components/Button/Button.vue";
