@@ -7,9 +7,9 @@
       @onPressed="$emit('onPressed')"
     />
     <SidebarItem
+      class="disabled:cursor-not-allowed"
       text="Historial de operaciones"
       icon="historial"
-      to="/historial"
       @onPressed="$emit('onPressed')"
     />
     <SidebarItem
