@@ -1,5 +1,27 @@
 <template>
   <div>
+    <Modal v-model="open" closeable-by-backdrop>
+      <div
+        class="flex flex-col items-center bg-white rounded-xl w-full justify-center"
+      >
+        <BaseCard class="w-306 md:w-306 my-2" text="">
+          <DetalleTransfers
+            class="flex justify-left p-4 px-6"
+            :data2="quote"
+            :data3="transaction"
+            :number-destiny="numberDestiny"
+            :currency="currency"
+            :banco="banco"
+          />
+        </BaseCard>
+        <button
+          class="w-306 bg-kambista-blue text-white h-14 rounded-xl mt-2 mb-1"
+          @click="closeDetail"
+        >
+          ENTENDIDO
+        </button>
+      </div>
+    </Modal>
     <div>
       <Topbarflow3 class="hidden sm:block" variant="light" show-logo show-nav />
     </div>
@@ -15,6 +37,12 @@
       <div>
         <ConstancyOpera class="flex h-359" />
         <BaseText />
+        <button
+          class="block sm:hidden pt-4 w-full justify-center underline"
+          @click="showDetail"
+        >
+          Detalle de la operación
+        </button>
       </div>
       <div>
         <BaseCard class="hidden sm:block w-306 md:w-306 ml-9" text="">
@@ -34,12 +62,13 @@
 
 <script>
 import Topbarflow3 from "~/shared/ui/components/Layouts/Dashboard/Topbarflow3.vue";
-
 import BaseText from "@/shared/ui/components/Typography/BaseText.vue";
 import ConstancyOpera from "@/modules/constans/components/ConstancyOpera.vue";
 import Topbarflowsm3 from "~/shared/ui/components/Layouts/Dashboard/Topbarflowsm3.vue";
 import DetalleTransfer from "@/modules/transferir/DetalleTransfers.vue";
+import Modal from "@/shared/ui/components/Modal/Modal.vue";
 import { mapState } from "vuex";
+import BaseCard from "@/shared/ui/components/Cards/BaseCard.vue";
 
 export default {
   components: {
@@ -47,7 +76,9 @@ export default {
     ConstancyOpera,
     Topbarflow3,
     Topbarflowsm3,
-    DetalleTransfer
+    DetalleTransfer,
+    BaseCard,
+    Modal
   },
   data() {
     return {
@@ -82,6 +113,12 @@ export default {
     this.banco = this.data3.bankId;
   },
   methods: {
+    showDetail() {
+      this.open = true;
+    },
+    closeDetail() {
+      this.open = false;
+    },
     async sendconstancia() {
       this.loading = true;
       try {
