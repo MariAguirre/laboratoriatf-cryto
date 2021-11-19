@@ -27,6 +27,7 @@
         :number-destiny="numberDestiny"
         :currency="currency"
         :banco="banco"
+        
        />
        </BaseCard>
        
@@ -74,11 +75,17 @@ export default {
       data3: {},
       numberDestiny: "",
       currency: "",
-      banco: ""
+      banco: "",
+      codigo: "",
+      open: false,
+      loading: null
     };
   },
   computed: {
-    ...mapState(["transaction", "quote", "check"])
+    ...mapState(["transaction", "quote", "check"]),
+    disabled() {
+      return !(this.codigo !== "");
+    }
   },
   mounted() {
     const token = localStorage.getItem("token");
@@ -91,7 +98,25 @@ export default {
     this.data3 = this.transaction;
     this.numberDestiny = this.data3.account[0].number;
     this.currency = this.data3.account[0].currency;
-    this.banco = this.data3.bankId;
+    this.banco = this.data3.bankId;   
+  },
+  methods: {
+    async sendconstancia() {
+      this.loading = true;
+      try {
+        const id = this.transaction.id;
+        const response = await this.$services.transaction.checkTransaction(
+          { voucher: this.codigo },
+          localStorage.getItem("token"),
+          id
+        );
+        console.log(response);
+        window.location.href = "/confirmacion";
+      } catch (err) {
+        this.open = true;
+        this.loading = null;
+      }
+    }
   }
 };
 </script>

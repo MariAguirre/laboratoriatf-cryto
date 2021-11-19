@@ -10,13 +10,13 @@
         DETALLE DE TU OPERACIÓN
       </h1>
       <div class="mt-4">
-        <p class="text-gray-500 font-bold">Origen</p>
+        <p class=" font-bold">Origen</p>
         <p class="mt-2 text-gray-500">
           {{ data3 ? (data3.bankId ? data3.bankId : "") : "" }}
         </p>
       </div>
       <div class="mt-4">
-        <p class="text-gray-500 font-bold">Direccion de destino {{ currency }}</p>
+        <p class=" font-bold">Direccion de destino {{ currency }}</p>
         <p class="mt-2 truncate md:overflow-ellipsis text-gray-500">
           {{ numberDestiny }}
         </p>
