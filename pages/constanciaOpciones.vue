@@ -1,33 +1,38 @@
 <template>
-  <div>
-    <Topbar variant="light" show-logo></Topbar>
-    <div class="m-24 mr-16 grid grid-cols-2 grap-4">
-      <BaseCard text="">
-        <ConstancySend />
-      </BaseCard>
+  <div class=" Grid grid-flow-col">
+    <Topbarflow3 variant="light" show-logo></Topbarflow3>
+    <div class="m-18 ml-8 mr-8 mt-20 flex justify-center">
+      <div>      
+        <ConstancySend />      
       <BaseText />
-      <DetalleTransfer
-        class="flex justify-left md:p-4"
+      </div>
+      <div class="hidden sm:block w-306 md:w-306 ml-9">
+        
+      <DetalleTransfer 
+        class=" flex justify-left md:p-4 "
         :data2="quote"
         :data3="transaction"
         :number-destiny="numberDestiny"
         :currency="currency"
         :banco="banco"
       />
+       
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import Topbar from "~/shared/ui/components/Layouts/Dashboard/Topbar.vue";
-import BaseCard from "@/shared/ui/components/Cards/BaseCard.vue";
+import Topbarflow3 from "~/shared/ui/components/Layouts/Dashboard/Topbarflow3.vue";
+
 import BaseText from "@/shared/ui/components/Typography/BaseText.vue";
 import ConstancySend from "@/modules/constans/components/ConstancySend.vue";
 import DetalleTransfer from "@/modules/transferir/DetalleTransfers.vue";
 import { mapState } from "vuex";
 
+
 export default {
-  components: { Topbar, BaseCard, BaseText, ConstancySend, DetalleTransfer },
+  components: { BaseText, ConstancySend, DetalleTransfer, Topbarflow3 },
 
   data() {
     return {

@@ -72,7 +72,7 @@
             </label>
             <Select
               v-model="selectOne"
-              class="w-36 h-70 sm:h-81 rounded-r-lg text-base sm:text-xl font-black"
+              class="w-36 h-70 sm:h-81 rounded-r-lg text-base sm:text-xl font-black flex justify-center"
               :options="optionsOne"
               @send="receiveOne"
             />

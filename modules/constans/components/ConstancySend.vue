@@ -1,18 +1,6 @@
 <template>
-  <div
-    class="
-      font-montserrat
-      flex flex-col
-      justify-center
-      items-center
-      bg-white
-      w-330
-      h-465
-      backdrop-blur-sm
-      sm:w-719 sm:h-434
-    "
-  >
-    <Modal v-model="open" closeable-by-backdrop>
+<div>
+  <Modal v-model="open" closeable-by-backdrop>
       <div class="flex flex-col items-center bg-white rounded-xl w-full">
         <div class="flex flex-col w-11/12 sm:w-96">
           <p class="pb-1 text-center text-2xl leading-6 font-normal">
@@ -22,7 +10,9 @@
         </div>
       </div>
     </Modal>
-    <img
+   <BaseCard text="">
+   <div  class="flex flex-col justify-center items-center">
+     <img
       class="mb-0.5"
       src="@/assets/images/document/document-icon.svg"
       alt=""
@@ -30,20 +20,16 @@
     <h1 class="mb-4 font-bold text-24 text-blue leading-29">
       Envía constancia
     </h1>
-    <fieldset class="w-277 sm:w-auto">
-      <div>
-        <p
-          class="pl-3 mb-5 font-normal text-16 leading-20 text-left sm:text-center"
-        >
-          Selecciona una forma de envío de la constancia de tu transferencia
-        </p>
-      </div>
-      <div class="flex flex-col mt-4 space-y-2 items-center">
-        <div
-          class="flex flex-col inputContainer justify-center items-center w-306 sm:w-396"
-        >
-          <div class="flex w-full py-5">
-            <input
+     <fieldset class="w-277 sm:w-auto">
+       <div>
+          <p class="pl-3 mb-5 font-normal text-16 leading-20 text-left sm:text-center">
+            Selecciona una forma de envío de la constancia de tu transferencia
+          </p>
+       </div>
+       <div class="flex flex-col mt-4 space-y-2 items-center">
+         <div class="flex flex-col inputContainer justify-center items-center w-306 sm:w-396">
+           <div class="flex w-full py-5">
+              <input
               id="push-upload"
               v-model="checked"
               value="uploadFile"
@@ -58,10 +44,10 @@
             >
               Enviar una imagen del voucher
             </label>
-          </div>
-          <div v-if="check" class="block w-full pb-3">
-            <div class="text-sm text-grey">
-              <label
+           </div>
+           <div v-if="check" class="block w-full pb-3">
+             <div>
+               <label
                 for="file-upload"
                 class="
                   w-250
@@ -80,8 +66,8 @@
                   items-center
                 "
               >
-                <span v-if="image">Adjunta una imagen</span>
-                <input
+               <span v-if="image">Adjunta una imagen</span>
+               <input
                   id="file-upload"
                   name="file-upload"
                   type="file"
@@ -93,12 +79,12 @@
                   src="@/assets/images/common/upload-icon.svg"
                   alt="upload"
                 />
-              </label>
-            </div>
-          </div>
-        </div>
-        <div class="flex items-center inputContainer w-306 h-70 sm:w-396">
-          <input
+               </label>
+             </div>
+           </div>
+         </div>
+         <div class="flex items-center inputContainer w-306 h-70 sm:w-396">
+           <input
             id="push-email"
             v-model="checked"
             value="email"
@@ -109,17 +95,14 @@
           />
           <label
             for="push-email"
-            class="ml-3 w-5/6 text-14 sm:text-16 font-normal text-blue leading-24 tracking-wider"
-          >
-            Enviar comprobante por correo
-            <a
-              class="underline font-bold w-5/6 tracking-wider text-blue leading-24 text-14 sm:text-16"
-              >operaciones@kambista.com</a
-            >
+            class="ml-3 w-5/6 text-14 sm:text-16 font-normal text-blue leading-24 tracking-wider">
+              Enviar comprobante por correo
+            <a class="underline font-bold w-5/6 tracking-wider text-blue leading-24 text-14 sm:text-16">
+              operaciones@kambista.com</a>
           </label>
-        </div>
-      </div>
-    </fieldset>
+         </div>
+       </div>
+     </fieldset>
     <div class="flex items-center mt-8">
       <input
         id="check"
@@ -129,34 +112,33 @@
         class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
         @change="handlingInmediate"
       />
-      <label
-        for="check"
-        class="ml-2 font-normal text-12 sm:text-14 text-gray-2 leading-15 w-277 sm:w-auto"
-      >
-        Realicé una
-        <b class="text-12 sm:text-14 text-gray-2 leading-15"
-          >transferencia interbancaria</b
-        >
-        inmediata a la cuenta de Kambista</label
-      >
+      <label for="check" class="ml-2 font-normal text-12 sm:text-14 text-gray-2 leading-15 w-277 sm:w-auto">
+        Realicé una <b class="text-12 sm:text-14 text-gray-2 leading-15">transferencia interbancaria</b>
+        inmediata a la cuenta de Kambista</label>
     </div>
+   </div>
+   </BaseCard>
+   <div class="mt-14">
     <Button
       :disabled="disabled"
       :loading="loading"
       text="ENVIAR CONSTANCIA"
       @click.native="sendconstancia"
     />
-  </div>
+    </div>
+</div>
 </template>
 <script>
 import Button from "@/shared/ui/components/Button/Button.vue";
 import Modal from "@/shared/ui/components/Modal/Modal.vue";
+import BaseCard from "@/shared/ui/components/Cards/BaseCard.vue";
 import { mapState } from "vuex";
 
 export default {
   components: {
     Button,
-    Modal
+    Modal,
+    BaseCard
   },
   props: {},
   data() {

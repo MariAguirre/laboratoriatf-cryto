@@ -223,7 +223,7 @@ export default {
           console.log
         );
       } */
-        this.$router.push({ path: "transfers" }, console.log, console.log);
+        this.$router.push({ path: "transferencia" }, console.log, console.log);
       } catch (err) {
         this.open = true;
       }     

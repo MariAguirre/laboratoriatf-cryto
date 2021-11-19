@@ -4,7 +4,7 @@
     <div class="m-18 ml-8 mr-8 mt-20 flex justify-center">
       <div>
         <BaseCard class="w-306 md:w-719 p-1 " text="">
-           <ConstancyOpera class="flex h-359" />
+           <ConstancyOpera class="flex h-359" :codigo="codigo"/>
        </BaseCard>
        <BaseText />
        </div>
@@ -17,8 +17,18 @@
         :number-destiny="numberDestiny"
         :currency="currency"
         :banco="banco"
+        
        />
        </BaseCard>
+
+       <Button
+      class="w-410 "
+      
+      :loading="loading"
+      
+      text="ENVIAR CONSTANCIA"
+      @click.native="sendconstancia"
+    />
       </div>     
     </div>
       
@@ -43,7 +53,7 @@ import Topbarflow3 from "~/shared/ui/components/Layouts/Dashboard/Topbarflow3.vu
 import BaseCard from "@/shared/ui/components/Cards/BaseCard.vue";
 import BaseText from "@/shared/ui/components/Typography/BaseText.vue";
 import ConstancyOpera from "@/modules/constans/components/ConstancyOpera.vue";
-
+import Button from "@/shared/ui/components/Button/Button.vue";
 import DetalleTransfer from "@/modules/transferir/DetalleTransfers.vue";
 import { mapState } from "vuex";
 
@@ -53,7 +63,7 @@ export default {
     BaseText,
     ConstancyOpera,
     Topbarflow3,
-    
+    Button,
     DetalleTransfer
   },
   data() {
@@ -63,11 +73,17 @@ export default {
       data3: {},
       numberDestiny: "",
       currency: "",
-      banco: ""
+      banco: "",
+      codigo: "",
+      open: false,
+      loading: null
     };
   },
   computed: {
-    ...mapState(["transaction", "quote", "check"])
+    ...mapState(["transaction", "quote", "check"]),
+    disabled() {
+      return !(this.codigo !== "");
+    }
   },
   mounted() {
     const token = localStorage.getItem("token");
@@ -80,7 +96,25 @@ export default {
     this.data3 = this.transaction;
     this.numberDestiny = this.data3.account[0].number;
     this.currency = this.data3.account[0].currency;
-    this.banco = this.data3.bankId;
+    this.banco = this.data3.bankId;   
+  },
+  methods: {
+    async sendconstancia() {
+      this.loading = true;
+      try {
+        const id = this.transaction.id;
+        const response = await this.$services.transaction.checkTransaction(
+          { voucher: this.codigo },
+          localStorage.getItem("token"),
+          id
+        );
+        console.log(response);
+        window.location.href = "/confirmacion";
+      } catch (err) {
+        this.open = true;
+        this.loading = null;
+      }
+    }
   }
 };
 </script>
