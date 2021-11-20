@@ -73,17 +73,7 @@
                 />
 
                 <div class="flex-col justify-between items-center mt-4">
-                  <div class="flex justify-center items-center">
-                    <img
-                      class=""
-                      src="@/assets/images/common/question-icon.svg"
-                      alt="question"
-                    />
-                    <span
-                      class="font-medium text-12 mt-2 md:text-14 flex justify-center tracking-0.03 md:tracking-normal"
-                      >¿Dónde encuentro el código de operación?</span
-                    >
-                  </div>
+                  
                   <div
                     class="flex justify-center items-center mt-10 px-8 sm:p-0"
                   >
