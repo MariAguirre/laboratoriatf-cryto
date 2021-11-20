@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col sm:mt-6">
+  <div class="flex flex-col  sm:mt-6">
     <SidebarItem
       text="Crypto"
       icon="exchange"
@@ -7,29 +7,33 @@
       @onPressed="$emit('onPressed')"
     />
     <SidebarItem
-      class="disabled:cursor-not-allowed"
+      class="disabled:cursor-not-allowed opacity-50"
       text="Historial de operaciones"
       icon="historial"
       @onPressed="$emit('onPressed')"
     />
     <SidebarItem
+    class="disabled:cursor-not-allowed opacity-50"
       text="Cuentas bancarias"
       icon="bank"
       @onPressed="$emit('onPressed')"
     />
     <SidebarItem
+    class="disabled:cursor-not-allowed opacity-50"
       text="Recomienda y gana"
       icon="win"
       @onPressed="$emit('onPressed')"
     />
     <SidebarItem
+    class="disabled:cursor-not-allowed opacity-50"
       text="Beneficios"
       icon="benefits"
       @onPressed="$emit('onPressed')"
     />
     <slot name="banners"></slot>
     <SidebarItem
-      class="border-t md:border-0 mt-5 pt-5 sm:mt-0 sm:pt-3"
+    
+      class="border-t md:border-0 mt-5 pt-5 sm:mt-0 sm:pt-3 opacity-50"
       text="Ayuda"
       icon="help"
       @onPressed="$emit('onPressed')"
