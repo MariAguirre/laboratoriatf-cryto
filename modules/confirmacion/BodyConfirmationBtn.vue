@@ -4,10 +4,14 @@
   flex flex-col
   justify-center
   items-center
-  py-2 w-340 sm:w-500">
+  py-8 w-340 sm:w-500">
 
-  <p class=" mt-2 py-8 px-2  items-center text-center"> Verificaremos tu operación. Puedes ver su estado en “Mis operaciones”</p>
-  <Button class="w-330 md:w-410 font-bold" text="IR A MIS OPERACIONES"></Button>
+  
+  <Button class="w-330 md:w-410 font-bold"  
+  :loading="loading"
+  text="VOLVER A COTIZAR"
+ @click.native="calculadora"
+></Button>
   </div>
 </template>
 <script>
@@ -17,6 +21,12 @@ export default {
     components: {
         Button,
     },
+    methods:{
+        calculadora(){
+            window.location.href="/";
+
+        }
+    }
 }
 </script>
 

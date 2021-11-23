@@ -1,7 +1,7 @@
 <template>
-  <DashboardLayout title="Cambios">
+  <DashboardLayout title="Crypto">
     <section
-      class="relative flex justify-center items-center h-screen sm:h-full "
+      class="relative flex justify-center items-center mt-8 sm:h-full sm:mt-0 "
     >
       <Main />
     </section>
@@ -19,7 +19,7 @@ export default {
     Main
   },
   computed: {
-    ...mapState(["transaction", "quote", "check"])
+    ...mapState(["transaction", "quote"])
   },
   mounted() {
     const token = localStorage.getItem("token");

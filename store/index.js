@@ -5,8 +5,7 @@ export const state = () => ({
   requerimients: [],
   loading: true,
   transaction: {},
-  quote: {},
-  check: {}
+  quote: {}
 });
 
 export const mutations = {
@@ -35,9 +34,6 @@ export const mutations = {
   },
   SET_QUOTE(state, data) {
     state.quote = data;
-  },
-  SET_CHECK(state, data) {
-    state.check = data;
   }
 };
 
@@ -76,9 +72,6 @@ export const actions = {
   },
   setQuote: ({ commit }, data) => {
     commit("SET_QUOTE", data);
-  },
-  setCheck: ({ commit }, data) => {
-    commit("SET_CHECK", data);
   }
 };
 

@@ -12,6 +12,7 @@ items-center"
         background="transparent"
         speed="1"
         style="width:250px; height:500px;"
+        name="lottiePlayer"
         loop
         autoplay
       ></lottie-player>
@@ -73,6 +74,7 @@ items-center"
         background="transparent"
         speed="1"
         style="width:250px; height:500px;"
+        name="lottiePlayer"
         loop
         autoplay
       ></lottie-player>
@@ -83,6 +85,7 @@ items-center"
 import BaseCard from "@/shared/ui/components/Cards/BaseCard.vue";
 import Loader from "@/shared/ui/components/Loading/LoadingScreen.vue";
 import { mapState } from "vuex";
+import "@lottiefiles/lottie-player";
 
 export default {
   components: {
